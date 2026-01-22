@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-700 via-teal-600 to-cyan-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6 animate-fade-in">About Vspaze Institute</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -31,20 +31,20 @@ const About = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-blue-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
-                <h3 className="text-4xl font-bold text-blue-600 mb-2">500+</h3>
+              <div className="bg-teal-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+                <h3 className="text-4xl font-bold text-teal-600 mb-2">500+</h3>
                 <p className="text-gray-700">Online Students</p>
               </div>
-              <div className="bg-purple-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
-                <h3 className="text-4xl font-bold text-purple-600 mb-2">25+</h3>
+              <div className="bg-cyan-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+                <h3 className="text-4xl font-bold text-cyan-600 mb-2">25+</h3>
                 <p className="text-gray-700">Expert Faculty</p>
               </div>
-              <div className="bg-green-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
-                <h3 className="text-4xl font-bold text-green-600 mb-2">15+</h3>
+              <div className="bg-teal-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+                <h3 className="text-4xl font-bold text-teal-600 mb-2">15+</h3>
                 <p className="text-gray-700">Online Courses</p>
               </div>
-              <div className="bg-orange-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
-                <h3 className="text-4xl font-bold text-orange-600 mb-2">100%</h3>
+              <div className="bg-cyan-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+                <h3 className="text-4xl font-bold text-cyan-600 mb-2">100%</h3>
                 <p className="text-gray-700">Online Learning</p>
               </div>
             </div>
@@ -53,12 +53,12 @@ const About = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-16 bg-gradient-to-br from-teal-50 to-cyan-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                <Target className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+                <Target className="w-8 h-8 text-teal-600" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
@@ -66,8 +66,8 @@ const About = () => {
               </p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-                <Eye className="w-8 h-8 text-purple-600" />
+              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-6">
+                <Eye className="w-8 h-8 text-cyan-600" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Vision</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
@@ -87,10 +87,10 @@ const About = () => {
           </div>
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: Monitor, title: 'Accessibility', desc: 'Quality education accessible to everyone, everywhere', color: 'blue' },
-              { icon: Heart, title: 'Integrity', desc: 'Honest and transparent in all our dealings', color: 'red' },
-              { icon: Zap, title: 'Innovation', desc: 'Cutting-edge online learning technology', color: 'yellow' },
-              { icon: Shield, title: 'Trust', desc: 'Building lasting relationships with students', color: 'green' }
+              { icon: Monitor, title: 'Accessibility', desc: 'Quality education accessible to everyone, everywhere', color: 'teal' },
+              { icon: Heart, title: 'Integrity', desc: 'Honest and transparent in all our dealings', color: 'cyan' },
+              { icon: Zap, title: 'Innovation', desc: 'Cutting-edge online learning technology', color: 'teal' },
+              { icon: Shield, title: 'Trust', desc: 'Building lasting relationships with students', color: 'cyan' }
             ].map((value, idx) => (
               <div key={idx} className="text-center p-6 rounded-xl hover:bg-gray-50 transition-all transform hover:-translate-y-2">
                 <div className={`w-16 h-16 bg-${value.color}-100 rounded-full flex items-center justify-center mx-auto mb-4`}>
@@ -105,7 +105,7 @@ const About = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-br from-teal-600 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Why Students Choose Us</h2>

@@ -6,7 +6,8 @@ const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  timeout: 10000
 });
 
 // Add token to requests
@@ -22,8 +23,15 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Don't clear auth or redirect - let components handle errors gracefully
-    // This allows demo mode to work without backend
+    if (!error.response) {
+      console.error('CORS or Network Error - Check backend CORS configuration');
+    }
+    console.error('API Error:', {
+      status: error.response?.status,
+      message: error.message,
+      url: error.config?.url,
+      data: error.response?.data
+    });
     return Promise.reject(error);
   }
 );
