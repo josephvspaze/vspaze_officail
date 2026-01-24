@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-teal-700 via-teal-600 to-cyan-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6 animate-fade-in">About Vspaze Institute</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -105,7 +105,7 @@ const About = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 bg-gradient-to-br from-teal-600 to-cyan-600 text-white">
+      <section className="py-16 bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Why Students Choose Us</h2>

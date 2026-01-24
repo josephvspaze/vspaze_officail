@@ -45,37 +45,38 @@ const InstituteNavbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-teal-700/75 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+        <div className="flex justify-between items-center h-20">
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-transparent rounded-full flex items-center justify-center border-2 border-white">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Vspaze
-            </span>
+            <div className="flex items-center space-x-1">
+              <span className="text-2xl font-bold text-white">Vspaze</span>
+              <span className="text-2xl font-bold text-cyan-300">Technologies</span>
+            </div>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, idx) => (
               item.dropdown ? (
                 <div key={idx} className="relative">
                   <button
                     onClick={() => setDropdownOpen(dropdownOpen === idx ? null : idx)}
-                    className="flex items-center space-x-1 font-medium text-gray-700 hover:text-blue-600 transition-colors"
+                    className="flex items-center space-x-1 font-medium text-white hover:text-cyan-200 transition-colors"
                   >
                     <span>{item.name}</span>
                     <ChevronDown className="w-4 h-4" />
                   </button>
                   {dropdownOpen === idx && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-teal-700/80 backdrop-blur-md rounded-lg shadow-lg border border-white/10 py-2 z-50">
                       {item.dropdown.map((subItem, subIdx) => (
                         <Link
                           key={subIdx}
                           to={subItem.path}
                           onClick={() => setDropdownOpen(null)}
-                          className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                          className="flex items-center space-x-2 px-4 py-2 text-white hover:bg-white/10 hover:text-cyan-200 transition-colors"
                         >
                           <subItem.icon className="w-4 h-4" />
                           <span>{subItem.name}</span>
@@ -90,8 +91,8 @@ const InstituteNavbar = () => {
                   to={item.path}
                   className={`font-medium transition-colors ${
                     isActive(item.path)
-                      ? 'text-blue-600'
-                      : 'text-gray-700 hover:text-blue-600'
+                      ? 'text-cyan-200'
+                      : 'text-white hover:text-cyan-200'
                   }`}
                 >
                   {item.name}
@@ -100,29 +101,17 @@ const InstituteNavbar = () => {
             ))}
             <Link
               to="/student-login"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              className="text-white hover:text-cyan-200 font-medium transition-colors"
             >
               Student Login
-            </Link>
-            <Link
-              to="/teacher-login"
-              className="text-gray-700 hover:text-green-600 font-medium transition-colors"
-            >
-              Teacher Login
-            </Link>
-            <Link
-              to="/admin-login"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
-            >
-              Admin Login
             </Link>
           </div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+            className="md:hidden p-2 rounded-lg hover:bg-white/10"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
           </button>
         </div>
       </div>
@@ -134,18 +123,18 @@ const InstituteNavbar = () => {
 
       {/* Mobile Menu Sidebar */}
       {isOpen && (
-        <div onClick={(e) => e.stopPropagation()} className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-white to-blue-50 shadow-xl z-50 transform transition-transform duration-300 md:hidden overflow-y-auto ${
+        <div onClick={(e) => e.stopPropagation()} className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-teal-600 to-teal-700 backdrop-blur-md bg-opacity-90 shadow-xl z-50 transform transition-transform duration-300 md:hidden overflow-y-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}>
-          <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+          <div className="p-4 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/40">
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-gray-900">Vspaze Institute</span>
+              <span className="font-bold text-white">Vspaze</span>
             </div>
-            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-gray-100 rounded-lg">
-              <X className="w-6 h-6 text-gray-600" />
+            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg">
+              <X className="w-6 h-6 text-white" />
             </button>
           </div>
 
@@ -153,7 +142,7 @@ const InstituteNavbar = () => {
             {navItems.map((item, idx) => (
               item.dropdown ? (
                 <div key={idx} className="mb-2">
-                  <div className="flex items-center space-x-3 px-4 py-3 text-gray-700 font-medium">
+                  <div className="flex items-center space-x-3 px-4 py-3 text-white font-medium">
                     <item.icon className="w-5 h-5" />
                     <span>{item.name}</span>
                   </div>
@@ -165,8 +154,8 @@ const InstituteNavbar = () => {
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-all ${
                           isActive(subItem.path)
-                            ? 'bg-blue-600 text-white shadow-md'
-                            : 'text-gray-600 hover:bg-gray-100'
+                            ? 'bg-white/20 text-cyan-200 shadow-md'
+                            : 'text-cyan-100 hover:bg-white/10'
                         }`}
                       >
                         <subItem.icon className="w-4 h-4" />
@@ -182,8 +171,8 @@ const InstituteNavbar = () => {
                   onClick={() => setIsOpen(false)}
                   className={`flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 transition-all ${
                     isActive(item.path)
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-white/20 text-cyan-200 shadow-md'
+                      : 'text-white hover:bg-white/10'
                   }`}
                 >
                   <item.icon className="w-5 h-5" />
@@ -192,30 +181,14 @@ const InstituteNavbar = () => {
               )
             ))}
             
-            <div className="border-t border-gray-200 mt-4 pt-4">
+            <div className="border-t border-white/10 mt-4 pt-4">
               <Link
                 to="/student-login"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 text-gray-700 hover:bg-gray-100 transition-all"
+                className="flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 text-white hover:bg-white/10 transition-all"
               >
                 <User className="w-5 h-5" />
                 <span className="font-medium">Student Login</span>
-              </Link>
-              <Link
-                to="/teacher-login"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 text-gray-700 hover:bg-green-100 transition-all"
-              >
-                <Users className="w-5 h-5" />
-                <span className="font-medium">Teacher Login</span>
-              </Link>
-              <Link
-                to="/admin-login"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 text-gray-700 hover:bg-gray-100 transition-all"
-              >
-                <Shield className="w-5 h-5" />
-                <span className="font-medium">Admin Login</span>
               </Link>
             </div>
           </nav>

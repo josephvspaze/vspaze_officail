@@ -37,7 +37,7 @@ const CourseDetail = () => {
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Header */}
-      <div className="bg-gradient-to-br from-cyan-600 via-blue-600 to-slate-700 py-20">
+      <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center text-cyan-200 hover:text-white mb-6 transition-colors">
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -65,7 +65,7 @@ const CourseDetail = () => {
                   <span className="text-white font-semibold">Certificate</span>
                 </div>
               </div>
-              <Link to="/student-registration" className="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl transition-all transform hover:scale-105">
+              <Link to="/student-registration" className="inline-flex items-center bg-white text-teal-700 px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl transition-all transform hover:scale-105">
                 Enroll Now
               </Link>
             </div>
@@ -84,10 +84,10 @@ const CourseDetail = () => {
             <h2 className="text-4xl font-extrabold text-white mb-8">Course Curriculum</h2>
             <div className="space-y-4">
               {courseModules.length > 0 ? courseModules.map((module, idx) => (
-                <div key={idx} className="bg-slate-800 border border-cyan-500/20 rounded-2xl overflow-hidden">
+                <div key={idx} className="bg-slate-800 border border-teal-500/20 rounded-2xl overflow-hidden">
                   <button onClick={() => setExpandedModule(expandedModule === idx ? null : idx)} className="w-full flex items-center justify-between p-6 hover:bg-slate-700/50 transition-colors">
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
+                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center">
                         <span className="text-white font-bold text-lg">{idx + 1}</span>
                       </div>
                       <h3 className="text-xl font-bold text-white">{module.module}</h3>
@@ -95,7 +95,7 @@ const CourseDetail = () => {
                     {expandedModule === idx ? <ChevronUp className="w-6 h-6 text-cyan-400" /> : <ChevronDown className="w-6 h-6 text-cyan-400" />}
                   </button>
                   {expandedModule === idx && (
-                    <div className="px-6 pb-6 border-t border-cyan-500/20">
+                    <div className="px-6 pb-6 border-t border-teal-500/20">
                       <div className="mt-4 space-y-4">
                         <div>
                           <h4 className="text-cyan-400 font-semibold mb-3 flex items-center">
@@ -116,7 +116,7 @@ const CourseDetail = () => {
                   )}
                 </div>
               )) : (
-                <div className="bg-slate-800 border border-cyan-500/20 rounded-2xl p-8 text-center">
+                <div className="bg-slate-800 border border-teal-500/20 rounded-2xl p-8 text-center">
                   <p className="text-cyan-100">Syllabus details coming soon...</p>
                 </div>
               )}
@@ -125,7 +125,7 @@ const CourseDetail = () => {
 
           {/* Sidebar */}
           <div>
-            <div className="bg-slate-800 border border-cyan-500/20 rounded-2xl p-6 sticky top-6">
+            <div className="bg-slate-800 border border-teal-500/20 rounded-2xl p-6 sticky top-6">
               <h3 className="text-2xl font-bold text-white mb-6">What You'll Learn</h3>
               <ul className="space-y-3 mb-6">
                 {course.subjects && course.subjects.map((item, idx) => (
@@ -137,7 +137,7 @@ const CourseDetail = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/student-registration" className="block text-center bg-gradient-to-r from-cyan-600 to-blue-600 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-cyan-500/30 transition-all">
+              <Link to="/student-registration" className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all">
                 Enroll Now
               </Link>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GraduationCap, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { GraduationCap, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import api from '../utils/api';
 
 const StudentLogin = () => {
@@ -72,10 +72,10 @@ const StudentLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl w-full max-w-md p-8 border border-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 flex items-center justify-center p-4">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl w-full max-w-md p-8 border border-teal-200/30">
         <div className="flex items-center justify-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
+          <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-xl flex items-center justify-center">
             <GraduationCap className="w-10 h-10 text-white" />
           </div>
         </div>
@@ -98,7 +98,7 @@ const StudentLogin = () => {
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -112,7 +112,7 @@ const StudentLogin = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                 placeholder="Enter your password"
               />
               <button
@@ -127,7 +127,7 @@ const StudentLogin = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-semibold transition-colors"
+            className="w-full bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-3 rounded-lg hover:shadow-lg hover:shadow-teal-500/50 font-semibold transition-all"
           >
             Login
           </button>
@@ -136,7 +136,7 @@ const StudentLogin = () => {
 
 
         <p className="text-center text-gray-500 text-sm mt-4">
-          Don't have an account? <a href="/student-registration" className="text-blue-600 hover:underline">Register here</a>
+          Don't have an account? <a href="/student-registration" className="text-teal-600 hover:underline">Register here</a>
         </p>
       </div>
     </div>

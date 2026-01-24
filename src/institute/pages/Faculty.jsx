@@ -22,7 +22,7 @@ const Faculty = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Meet Our Expert Faculty</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -41,9 +41,9 @@ const Faculty = () => {
                 to={`/faculty/${member._id}`}
                 className="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden cursor-pointer"
               >
-                <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-8 text-center">
+                <div className="bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center">
                   <div className="w-32 h-32 rounded-full mx-auto mb-4 shadow-xl border-4 border-white bg-white flex items-center justify-center">
-                    <span className="text-4xl font-bold text-blue-600">
+                    <span className="text-4xl font-bold text-teal-600">
                       {member.name?.split(' ').map(n => n[0]).join('') || 'F'}
                     </span>
                   </div>
@@ -56,11 +56,11 @@ const Faculty = () => {
 
                   <div className="space-y-3 mb-4">
                     <div className="flex items-center text-gray-700">
-                      <GraduationCap className="w-5 h-5 mr-3 text-blue-600" />
+                      <GraduationCap className="w-5 h-5 mr-3 text-teal-600" />
                       <span className="text-sm">{member.qualification}</span>
                     </div>
                     <div className="flex items-center text-gray-700">
-                      <Briefcase className="w-5 h-5 mr-3 text-green-600" />
+                      <Briefcase className="w-5 h-5 mr-3 text-cyan-600" />
                       <span className="text-sm">{member.experience} Experience</span>
                     </div>
                   </div>
@@ -74,7 +74,7 @@ const Faculty = () => {
                       {(member.assignedCourses || []).map((course, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium"
+                          className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-medium"
                         >
                           {typeof course === 'string' ? course : course.name}
                         </span>
@@ -89,13 +89,13 @@ const Faculty = () => {
       </section>
 
       {/* Join Our Team */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Want to Join Our Faculty Team?</h2>
           <p className="text-xl mb-8 opacity-90">We're always looking for passionate online educators</p>
           <a
             href="/teacher-registration"
-            className="inline-flex items-center space-x-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all"
+            className="inline-flex items-center space-x-2 bg-white text-teal-700 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all"
           >
             <span>Apply Now</span>
             <Mail className="w-5 h-5" />

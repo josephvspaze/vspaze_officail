@@ -72,7 +72,7 @@ const SuccessStories = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-600 via-blue-600 to-purple-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Success Stories</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -90,8 +90,8 @@ const SuccessStories = () => {
           </div>
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             {placementStats.map((stat, idx) => (
-              <div key={idx} className="text-center p-6 bg-gradient-to-br from-blue-50 to-green-50 rounded-xl hover:shadow-lg transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div key={idx} className="text-center p-6 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl hover:shadow-lg transition-all">
+                <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-4xl font-bold text-gray-900 mb-2">{stat.metric}</h3>
@@ -103,7 +103,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Recent Placements Ticker */}
-      <section className="py-8 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+      <section className="py-8 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold mb-2">🎉 Recent Placements (Last 30 Days)</h3>
@@ -144,7 +144,7 @@ const SuccessStories = () => {
                     <img src={story.image} alt={story.name} className="w-16 h-16 rounded-full object-cover" />
                     <div>
                       <h3 className="text-xl font-bold text-gray-900">{story.name}</h3>
-                      <p className="text-blue-600 font-semibold">{story.course}</p>
+                      <p className="text-teal-600 font-semibold">{story.course}</p>
                     </div>
                   </div>
                   
@@ -164,18 +164,18 @@ const SuccessStories = () => {
 
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center text-gray-700">
-                      <Building className="w-4 h-4 mr-2 text-blue-600" />
+                      <Building className="w-4 h-4 mr-2 text-teal-600" />
                       <span className="font-semibold">{story.company}</span>
                     </div>
                     <div className="flex items-center text-gray-700">
-                      <Calendar className="w-4 h-4 mr-2 text-blue-600" />
+                      <Calendar className="w-4 h-4 mr-2 text-teal-600" />
                       <span>Completed in {story.duration}</span>
                     </div>
                   </div>
 
                   <p className="text-gray-600 italic mb-4">"{story.story}"</p>
                   
-                  <a href={story.linkedin} className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+                  <a href={story.linkedin} className="inline-flex items-center text-teal-600 hover:text-teal-800 font-semibold">
                     <ExternalLink className="w-4 h-4 mr-1" />
                     View LinkedIn Profile
                   </a>
@@ -205,7 +205,7 @@ const SuccessStories = () => {
                     e.target.nextSibling.style.display = 'flex';
                   }}
                 />
-                <div className="w-full h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg items-center justify-center mb-3 hidden">
+                <div className="w-full h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg items-center justify-center mb-3 hidden">
                   <span className="text-white font-bold text-sm">{company.name.substring(0, 3)}</span>
                 </div>
                 <p className="font-semibold text-gray-900 text-center text-sm">{company.name}</p>
@@ -216,13 +216,13 @@ const SuccessStories = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-green-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Write Your Success Story?</h2>
           <p className="text-xl mb-8 opacity-90">Join 500+ students who transformed their careers with us</p>
           <a
             href="/student-registration"
-            className="inline-flex items-center space-x-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
+            className="inline-flex items-center space-x-2 bg-white text-teal-700 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
           >
             <span>Start Your Journey</span>
             <TrendingUp className="w-5 h-5" />

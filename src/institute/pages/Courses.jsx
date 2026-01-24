@@ -38,7 +38,7 @@ const Courses = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Our Courses</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -85,7 +85,7 @@ const Courses = () => {
                 to={`/course/${course._id}`}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block"
               >
-                <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-8 text-center">
+                <div className="bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center">
                   <div className="w-20 h-20 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                     {iconType === 'code' && <Code className="w-10 h-10 text-white" />}
                     {iconType === 'database' && <Database className="w-10 h-10 text-white" />}
@@ -101,12 +101,12 @@ const Courses = () => {
                   
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center text-gray-700">
-                      <Clock className="w-5 h-5 mr-2 text-blue-600" />
+                      <Clock className="w-5 h-5 mr-2 text-teal-600" />
                       <span>{course.duration}</span>
                     </div>
                     <div className="flex items-center text-gray-700">
-                      <DollarSign className="w-5 h-5 mr-2 text-green-600" />
-                      <span className="font-bold text-green-600">₹{course.fee?.toLocaleString()}</span>
+                      <DollarSign className="w-5 h-5 mr-2 text-cyan-600" />
+                      <span className="font-bold text-cyan-600">₹{course.fee?.toLocaleString()}</span>
                     </div>
                   </div>
 
@@ -133,7 +133,7 @@ const Courses = () => {
                     <Link
                       to="/student-registration"
                       onClick={(e) => e.stopPropagation()}
-                      className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
+                      className="flex-1 text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
                     >
                       Enroll Now
                     </Link>
@@ -148,13 +148,13 @@ const Courses = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Can't Find What You're Looking For?</h2>
           <p className="text-xl mb-8 opacity-90">Contact us for customized online training programs</p>
           <Link
             to="/contact"
-            className="inline-flex items-center space-x-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all"
+            className="inline-flex items-center space-x-2 bg-white text-teal-700 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all"
           >
             <span>Contact Us</span>
             <ArrowRight className="w-5 h-5" />

@@ -35,7 +35,7 @@ const Certifications = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Certifications & Accreditations</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -53,16 +53,16 @@ const Certifications = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industryCertifications.map((cert, idx) => (
-              <div key={idx} className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg transition-all">
+              <div key={idx} className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-teal-500 hover:shadow-lg transition-all">
                 <div className="text-center mb-4">
                   <img src={cert.logo} alt={cert.provider} className="w-16 h-16 object-contain mx-auto mb-3" />
                   <h3 className="text-xl font-bold text-gray-900">{cert.name}</h3>
-                  <p className="text-blue-600 font-semibold">{cert.provider}</p>
+                  <p className="text-teal-600 font-semibold">{cert.provider}</p>
                 </div>
                 <div className="space-y-2">
                   <p className="text-sm text-gray-600">Available in:</p>
                   {cert.courses.map((course, i) => (
-                    <span key={i} className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm mr-2">
+                    <span key={i} className="inline-block bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm mr-2">
                       {course}
                     </span>
                   ))}
@@ -83,7 +83,7 @@ const Certifications = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {instituteAccreditations.map((accred, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <accred.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{accred.name}</h3>
@@ -103,11 +103,11 @@ const Certifications = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {partnerships.map((partner, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-200">
+              <div key={idx} className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 border border-teal-200">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900">{partner.name}</h3>
-                    <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm mt-2">
+                    <span className="inline-block bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-3 py-1 rounded-full text-sm mt-2">
                       {partner.type}
                     </span>
                   </div>
@@ -121,7 +121,7 @@ const Certifications = () => {
       </section>
 
       {/* Quality Assurance Standards */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Quality Assurance Standards</h2>
@@ -149,7 +149,7 @@ const Certifications = () => {
           <p className="text-xl text-gray-600 mb-8">Join our certified programs and boost your career prospects</p>
           <a
             href="/student-registration"
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
           >
             <Award className="w-5 h-5" />
             <span>Enroll Now</span>

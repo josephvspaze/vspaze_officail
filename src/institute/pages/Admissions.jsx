@@ -64,7 +64,7 @@ const Admissions = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-600 via-blue-600 to-purple-600 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Admissions & Fees</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -82,11 +82,11 @@ const Admissions = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {courses.map((course, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border-2 border-transparent hover:border-blue-500 transition-all">
+              <div key={idx} className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 border-2 border-transparent hover:border-teal-500 transition-all">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{course.name}</h3>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-3xl font-bold text-blue-600">{course.fee}</span>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                  <span className="text-3xl font-bold text-teal-600">{course.fee}</span>
+                  <span className="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm font-semibold">
                     {course.duration}
                   </span>
                 </div>
@@ -105,7 +105,7 @@ const Admissions = () => {
                   </div>
                   <div className="border-t pt-2 flex justify-between font-bold">
                     <span>Total:</span>
-                    <span className="text-blue-600">₹{parseInt(course.fee.replace('₹', '').replace(',', '')) + 3500}</span>
+                    <span className="text-teal-600">₹{(parseInt(course.fee) || 0) + 3500}</span>
                   </div>
                 </div>
                 <button
@@ -113,7 +113,7 @@ const Admissions = () => {
                     setSelectedCourse(course);
                     setLoanAmount(course.fee?.toString() || '45000');
                   }}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="w-full bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-2 rounded-lg hover:shadow-lg transition-all"
                 >
                   Calculate EMI
                 </button>
@@ -139,7 +139,7 @@ const Admissions = () => {
                       setSelectedCourse(course);
                       setLoanAmount(course.fee?.toString() || '45000');
                     }}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                   >
                     {courses.map(course => (
                       <option key={course._id} value={course._id}>{course.name}</option>
@@ -152,7 +152,7 @@ const Admissions = () => {
                     type="number"
                     value={loanAmount}
                     onChange={(e) => setLoanAmount(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                   />
                 </div>
                 <div>
@@ -160,7 +160,7 @@ const Admissions = () => {
                   <select
                     value={tenure}
                     onChange={(e) => setTenure(parseInt(e.target.value))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                   >
                     <option value={3}>3 Months (0% Interest)</option>
                     <option value={6}>6 Months (5% Interest)</option>
@@ -168,7 +168,7 @@ const Admissions = () => {
                   </select>
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">EMI Breakdown</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
@@ -185,7 +185,7 @@ const Admissions = () => {
                   </div>
                   <div className="border-t pt-3 flex justify-between text-lg font-bold">
                     <span>Monthly EMI:</span>
-                    <span className="text-blue-600">
+                    <span className="text-teal-600">
                       ₹{calculateEMI(parseInt(loanAmount), tenure === 3 ? 0 : tenure === 6 ? 5 : 8, tenure).toLocaleString()}
                     </span>
                   </div>
@@ -205,14 +205,14 @@ const Admissions = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {paymentPlans.map((plan, idx) => (
-              <div key={idx} className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg transition-all">
+              <div key={idx} className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-teal-500 hover:shadow-lg transition-all">
                 <div className="text-center mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3">
                     <plan.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
-                  {plan.discount && <span className="text-green-600 font-semibold">{plan.discount} OFF</span>}
-                  {plan.interest && <span className="text-blue-600 font-semibold">{plan.interest} Interest</span>}
+                  {plan.discount && <span className="text-cyan-600 font-semibold">{plan.discount} OFF</span>}
+                  {plan.interest && <span className="text-teal-600 font-semibold">{plan.interest} Interest</span>}
                 </div>
                 <p className="text-gray-600 text-sm text-center">{plan.description}</p>
               </div>
@@ -222,7 +222,7 @@ const Admissions = () => {
       </section>
 
       {/* Scholarships */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-16 bg-gradient-to-br from-teal-50 to-cyan-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Scholarship Programs</h2>
@@ -232,14 +232,14 @@ const Admissions = () => {
             {scholarships.map((scholarship, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
                 <div className="text-center mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3">
                     <scholarship.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">{scholarship.name}</h3>
                 </div>
                 <div className="space-y-2">
                   <p className="text-sm text-gray-600"><strong>Eligibility:</strong> {scholarship.eligibility}</p>
-                  <p className="text-sm font-semibold text-green-600">{scholarship.benefit}</p>
+                  <p className="text-sm font-semibold text-teal-600">{scholarship.benefit}</p>
                 </div>
               </div>
             ))}
@@ -255,7 +255,7 @@ const Admissions = () => {
             <p className="text-xl text-gray-600">Simple 5-step process to join Vspaze Institute</p>
           </div>
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-teal-200"></div>
             <div className="space-y-8">
               {admissionProcess.map((step, idx) => (
                 <div key={idx} className={`flex items-center ${idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
@@ -265,7 +265,7 @@ const Admissions = () => {
                       <p className="text-gray-600">{step.description}</p>
                     </div>
                   </div>
-                  <div className="relative z-10 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                  <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-teal-600 to-cyan-500 rounded-full flex items-center justify-center">
                     <span className="text-white font-bold">{step.step}</span>
                   </div>
                   <div className="w-1/2"></div>
@@ -293,7 +293,7 @@ const Admissions = () => {
                 <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
                   date.status === 'Open' ? 'bg-green-100 text-green-800' :
                   date.status === 'Upcoming' ? 'bg-yellow-100 text-yellow-800' :
-                  'bg-blue-100 text-blue-800'
+                  'bg-teal-100 text-teal-800'
                 }`}>
                   {date.status}
                 </span>
@@ -304,13 +304,13 @@ const Admissions = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
           <p className="text-xl mb-8 opacity-90">Apply now and secure your seat in the next batch</p>
           <a
             href="/student-registration"
-            className="inline-flex items-center space-x-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
+            className="inline-flex items-center space-x-2 bg-white text-teal-700 px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
           >
             <CheckCircle className="w-5 h-5" />
             <span>Apply Now</span>

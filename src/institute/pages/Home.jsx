@@ -145,7 +145,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-teal-900 to-cyan-400">
+    <div className="bg-gradient-to-b from-teal-900 via-teal-800 to-cyan-500">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-teal-900 to-cyan-400 py-12 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -233,7 +233,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-teal-900 to-cyan-400 relative">
+      <section className="py-20 relative border-t border-white/10">
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -263,7 +263,7 @@ const Home = () => {
       </section>
 
       {/* Featured Courses */}
-      <section className="py-20 bg-gradient-to-br from-teal-900 to-cyan-400">
+      <section className="py-20 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 bg-teal-500/20 text-teal-300 rounded-full font-semibold mb-4 border border-teal-400/30">
@@ -315,7 +315,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-teal-900 to-cyan-400">
+      <section className="py-20 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4">Why Choose Vspaze?</h2>
@@ -344,7 +344,7 @@ const Home = () => {
       </section>
 
       {/* Faculty Highlights */}
-      <section className="py-20 bg-gradient-to-br from-teal-900 to-cyan-400">
+      <section className="py-20 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <div className="inline-block px-6 py-2 bg-teal-500/20 text-teal-300 rounded-full font-semibold mb-4 border border-teal-400/30">
@@ -383,7 +383,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-teal-900 to-cyan-400">
+      <section className="py-20 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <div className="inline-block px-6 py-2 bg-white/20 text-white rounded-full font-semibold mb-4 border border-white/30">
@@ -400,7 +400,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-teal-900 to-cyan-400 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden border-t border-white/10">
         <div className="absolute inset-0">
           <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl top-0 left-0 animate-blob"></div>
           <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl bottom-0 right-0 animate-blob animation-delay-2000"></div>
