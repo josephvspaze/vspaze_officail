@@ -18,6 +18,17 @@ const InstituteNavbar = () => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownOpen !== null) {
+        setDropdownOpen(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [dropdownOpen]);
+
   const navItems = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'About', path: '/about', icon: Info },
@@ -45,6 +56,7 @@ const InstituteNavbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
+    <>
     <nav className="bg-teal-700/75 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -52,9 +64,9 @@ const InstituteNavbar = () => {
             <div className="w-12 h-12 bg-transparent rounded-full flex items-center justify-center border-2 border-white">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
-            <div className="flex items-center space-x-1">
-              <span className="text-2xl font-bold text-white">Vspaze</span>
-              <span className="text-2xl font-bold text-cyan-300">Technologies</span>
+            <div className="flex items-center">
+              <span className="text-2xl font-bold"><span className="text-white">V</span><span className="text-cyan-300">spaze</span></span>
+              <span className="text-2xl font-bold ml-2"><span className="text-white">I</span><span className="text-cyan-300">nstitute</span></span>
             </div>
           </Link>
 
@@ -63,7 +75,10 @@ const InstituteNavbar = () => {
               item.dropdown ? (
                 <div key={idx} className="relative">
                   <button
-                    onClick={() => setDropdownOpen(dropdownOpen === idx ? null : idx)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDropdownOpen(dropdownOpen === idx ? null : idx);
+                    }}
                     className="flex items-center space-x-1 font-medium text-white hover:text-cyan-200 transition-colors"
                   >
                     <span>{item.name}</span>
@@ -116,85 +131,88 @@ const InstituteNavbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={() => setIsOpen(false)}></div>
-      )}
-
-      {/* Mobile Menu Sidebar */}
-      {isOpen && (
-        <div onClick={(e) => e.stopPropagation()} className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-teal-600 to-teal-700 backdrop-blur-md bg-opacity-90 shadow-xl z-50 transform transition-transform duration-300 md:hidden overflow-y-auto ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}>
-          <div className="p-4 border-b border-white/10 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/40">
-                <GraduationCap className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-bold text-white">Vspaze</span>
-            </div>
-            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg">
-              <X className="w-6 h-6 text-white" />
-            </button>
-          </div>
-
-          <nav className="p-4">
-            {navItems.map((item, idx) => (
-              item.dropdown ? (
-                <div key={idx} className="mb-2">
-                  <div className="flex items-center space-x-3 px-4 py-3 text-white font-medium">
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </div>
-                  <div className="ml-8 space-y-1">
-                    {item.dropdown.map((subItem, subIdx) => (
-                      <Link
-                        key={subIdx}
-                        to={subItem.path}
-                        onClick={() => setIsOpen(false)}
-                        className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-all ${
-                          isActive(subItem.path)
-                            ? 'bg-white/20 text-cyan-200 shadow-md'
-                            : 'text-cyan-100 hover:bg-white/10'
-                        }`}
-                      >
-                        <subItem.icon className="w-4 h-4" />
-                        <span className="text-sm">{subItem.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                    isActive(item.path)
-                      ? 'bg-white/20 text-cyan-200 shadow-md'
-                      : 'text-white hover:bg-white/10'
-                  }`}
-                >
-                  <item.icon className="w-5 h-5" />
-                  <span className="font-medium">{item.name}</span>
-                </Link>
-              )
-            ))}
-            
-            <div className="border-t border-white/10 mt-4 pt-4">
-              <Link
-                to="/student-login"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 text-white hover:bg-white/10 transition-all"
-              >
-                <User className="w-5 h-5" />
-                <span className="font-medium">Student Login</span>
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
     </nav>
+
+    {/* Mobile Menu Overlay */}
+    <div 
+      className={`fixed inset-0 bg-black/50 z-[100] md:hidden transition-opacity duration-300 ${
+        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
+      onClick={() => setIsOpen(false)}
+    />
+
+    {/* Mobile Menu Sidebar */}
+    <div className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-teal-600 to-teal-700 shadow-2xl z-[101] md:hidden overflow-y-auto transform transition-transform duration-300 ease-in-out ${
+      isOpen ? 'translate-x-0' : '-translate-x-full'
+    }`}>
+        <div className="p-4 border-b border-white/10 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/40">
+              <GraduationCap className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-bold text-white">Vspaze</span>
+          </div>
+          <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg">
+            <X className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
+        <div className="p-4">
+          {navItems.map((item, idx) => (
+            item.dropdown ? (
+              <div key={idx} className="mb-2">
+                <div className="flex items-center space-x-3 px-4 py-3 text-white font-medium">
+                  <item.icon className="w-5 h-5" />
+                  <span>{item.name}</span>
+                </div>
+                <div className="ml-4 space-y-1">
+                  {item.dropdown.map((subItem, subIdx) => (
+                    <Link
+                      key={subIdx}
+                      to={subItem.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-all ${
+                        isActive(subItem.path)
+                          ? 'bg-white/20 text-cyan-200'
+                          : 'text-cyan-100 hover:bg-white/10'
+                      }`}
+                    >
+                      <subItem.icon className="w-4 h-4" />
+                      <span className="text-sm">{subItem.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 transition-all ${
+                  isActive(item.path)
+                    ? 'bg-white/20 text-cyan-200'
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                <item.icon className="w-5 h-5" />
+                <span className="font-medium">{item.name}</span>
+              </Link>
+            )
+          ))}
+          
+          <div className="border-t border-white/10 mt-4 pt-4">
+            <Link
+              to="/student-login"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all"
+            >
+              <User className="w-5 h-5" />
+              <span className="font-medium">Student Login</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

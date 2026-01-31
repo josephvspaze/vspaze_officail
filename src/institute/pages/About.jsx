@@ -9,7 +9,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6 animate-fade-in">About Vspaze Institute</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
-            India's Leading Online Learning Platform - Empowering students since 2015
+            India's Leading Online Learning Platform - Empowering students since 2024
           </p>
         </div>
       </section>
@@ -21,7 +21,7 @@ const About = () => {
             <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
               <p className="text-gray-600 mb-4 text-lg leading-relaxed">
-                Founded in 2015, Vspaze Institute started with a vision to make quality education accessible to everyone through online learning. We bridge the gap between academic learning and industry requirements with our 100% online courses.
+                Founded in 2024, Vspaze Institute started with a vision to make quality education accessible to everyone through online learning. We bridge the gap between academic learning and industry requirements with our 100% online courses.
               </p>
               <p className="text-gray-600 mb-4 text-lg leading-relaxed">
                 We've trained over 500+ students from across India who are now working in top companies like TCS, Infosys, Wipro, and many startups. Our success lies in our commitment to quality online education and personalized attention to each student.
@@ -117,7 +117,7 @@ const About = () => {
               { icon: TrendingUp, title: 'Career Growth', desc: '95% of our students get placed in top companies' },
               { icon: Video, title: 'Recorded Sessions', desc: 'Access recorded classes anytime for revision' },
               { icon: Zap, title: 'Hands-on Projects', desc: 'Real-world projects and practical assignments' },
-              { icon: Heart, title: '24/7 Support', desc: 'Online doubt clearing and mentorship support' },
+              { icon: Heart, title: '12/7 Support', desc: 'Online doubt clearing and mentorship support' },
               { icon: Shield, title: 'Placement Assistance', desc: 'Dedicated online placement support' }
             ].map((item, idx) => (
               <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all">

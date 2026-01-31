@@ -1,8 +1,12 @@
 import React from 'react';
 import { GraduationCap, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const InstituteFooter = () => {
+  const location = useLocation();
+  
+  const isActive = (path) => location.pathname === path;
+  
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -27,6 +31,11 @@ const InstituteFooter = () => {
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
               <a href="#" className="text-gray-400 hover:text-red-500 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
@@ -36,11 +45,31 @@ const InstituteFooter = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors">Courses</Link></li>
-              <li><Link to="/faculty" className="text-gray-400 hover:text-white transition-colors">Faculty</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              <li>
+                <Link to="/" className={`text-gray-400 hover:text-white transition-colors ${isActive('/') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className={`text-gray-400 hover:text-white transition-colors ${isActive('/about') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses" className={`text-gray-400 hover:text-white transition-colors ${isActive('/courses') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                  Courses
+                </Link>
+              </li>
+              <li>
+                <Link to="/faculty" className={`text-gray-400 hover:text-white transition-colors ${isActive('/faculty') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                  Faculty
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className={`text-gray-400 hover:text-white transition-colors ${isActive('/contact') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 

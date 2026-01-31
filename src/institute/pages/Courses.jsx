@@ -35,6 +35,32 @@ const Courses = () => {
 
   const categories = ['All', 'Development', 'Data Science', 'Marketing', 'Design', 'Cloud'];
 
+  const filteredCourses = courses.filter(course => {
+    if (selectedCategory === 'All') return true;
+    const courseName = course.name.toLowerCase();
+    const category = selectedCategory.toLowerCase();
+    
+    if (category === 'development') {
+      return courseName.includes('development') || courseName.includes('full stack') || 
+             courseName.includes('web') || courseName.includes('java') || 
+             courseName.includes('python') || courseName.includes('mobile');
+    }
+    if (category === 'data science') {
+      return courseName.includes('data') || courseName.includes('ai') || 
+             courseName.includes('machine learning') || courseName.includes('analytics');
+    }
+    if (category === 'marketing') {
+      return courseName.includes('marketing') || courseName.includes('digital');
+    }
+    if (category === 'design') {
+      return courseName.includes('design') || courseName.includes('ui') || courseName.includes('ux');
+    }
+    if (category === 'cloud') {
+      return courseName.includes('cloud') || courseName.includes('aws') || courseName.includes('azure');
+    }
+    return true;
+  });
+
   return (
     <div>
       {/* Hero Section */}
@@ -73,17 +99,17 @@ const Courses = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
             <div className="text-center py-12"><div className="text-xl text-gray-600">Loading courses...</div></div>
-          ) : courses.length === 0 ? (
-            <div className="text-center py-12"><div className="text-xl text-gray-600">No courses available</div></div>
+          ) : filteredCourses.length === 0 ? (
+            <div className="text-center py-12"><div className="text-xl text-gray-600">No courses found in this category</div></div>
           ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => {
+            {filteredCourses.map((course) => {
               const iconType = getIconType(course.name);
               return (
               <Link
                 key={course._id}
                 to={`/course/${course._id}`}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block flex flex-col"
               >
                 <div className="bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center">
                   <div className="w-20 h-20 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
@@ -94,10 +120,10 @@ const Courses = () => {
                     {iconType === 'palette' && <Palette className="w-10 h-10 text-white" />}
                     {iconType === 'users' && <UsersIcon className="w-10 h-10 text-white" />}
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{course.name}</h3>
+                  <h3 className="text-2xl font-bold text-white min-h-[64px] flex items-center justify-center">{course.name}</h3>
                 </div>
-                <div className="p-6">
-                  <p className="text-gray-600 mb-4">{course.description}</p>
+                <div className="p-6 flex flex-col flex-grow">
+                  <p className="text-gray-600 mb-4 h-12 line-clamp-2">{course.description}</p>
                   
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center text-gray-700">
@@ -110,21 +136,23 @@ const Courses = () => {
                     </div>
                   </div>
 
-                  {course.subjects && course.subjects.length > 0 && (
-                  <div className="mb-4">
+                  <div className="mb-4 flex-grow">
                     <h4 className="font-semibold text-gray-900 mb-2">What you'll learn:</h4>
                     <div className="space-y-1">
-                      {course.subjects.slice(0, 4).map((item, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-gray-600">
-                          <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
+                      {course.subjects && course.subjects.length > 0 ? (
+                        course.subjects.slice(0, 4).map((item, idx) => (
+                          <div key={idx} className="flex items-start text-sm text-gray-600">
+                            <CheckCircle className="w-4 h-4 mr-2 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="line-clamp-1">{item}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-sm text-gray-500 italic">Course content coming soon</div>
+                      )}
                     </div>
                   </div>
-                  )}
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mt-auto">
                     <button
                       className="flex-1 text-center bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all"
                     >

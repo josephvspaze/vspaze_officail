@@ -48,18 +48,14 @@ const SuccessStories = () => {
   ];
 
   const hiringPartners = [
-    { name: 'TCS', logo: 'https://logos-world.net/wp-content/uploads/2020/09/Tata-Consultancy-Services-TCS-Logo.png' },
-    { name: 'Infosys', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Infosys-Logo.png' },
-    { name: 'Wipro', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Wipro-Logo.png' },
-    { name: 'Accenture', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Accenture-Logo.png' },
-    { name: 'Microsoft', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Microsoft-Logo.png' },
-    { name: 'Amazon', logo: 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Logo.png' },
-    { name: 'Google', logo: 'https://logos-world.net/wp-content/uploads/2020/09/Google-Logo.png' },
-    { name: 'IBM', logo: 'https://logos-world.net/wp-content/uploads/2020/09/IBM-Logo.png' },
-    { name: 'Cognizant', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Cognizant-Logo.png' },
-    { name: 'HCL', logo: 'https://logos-world.net/wp-content/uploads/2020/06/HCL-Logo.png' },
-    { name: 'Tech Mahindra', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Tech-Mahindra-Logo.png' },
-    { name: 'Capgemini', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Capgemini-Logo.png' }
+    { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Tata_Consultancy_Services_Logo.svg', hasLogo: true },
+    { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', hasLogo: true },
+    { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg', hasLogo: true },
+    { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg', hasLogo: true },
+    { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', hasLogo: true },
+    { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', hasLogo: true },
+    { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', hasLogo: true },
+    { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg', hasLogo: true }
   ];
 
   const placementStats = [
@@ -193,21 +189,20 @@ const SuccessStories = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Hiring Partners</h2>
             <p className="text-xl text-gray-600">Top companies that hire our students</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {hiringPartners.map((company, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105">
-                <img 
-                  src={company.logo} 
-                  alt={company.name}
-                  className="w-full h-16 object-contain mx-auto mb-3"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="w-full h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg items-center justify-center mb-3 hidden">
-                  <span className="text-white font-bold text-sm">{company.name.substring(0, 3)}</span>
-                </div>
+              <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                {company.hasLogo ? (
+                  <img 
+                    src={company.logo} 
+                    alt={company.name}
+                    className="w-full h-16 object-contain mb-3"
+                  />
+                ) : (
+                  <div className="w-full h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg flex items-center justify-center mb-3">
+                    <span className="text-white font-bold text-lg">{company.name}</span>
+                  </div>
+                )}
                 <p className="font-semibold text-gray-900 text-center text-sm">{company.name}</p>
               </div>
             ))}

@@ -7,6 +7,7 @@ const StudentRegistration = () => {
     name: '',
     email: '',
     phone: '',
+    parentPhone: '',
     course: '',
     address: ''
   });
@@ -45,7 +46,7 @@ const StudentRegistration = () => {
         localStorage.setItem('pending_students', JSON.stringify(pending));
         
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', course: '', address: '' });
+        setFormData({ name: '', email: '', phone: '', parentPhone: '', course: '', address: '' });
       }
     } catch (error) {
       console.log('API failed, saving to localStorage only');
@@ -101,7 +102,7 @@ const StudentRegistration = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name <span className="text-red-600">*</span></label>
               <div className="relative">
                 <User className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
@@ -116,7 +117,7 @@ const StudentRegistration = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address <span className="text-red-600">*</span></label>
               <div className="relative">
                 <Mail className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
@@ -131,7 +132,7 @@ const StudentRegistration = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number <span className="text-red-600">*</span></label>
               <div className="relative">
                 <Phone className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
@@ -139,14 +140,33 @@ const StudentRegistration = () => {
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                  placeholder="+91 98765 43210"
+                  placeholder="9876543210"
+                  pattern="[0-9]{10}"
+                  maxLength="10"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Select Course *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Parent Mobile Number <span className="text-red-600">*</span></label>
+              <div className="relative">
+                <Phone className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="tel"
+                  value={formData.parentPhone}
+                  onChange={(e) => setFormData({...formData, parentPhone: e.target.value})}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  placeholder="9876543210"
+                  pattern="[0-9]{10}"
+                  maxLength="10"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Select Course <span className="text-red-600">*</span></label>
               <div className="relative">
                 <BookOpen className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <select
@@ -166,7 +186,7 @@ const StudentRegistration = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Address <span className="text-red-600">*</span></label>
               <div className="relative">
                 <MapPin className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
                 <textarea

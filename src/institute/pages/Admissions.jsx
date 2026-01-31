@@ -17,10 +17,6 @@ const Admissions = () => {
       const response = await api.get('/courses');
       const coursesData = response.data.courses || [];
       setCourses(coursesData);
-      if (coursesData.length > 0) {
-        setSelectedCourse(coursesData[0]);
-        setLoanAmount(coursesData[0].fee?.toString() || '45000');
-      }
     } catch (error) {
       console.error('Error fetching courses:', error);
     }
@@ -48,16 +44,31 @@ const Admissions = () => {
 
   const admissionProcess = [
     { step: 1, title: 'Online Registration', description: 'Fill the registration form with your details' },
-    { step: 2, title: 'Document Verification', description: 'Submit required documents for verification' },
-    { step: 3, title: 'Counseling Session', description: 'Free career counseling and course guidance' },
-    { step: 4, title: 'Fee Payment', description: 'Choose payment plan and complete fee payment' },
-    { step: 5, title: 'Batch Allocation', description: 'Get assigned to your preferred batch timing' }
+    { step: 2, title: 'Fee Payment', description: 'Choose payment plan and complete fee payment' },
+    { step: 3, title: 'Start Learning', description: 'Access live classes and course materials instantly' },
+    { step: 4, title: 'Get Certified', description: 'Complete course and receive industry-recognized certificate' },
+    { step: 5, title: 'Career Support', description: 'Get placement assistance and job opportunities' }
   ];
 
+  const getCurrentDate = () => {
+    const now = new Date();
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    return now.toLocaleDateString('en-US', options);
+  };
+
+  const getDateRange = (startDays, endDays) => {
+    const start = new Date();
+    start.setDate(start.getDate() + startDays);
+    const end = new Date();
+    end.setDate(end.getDate() + endDays);
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
+  };
+
   const importantDates = [
-    { event: 'Early Bird Registration', date: 'Jan 15 - Feb 15, 2024', status: 'Open' },
-    { event: 'Regular Admission', date: 'Feb 16 - Mar 30, 2024', status: 'Open' },
-    { event: 'Late Admission', date: 'Apr 1 - Apr 15, 2024', status: 'Upcoming' },
+    { event: 'Early Bird Registration', date: getDateRange(0, 30), status: 'Open' },
+    { event: 'Regular Admission', date: getDateRange(31, 75), status: 'Open' },
+    { event: 'Late Admission', date: getDateRange(76, 90), status: 'Upcoming' },
     { event: 'Batch Start Date', date: 'Every Monday', status: 'Rolling' }
   ];
 
@@ -112,6 +123,7 @@ const Admissions = () => {
                   onClick={() => {
                     setSelectedCourse(course);
                     setLoanAmount(course.fee?.toString() || '45000');
+                    document.getElementById('emi-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
                   className="w-full bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-2 rounded-lg hover:shadow-lg transition-all"
                 >
@@ -124,7 +136,7 @@ const Admissions = () => {
       </section>
 
       {/* EMI Calculator */}
-      <section className="py-16 bg-gray-50">
+      <section id="emi-calculator" className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">EMI Calculator</h2>
@@ -133,14 +145,15 @@ const Admissions = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Course</label>
                   <select
-                    value={selectedCourse?.id || ''}
+                    value={selectedCourse?._id || ''}
                     onChange={(e) => {
                       const course = courses.find(c => c._id === e.target.value);
                       setSelectedCourse(course);
-                      setLoanAmount(course.fee?.toString() || '45000');
+                      setLoanAmount(course?.fee?.toString() || '45000');
                     }}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                   >
+                    <option value="">Select Course</option>
                     {courses.map(course => (
                       <option key={course._id} value={course._id}>{course.name}</option>
                     ))}

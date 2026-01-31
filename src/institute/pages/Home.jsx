@@ -121,6 +121,41 @@ const Home = () => {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [courses, setCourses] = useState([]);
 
+  const testimonials = [
+    {
+      id: 1,
+      name: 'Rahul Sharma',
+      course: 'Full Stack Development',
+      company: 'TCS',
+      rating: 5,
+      review: 'Vspaze transformed my career! The hands-on projects and expert mentors helped me land my dream job at TCS. The curriculum is industry-focused and the support is exceptional.'
+    },
+    {
+      id: 2,
+      name: 'Priya Patel',
+      course: 'Data Science & AI',
+      company: 'Infosys',
+      rating: 5,
+      review: 'Best decision I made was joining Vspaze. The live coding sessions and real-world projects gave me the confidence to crack interviews. Now working as a Data Scientist at Infosys!'
+    },
+    {
+      id: 3,
+      name: 'Amit Kumar',
+      course: 'Cloud Computing',
+      company: 'Wipro',
+      rating: 5,
+      review: 'The faculty at Vspaze are industry experts who genuinely care about student success. The placement support was outstanding. Highly recommend for anyone serious about tech careers.'
+    },
+    {
+      id: 4,
+      name: 'Sneha Reddy',
+      course: 'Digital Marketing',
+      company: 'Accenture',
+      rating: 5,
+      review: 'Amazing learning experience! The course content is up-to-date with industry trends. Got placed at Accenture within 2 months of course completion. Thank you Vspaze team!'
+    }
+  ];
+
   useEffect(() => {
     fetchCourses();
   }, []);
@@ -171,42 +206,13 @@ const Home = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start items-center">
                 <Link to="/student-registration" className="group bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:shadow-2xl hover:shadow-teal-500/50 transition-all transform hover:scale-105 flex items-center space-x-3 w-full sm:w-auto justify-center">
-                  <span>Start Learning Free</span>
+                  <span>Start Learning Now</span>
                   <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform" />
                 </Link>
                 <button onClick={() => setIsDemoModalOpen(true)} className="group bg-transparent border-3 border-teal-300 text-teal-200 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:bg-teal-300 hover:text-teal-900 transition-all flex items-center space-x-3 w-full sm:w-auto justify-center">
                   <Play className="w-5 h-5 sm:w-6 sm:h-6" />
                   <span>Watch Demo</span>
                 </button>
-              </div>
-              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                <Link 
-                  to="/student" 
-                  onClick={(e) => {
-                    // ============ TEMPORARY: DIRECT LOGIN FOR CLIENT DEMO ============
-                    localStorage.setItem('student_auth', JSON.stringify({
-                      isAuthenticated: true,
-                      student: { id: 'demo-student', name: 'Demo Student', email: 'demo@student.com', enrolledCourses: ['Full Stack Development'], dueAmount: 0 }
-                    }));
-                  }}
-                  className="text-teal-200 hover:text-teal-100 font-semibold text-sm sm:text-base transition-colors"
-                >
-                  Already a Student? Login →
-                </Link>
-                <span className="hidden sm:inline text-teal-300">|</span>
-                <Link 
-                  to="/teacher" 
-                  onClick={(e) => {
-                    // ============ TEMPORARY: DIRECT LOGIN FOR CLIENT DEMO ============
-                    localStorage.setItem('teacher_auth', JSON.stringify({
-                      isAuthenticated: true,
-                      teacher: { id: 'demo-teacher', name: 'Demo Teacher', email: 'demo@teacher.com', assignedCourses: ['Full Stack Development'] }
-                    }));
-                  }}
-                  className="text-teal-200 hover:text-teal-100 font-semibold text-sm sm:text-base transition-colors"
-                >
-                  Teacher Login →
-                </Link>
               </div>
               <div className="mt-12 flex justify-center md:justify-start items-center space-x-4 sm:space-x-8 text-white">
                 <div className="text-center">
@@ -215,12 +221,12 @@ const Home = () => {
                 </div>
                 <div className="w-px h-8 sm:h-12 bg-white/30"></div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold">95%</div>
-                  <div className="text-xs sm:text-sm opacity-80">Placement</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold">100%</div>
+                  <div className="text-xs sm:text-sm opacity-80">Placement Support</div>
                 </div>
                 <div className="w-px h-8 sm:h-12 bg-white/30"></div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold">4.9★</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold">4.6★</div>
                   <div className="text-xs sm:text-sm opacity-80">Rating</div>
                 </div>
               </div>
@@ -241,7 +247,7 @@ const Home = () => {
               { icon: Users, count: '500+', label: 'Students Enrolled', color: 'teal' },
               { icon: Award, count: '25+', label: 'Expert Faculty', color: 'cyan' },
               { icon: BookOpen, count: '15+', label: 'Tech Courses', color: 'teal' },
-              { icon: TrendingUp, count: '95%', label: 'Placement Rate', color: 'emerald' }
+              { icon: TrendingUp, count: '100%', label: 'Placement Support', color: 'emerald' }
             ].map((stat, idx) => {
               const bgClasses = {
                 teal: 'bg-gradient-to-br from-teal-400 to-teal-600',
@@ -276,7 +282,7 @@ const Home = () => {
             {courses.slice(0, 6).map((course) => {
               const iconType = getIconType(course.name);
               return (
-                <div key={course._id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden">
+                <div key={course._id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col">
                   <div className="relative bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center overflow-hidden">
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all"></div>
                     <div className="relative w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
@@ -287,17 +293,17 @@ const Home = () => {
                       {iconType === 'palette' && <Palette className="w-10 h-10 text-white" />}
                       {iconType === 'users' && <Users className="w-10 h-10 text-white" />}
                     </div>
-                    <h3 className="text-2xl font-bold text-white relative">{course.name}</h3>
+                    <h3 className="text-2xl font-bold text-white relative min-h-[64px] flex items-center justify-center">{course.name}</h3>
                   </div>
-                  <div className="p-8">
-                    <p className="text-gray-700 mb-6 line-clamp-2">{course.description}</p>
+                  <div className="p-8 flex flex-col flex-grow">
+                    <p className="text-gray-700 mb-6 h-12 line-clamp-2">{course.description}</p>
                     <div className="flex justify-between items-center mb-6 pb-6 border-b border-teal-200/30">
                       <span className="flex items-center text-teal-600 font-semibold">
                         <ClockIcon className="w-5 h-5 mr-2" /> {course.duration}
                       </span>
                       <span className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent">₹{course.fee?.toLocaleString()}</span>
                     </div>
-                    <Link to={`/course/${course._id}`} className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all group-hover:scale-105">
+                    <Link to={`/course/${course._id}`} className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all group-hover:scale-105 mt-auto">
                       Explore Course →
                     </Link>
                   </div>
@@ -395,7 +401,7 @@ const Home = () => {
           <div className="mb-16 hidden md:block">
             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Happy engineering students" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto max-w-4xl border border-white/20" />
           </div>
-          <TestimonialCarousel testimonials={[]} />
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
@@ -412,7 +418,16 @@ const Home = () => {
             <span>Enroll Now - It's Free</span>
             <ArrowRight className="w-6 h-6" />
           </Link>
-          <p className="text-white mt-6 opacity-75">✓ No Credit Card Required  ✓ Start Coding Today</p>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border-2 border-white/40 shadow-lg hover:scale-105 transition-transform">
+              <CheckCircle className="w-6 h-6 text-green-300" />
+              <span className="text-white font-bold text-lg">No Credit Card Required</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border-2 border-white/40 shadow-lg hover:scale-105 transition-transform">
+              <CheckCircle className="w-6 h-6 text-green-300" />
+              <span className="text-white font-bold text-lg">Start Coding Today</span>
+            </div>
+          </div>
         </div>
       </section>
 

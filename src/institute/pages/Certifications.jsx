@@ -3,12 +3,12 @@ import { Award, Shield, CheckCircle, Star, Building, Users } from 'lucide-react'
 
 const Certifications = () => {
   const industryCertifications = [
-    { name: 'AWS Certified Solutions Architect', provider: 'Amazon Web Services', logo: 'https://logos-world.net/wp-content/uploads/2021/08/Amazon-Web-Services-AWS-Logo.png', courses: ['Cloud Computing'] },
-    { name: 'Google Cloud Professional', provider: 'Google Cloud', logo: 'https://logos-world.net/wp-content/uploads/2021/09/Google-Cloud-Logo.png', courses: ['Cloud Computing'] },
-    { name: 'Microsoft Azure Fundamentals', provider: 'Microsoft', logo: 'https://logos-world.net/wp-content/uploads/2020/06/Microsoft-Logo.png', courses: ['Cloud Computing'] },
-    { name: 'Meta Frontend Developer', provider: 'Meta (Facebook)', logo: 'https://logos-world.net/wp-content/uploads/2020/04/Facebook-Logo.png', courses: ['Full Stack Development'] },
-    { name: 'Google Data Analytics', provider: 'Google', logo: 'https://logos-world.net/wp-content/uploads/2020/09/Google-Logo.png', courses: ['Data Science'] },
-    { name: 'IBM Data Science Professional', provider: 'IBM', logo: 'https://logos-world.net/wp-content/uploads/2020/09/IBM-Logo.png', courses: ['Data Science'] }
+    { name: 'AWS Certified Solutions Architect', provider: 'Amazon Web Services', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg', courses: ['Cloud Computing'] },
+    { name: 'Google Cloud Professional', provider: 'Google Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg', courses: ['Cloud Computing'] },
+    { name: 'Microsoft Azure Fundamentals', provider: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', courses: ['Cloud Computing'] },
+    { name: 'Meta Frontend Developer', provider: 'Meta (Facebook)', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg', courses: ['Full Stack Development'] },
+    { name: 'Google Data Analytics', provider: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', courses: ['Data Science'] },
+    { name: 'IBM Data Science Professional', provider: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg', courses: ['Data Science'] }
   ];
 
   const instituteAccreditations = [
@@ -28,8 +28,8 @@ const Certifications = () => {
   const qualityStandards = [
     { standard: 'Student Success Rate', metric: '95%', description: 'Course completion and placement success' },
     { standard: 'Industry Relevance', metric: '100%', description: 'Curriculum updated with latest industry trends' },
-    { standard: 'Faculty Expertise', metric: '8+ Years', description: 'Average industry experience of faculty' },
-    { standard: 'Student Satisfaction', metric: '4.9/5', description: 'Average rating from student feedback' }
+    { standard: 'Faculty Expertise', metric: '5+ Years', description: 'Average industry experience of faculty' },
+    { standard: 'Student Satisfaction', metric: '4.6/5', description: 'Average rating from student feedback' }
   ];
 
   return (
