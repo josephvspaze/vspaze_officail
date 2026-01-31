@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GraduationCap, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { GraduationCap, Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import api from '../utils/api';
 
 const StudentLogin = () => {
@@ -74,6 +74,11 @@ const StudentLogin = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 flex items-center justify-center p-4">
       <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl w-full max-w-md p-8 border border-teal-200/30">
+        <Link to="/" className="inline-flex items-center text-teal-700 hover:text-teal-900 mb-6 font-semibold">
+          <ArrowLeft className="w-5 h-5 mr-2" />
+          Back to Home
+        </Link>
+        
         <div className="flex items-center justify-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-xl flex items-center justify-center">
             <GraduationCap className="w-10 h-10 text-white" />

@@ -66,7 +66,7 @@ const InstituteNavbar = () => {
             </div>
             <div className="flex items-center">
               <span className="text-2xl font-bold"><span className="text-white">V</span><span className="text-cyan-300">spaze</span></span>
-              <span className="text-2xl font-bold ml-2"><span className="text-white">I</span><span className="text-cyan-300">nstitute</span></span>
+              <span className="text-2xl font-bold ml-2 text-white">Institute</span>
             </div>
           </Link>
 

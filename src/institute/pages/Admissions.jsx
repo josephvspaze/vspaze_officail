@@ -91,9 +91,9 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Course Fee Structure</h2>
             <p className="text-xl text-gray-600">Complete breakdown of fees for all courses</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {courses.map((course, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 border-2 border-transparent hover:border-teal-500 transition-all">
+              <div key={idx} className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 border-2 border-teal-500 transition-all w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{course.name}</h3>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-3xl font-bold text-teal-600">{course.fee}</span>
@@ -138,7 +138,7 @@ const Admissions = () => {
       {/* EMI Calculator */}
       <section id="emi-calculator" className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-black">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">EMI Calculator</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">

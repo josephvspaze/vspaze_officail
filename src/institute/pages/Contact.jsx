@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
+import DemoModal from '../components/DemoModal';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Contact = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -183,12 +185,14 @@ const Contact = () => {
             <MapPin className="w-16 h-16 text-teal-600 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Experience Online Learning</h3>
             <p className="text-gray-600 mb-6">Book a free demo class and see how we teach online</p>
-            <a href="/student-registration" className="inline-block bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all">
+            <button onClick={() => setIsDemoModalOpen(true)} className="inline-block bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all">
               Book Free Demo Class
-            </a>
+            </button>
           </div>
         </div>
       </section>
+      
+      <DemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
     </div>
   );
 };

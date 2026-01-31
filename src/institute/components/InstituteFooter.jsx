@@ -10,7 +10,7 @@ const InstituteFooter = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
@@ -76,11 +76,57 @@ const InstituteFooter = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Popular Courses</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">Full Stack Development</li>
-              <li className="text-gray-400">Data Science & AI</li>
-              <li className="text-gray-400">Digital Marketing</li>
-              <li className="text-gray-400">Cloud Computing</li>
-              <li className="text-gray-400">Python Programming</li>
+              <li>
+                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Full Stack Development
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses?category=Data Science" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Data Science & AI
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses?category=Marketing" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Digital Marketing
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses?category=Cloud" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Cloud Computing
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Python Programming
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Certifications</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  AWS Certified
+                </Link>
+              </li>
+              <li>
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Google Certified
+                </Link>
+              </li>
+              <li>
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Microsoft Certified
+                </Link>
+              </li>
+              <li>
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                  Industry Recognized
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -93,11 +139,21 @@ const InstituteFooter = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                <span className="text-gray-400">+91 98765 43210</span>
+                <a href="tel:+919876543210" className="text-gray-400 hover:text-white transition-colors">
+                  +91 98765 43210
+                </a>
+              </li>
+              <li className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <a href="tel:08012345678" className="text-gray-400 hover:text-white transition-colors">
+                  080-1234-5678 (Landline)
+                </a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                <span className="text-gray-400">info@vspaze.com</span>
+                <a href="mailto:info@vspaze.com" className="text-gray-400 hover:text-white transition-colors">
+                  info@vspaze.com
+                </a>
               </li>
             </ul>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Award, BookOpen, TrendingUp, CheckCircle, Star, Code, Database, Megaphone, Cloud, Palette, Briefcase, DollarSign, Clock as ClockIcon, Target, Play, Zap, Shield, Video, ChevronLeft, ChevronRight, X, Calendar } from 'lucide-react';
+import DemoModal from '../components/DemoModal';
 
 import api from '../../utils/api';
 
@@ -20,19 +21,19 @@ const TestimonialCarousel = ({ testimonials }) => {
         <div className="flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${current * 100}%)` }}>
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-              <div className="group bg-slate-800 border border-cyan-500/20 rounded-3xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all max-w-4xl mx-auto">
+              <div className="group bg-white border border-gray-200 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all max-w-4xl mx-auto">
                 <div className="flex items-center mb-6">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-6 h-6 text-yellow-500 fill-current" />
                   ))}
                 </div>
-                <p className="text-cyan-100 text-lg mb-6 italic leading-relaxed">"{testimonial.review}"</p>
-                <div className="flex items-center justify-between pt-6 border-t border-cyan-500/20">
+                <p className="text-gray-700 text-lg mb-6 italic leading-relaxed">"{testimonial.review}"</p>
+                <div className="flex items-center justify-between pt-6 border-t border-gray-200">
                   <div>
-                    <h4 className="font-bold text-white text-lg">{testimonial.name}</h4>
-                    <p className="text-sm text-cyan-300">{testimonial.course}</p>
+                    <h4 className="font-bold text-gray-900 text-lg">{testimonial.name}</h4>
+                    <p className="text-sm text-teal-600">{testimonial.course}</p>
                   </div>
-                  <span className="px-4 py-2 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-semibold border border-cyan-400/30">{testimonial.company}</span>
+                  <span className="px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold border border-teal-200">{testimonial.company}</span>
                 </div>
               </div>
             </div>
@@ -41,81 +42,14 @@ const TestimonialCarousel = ({ testimonials }) => {
       </div>
       <div className="flex justify-center mt-8 space-x-2">
         {testimonials.map((_, idx) => (
-          <button key={idx} onClick={() => setCurrent(idx)} className={`w-3 h-3 rounded-full transition-all ${ idx === current ? 'bg-cyan-500 w-8' : 'bg-cyan-500/30' }`} />
+          <button key={idx} onClick={() => setCurrent(idx)} className={`w-3 h-3 rounded-full transition-all ${ idx === current ? 'bg-black w-8' : 'bg-gray-400' }`} />
         ))}
       </div>
     </div>
   );
 };
 
-const WatchDemoModal = ({ isOpen, onClose }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
 
-  const liveDemoSlots = [
-    { id: 1, date: 'Jan 25, 2024', time: '10:00 AM - 11:00 AM' },
-    { id: 2, date: 'Jan 26, 2024', time: '2:00 PM - 3:00 PM' },
-    { id: 3, date: 'Jan 27, 2024', time: '4:00 PM - 5:00 PM' }
-  ];
-
-  const handleLiveDemoSelect = (slot) => {
-    window.open('https://meet.google.com/your-demo-link', '_blank');
-  };
-
-  const handleRecordedDemo = () => {
-    window.open('https://youtu.be/ajdRvxDWH4w?si=1ZFxG8Vstu66A3Gu', '_blank');
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()} className="bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-cyan-500/30">
-        <div className="p-6 border-b border-cyan-500/20 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Watch Demo</h2>
-          <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-lg">
-            <X className="w-5 h-5 text-white" />
-          </button>
-        </div>
-
-        <div className="p-6 min-h-[200px]">
-          {!selectedOption ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button onClick={() => setSelectedOption('live')} className="p-8 border-2 border-cyan-500/30 rounded-xl hover:border-cyan-500 hover:bg-cyan-500/10 transition-all bg-slate-700/50">
-                <Video className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Live Demo</h3>
-                <p className="text-cyan-200 text-sm">Join a live session with our expert</p>
-              </button>
-
-              <button onClick={() => { setSelectedOption('recorded'); handleRecordedDemo(); }} className="p-8 border-2 border-purple-500/30 rounded-xl hover:border-purple-500 hover:bg-purple-500/10 transition-all bg-slate-700/50">
-                <Play className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Recorded Demo</h3>
-                <p className="text-cyan-200 text-sm">Watch pre-recorded demo anytime</p>
-              </button>
-            </div>
-          ) : selectedOption === 'live' ? (
-            <div>
-              <button onClick={() => setSelectedOption(null)} className="text-cyan-400 hover:text-cyan-300 mb-4 font-semibold">← Back</button>
-              <h3 className="text-xl font-semibold text-white mb-4">Select a Time Slot</h3>
-              <div className="space-y-3">
-                {liveDemoSlots.map((slot) => (
-                  <button key={slot.id} onClick={() => handleLiveDemoSelect(slot)} className="w-full p-4 border-2 border-cyan-500/30 rounded-xl hover:border-cyan-500 hover:bg-cyan-500/10 transition-all text-left bg-slate-700/50">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold text-white">{slot.date}</p>
-                        <p className="text-cyan-200">{slot.time}</p>
-                      </div>
-                      <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm border border-green-500/30">Available</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Home = () => {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
@@ -363,18 +297,31 @@ const Home = () => {
             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Tech team collaboration" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto max-w-4xl border border-teal-500/20" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {[].map((member, idx) => (
-              <div key={member.id} className="group bg-slate-800 border border-teal-500/20 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden">
-                <div className="bg-gradient-to-br from-teal-600 via-cyan-600 to-slate-700 p-8 text-center">
-                  <div className="w-28 h-28 rounded-full mx-auto mb-4 shadow-2xl group-hover:scale-110 transition-transform border-2 border-teal-400 overflow-hidden">
-                    <img src={`https://randomuser.me/api/portraits/${idx % 2 === 0 ? 'men' : 'women'}/${idx + 10}.jpg`} alt={member.name} className="w-full h-full object-cover" />
+            {[
+              { id: 1, name: 'Dr. Rajesh Kumar', specialization: 'Full Stack Development', qualification: 'M.Tech, IIT Delhi', experience: '12+ Years', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
+              { id: 2, name: 'Priya Sharma', specialization: 'Data Science & AI', qualification: 'PhD in Computer Science', experience: '10+ Years', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
+              { id: 3, name: 'Amit Patel', specialization: 'Cloud Computing', qualification: 'B.Tech, AWS Certified', experience: '8+ Years', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80' },
+              { id: 4, name: 'Sneha Reddy', specialization: 'Digital Marketing', qualification: 'MBA, Google Certified', experience: '7+ Years', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80' }
+            ].map((member, idx) => (
+              <div key={member.id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col">
+                <div className="relative bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center overflow-hidden">
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all"></div>
+                  <div className="relative w-24 h-24 mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/30 shadow-2xl">
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl font-bold text-white relative min-h-[64px] flex items-center justify-center">{member.name}</h3>
                 </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
-                  <p className="text-teal-400 font-semibold mb-2">{member.specialization}</p>
-                  <p className="text-teal-100 text-sm mb-2">{member.qualification}</p>
-                  <p className="text-teal-200 text-sm">{member.experience} Experience</p>
+                <div className="p-8 flex flex-col flex-grow">
+                  <p className="text-gray-700 mb-6 h-12 line-clamp-2 font-semibold">{member.specialization}</p>
+                  <div className="flex justify-between items-center mb-6 pb-6 border-b border-teal-200/30">
+                    <span className="flex items-center text-teal-600 font-semibold text-sm">
+                      <Award className="w-5 h-5 mr-2" /> {member.qualification}
+                    </span>
+                    <span className="text-lg font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent">{member.experience}</span>
+                  </div>
+
                 </div>
               </div>
             ))}
@@ -399,7 +346,7 @@ const Home = () => {
             <p className="text-lg sm:text-xl text-white/90">Join thousands of successful alumni</p>
           </div>
           <div className="mb-16 hidden md:block">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Happy engineering students" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto max-w-4xl border border-white/20" />
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80" alt="Happy students celebrating graduation and success" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto max-w-4xl border border-white/20" />
           </div>
           <TestimonialCarousel testimonials={testimonials} />
         </div>
@@ -419,19 +366,17 @@ const Home = () => {
             <ArrowRight className="w-6 h-6" />
           </Link>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border-2 border-white/40 shadow-lg hover:scale-105 transition-transform">
-              <CheckCircle className="w-6 h-6 text-green-300" />
-              <span className="text-white font-bold text-lg">No Credit Card Required</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border-2 border-white/40 shadow-lg hover:scale-105 transition-transform">
-              <CheckCircle className="w-6 h-6 text-green-300" />
-              <span className="text-white font-bold text-lg">Start Coding Today</span>
-            </div>
+            <span className="text-white font-bold text-lg">
+              ✓ No Credit Card Required
+            </span>
+            <span className="text-white font-bold text-lg">
+              ✓ Start Coding Today
+            </span>
           </div>
         </div>
       </section>
 
-      <WatchDemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
+      <DemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
     </div>
   );
 };

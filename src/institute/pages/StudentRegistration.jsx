@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { User, Mail, Phone, BookOpen, MapPin, GraduationCap } from 'lucide-react';
 import api from '../../utils/api';
 
 const StudentRegistration = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,6 +49,7 @@ const StudentRegistration = () => {
         
         setSubmitted(true);
         setFormData({ name: '', email: '', phone: '', parentPhone: '', course: '', address: '' });
+        setTimeout(() => navigate('/'), 2000);
       }
     } catch (error) {
       console.log('API failed, saving to localStorage only');
@@ -61,6 +64,7 @@ const StudentRegistration = () => {
       
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', course: '', address: '' });
+      setTimeout(() => navigate('/'), 2000);
     } finally {
       setLoading(false);
     }
@@ -77,12 +81,9 @@ const StudentRegistration = () => {
           <p className="text-gray-600 mb-6">
             Thank you for registering with Vspaze Institute. Our admin team will review your application and contact you soon.
           </p>
-          <button
-            onClick={() => setSubmitted(false)}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
-          >
-            Register Another Student
-          </button>
+          <p className="text-sm text-gray-500">
+            Redirecting to home page...
+          </p>
         </div>
       </div>
     );
@@ -172,13 +173,13 @@ const StudentRegistration = () => {
                 <select
                   value={formData.course}
                   onChange={(e) => setFormData({...formData, course: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white"
                   required
                 >
                   <option value="">Choose a course</option>
                   {courses.map((course) => (
-                    <option key={course.id} value={course.name}>
-                      {course.name} - {course.duration} - {course.fee}
+                    <option key={course._id} value={course.name}>
+                      {course.name} - ₹{course.fee}
                     </option>
                   ))}
                 </select>

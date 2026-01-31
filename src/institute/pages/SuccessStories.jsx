@@ -48,7 +48,7 @@ const SuccessStories = () => {
   ];
 
   const hiringPartners = [
-    { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Tata_Consultancy_Services_Logo.svg', hasLogo: true },
+    { name: 'TCS', logo: 'https://logos-world.net/wp-content/uploads/2020/09/Tata-Consultancy-Services-TCS-Logo.png', hasLogo: true },
     { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', hasLogo: true },
     { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg', hasLogo: true },
     { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg', hasLogo: true },

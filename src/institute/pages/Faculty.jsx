@@ -32,40 +32,38 @@ const Faculty = () => {
       </section>
 
       {/* Faculty Grid */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gradient-to-b from-teal-900 via-teal-800 to-cyan-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {faculty.map((member) => (
               <Link
                 key={member._id}
                 to={`/faculty/${member._id}`}
-                className="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden cursor-pointer"
+                className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col"
               >
-                <div className="bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center">
-                  <div className="w-32 h-32 rounded-full mx-auto mb-4 shadow-xl border-4 border-white bg-white flex items-center justify-center">
-                    <span className="text-4xl font-bold text-teal-600">
+                <div className="relative bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center overflow-hidden">
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all"></div>
+                  <div className="relative w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <span className="text-3xl font-bold text-white">
                       {member.name?.split(' ').map(n => n[0]).join('') || 'F'}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
-                  <p className="text-white/90 font-semibold">{member.specialization}</p>
+                  <h3 className="text-2xl font-bold text-white relative min-h-[64px] flex items-center justify-center">{member.name}</h3>
                 </div>
-
-                <div className="p-6">
-                  <p className="text-gray-600 mb-4 italic">"{member.bio}"</p>
-
-                  <div className="space-y-3 mb-4">
-                    <div className="flex items-center text-gray-700">
-                      <GraduationCap className="w-5 h-5 mr-3 text-teal-600" />
+                <div className="p-8 flex flex-col flex-grow">
+                  <p className="text-teal-600 font-semibold text-center mb-4">{member.specialization}</p>
+                  <p className="text-gray-700 mb-6 h-12 line-clamp-2 italic">"{member.bio}"</p>
+                  <div className="space-y-3 mb-6 pb-6 border-b border-teal-200/30">
+                    <div className="flex items-center text-teal-600 font-semibold">
+                      <GraduationCap className="w-5 h-5 mr-2" />
                       <span className="text-sm">{member.qualification}</span>
                     </div>
-                    <div className="flex items-center text-gray-700">
-                      <Briefcase className="w-5 h-5 mr-3 text-cyan-600" />
-                      <span className="text-sm">{member.experience} Experience</span>
+                    <div className="flex items-center text-teal-600 font-semibold">
+                      <Briefcase className="w-5 h-5 mr-2" />
+                      <span className="text-sm">{member.experience}</span>
                     </div>
                   </div>
-
-                  <div className="mb-4">
+                  <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 mb-2 flex items-center">
                       <Award className="w-5 h-5 mr-2 text-yellow-500" />
                       Teaches:
@@ -80,6 +78,9 @@ const Faculty = () => {
                         </span>
                       ))}
                     </div>
+                  </div>
+                  <div className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all group-hover:scale-105 mt-auto">
+                    View Profile →
                   </div>
                 </div>
               </Link>

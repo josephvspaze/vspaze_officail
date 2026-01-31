@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Clock, DollarSign, Users, CheckCircle, ArrowRight, Code, Database, Megaphone, Cloud, Palette, Users as UsersIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import api from '../../utils/api';
 
 const Courses = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchParams] = useSearchParams();
+  const categoryFromUrl = searchParams.get('category') || 'All';
+  const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCourses();
   }, []);
+
+  useEffect(() => {
+    const category = searchParams.get('category') || 'All';
+    setSelectedCategory(category);
+  }, [searchParams]);
 
   const fetchCourses = async () => {
     try {
@@ -102,14 +109,14 @@ const Courses = () => {
           ) : filteredCourses.length === 0 ? (
             <div className="text-center py-12"><div className="text-xl text-gray-600">No courses found in this category</div></div>
           ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {filteredCourses.map((course) => {
               const iconType = getIconType(course.name);
               return (
               <Link
                 key={course._id}
                 to={`/course/${course._id}`}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block flex flex-col"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
               >
                 <div className="bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center">
                   <div className="w-20 h-20 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
