@@ -181,7 +181,7 @@ const Admissions = () => {
                   </select>
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-gray-900">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">EMI Breakdown</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">

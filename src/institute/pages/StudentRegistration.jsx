@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, Mail, Phone, BookOpen, MapPin, GraduationCap } from 'lucide-react';
+import { User, Mail, Phone, BookOpen, MapPin, GraduationCap, Camera } from 'lucide-react';
 import api from '../../utils/api';
 
 const StudentRegistration = () => {
@@ -11,7 +11,8 @@ const StudentRegistration = () => {
     phone: '',
     parentPhone: '',
     course: '',
-    address: ''
+    address: '',
+    profilePic: null
   });
   const [submitted, setSubmitted] = useState(false);
   const [courses, setCourses] = useState([]);
@@ -27,7 +28,17 @@ const StudentRegistration = () => {
       }
     };
     fetchCourses();
+    
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
+  // Scroll to top when success modal shows
+  useEffect(() => {
+    if (submitted) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [submitted]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,8 +59,7 @@ const StudentRegistration = () => {
         localStorage.setItem('pending_students', JSON.stringify(pending));
         
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', parentPhone: '', course: '', address: '' });
-        setTimeout(() => navigate('/'), 2000);
+        setFormData({ name: '', email: '', phone: '', parentPhone: '', course: '', address: '', profilePic: null });
       }
     } catch (error) {
       console.log('API failed, saving to localStorage only');
@@ -63,8 +73,7 @@ const StudentRegistration = () => {
       localStorage.setItem('pending_students', JSON.stringify(pending));
       
       setSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', course: '', address: '' });
-      setTimeout(() => navigate('/'), 2000);
+      setFormData({ name: '', email: '', phone: '', parentPhone: '', course: '', address: '', profilePic: null });
     } finally {
       setLoading(false);
     }
@@ -72,7 +81,7 @@ const StudentRegistration = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-start justify-center p-4 pt-20">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <GraduationCap className="w-10 h-10 text-green-600" />
@@ -81,9 +90,12 @@ const StudentRegistration = () => {
           <p className="text-gray-600 mb-6">
             Thank you for registering with Vspaze Institute. Our admin team will review your application and contact you soon.
           </p>
-          <p className="text-sm text-gray-500">
-            Redirecting to home page...
-          </p>
+          <button
+            onClick={() => navigate('/')}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl transition-all"
+          >
+            Back to Home
+          </button>
         </div>
       </div>
     );
@@ -102,6 +114,43 @@ const StudentRegistration = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Profile Picture (Optional)</label>
+              <div className="flex items-center justify-center">
+                <label className="relative cursor-pointer group">
+                  <div className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50 group-hover:bg-gray-100 transition-colors overflow-hidden">
+                    {formData.profilePic ? (
+                      <img 
+                        src={URL.createObjectURL(formData.profilePic)} 
+                        alt="Profile preview" 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="text-center">
+                        <Camera className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                        <span className="text-xs text-gray-500">Upload Photo</span>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setFormData({...formData, profilePic: e.target.files[0]})}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+              {formData.profilePic && (
+                <button
+                  type="button"
+                  onClick={() => setFormData({...formData, profilePic: null})}
+                  className="text-sm text-red-600 hover:text-red-700 mt-2 mx-auto block"
+                >
+                  Remove Photo
+                </button>
+              )}
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Full Name <span className="text-red-600">*</span></label>
               <div className="relative">

@@ -1,11 +1,14 @@
 import React from 'react';
-import { GraduationCap, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { GraduationCap, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, PhoneCall } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const InstituteFooter = () => {
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const category = searchParams.get('category');
   
   const isActive = (path) => location.pathname === path;
+  const isCourseCategory = (cat) => location.pathname === '/courses' && category === cat;
   
   return (
     <footer className="bg-gray-900 text-white">
@@ -77,27 +80,27 @@ const InstituteFooter = () => {
             <h3 className="text-lg font-semibold mb-4">Popular Courses</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Development') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
                   Full Stack Development
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Data Science" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/courses?category=Data Science" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Data Science') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
                   Data Science & AI
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Marketing" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/courses?category=Marketing" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Marketing') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
                   Digital Marketing
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Cloud" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/courses?category=Cloud" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Cloud') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
                   Cloud Computing
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Development') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
                   Python Programming
                 </Link>
               </li>
@@ -144,9 +147,9 @@ const InstituteFooter = () => {
                 </a>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <PhoneCall className="w-5 h-5 text-blue-500 flex-shrink-0" />
                 <a href="tel:08012345678" className="text-gray-400 hover:text-white transition-colors">
-                  080-1234-5678 (Landline)
+                  080-1234-5678
                 </a>
               </li>
               <li className="flex items-center space-x-3">
@@ -159,8 +162,17 @@ const InstituteFooter = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-gray-400">
           <p>&copy; 2024 Vspaze Institute. All rights reserved.</p>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="mt-4 sm:mt-0 flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-lg transition-all hover:shadow-lg"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            <span>Back to Top</span>
+          </button>
         </div>
       </div>
     </footer>

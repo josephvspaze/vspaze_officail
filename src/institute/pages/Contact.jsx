@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
 import DemoModal from '../components/DemoModal';
+import ContactPopup from '../components/ContactPopup';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,15 @@ const Contact = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [showContactPopup, setShowContactPopup] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContactPopup(true);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -181,7 +191,7 @@ const Contact = () => {
       {/* Map Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl p-12 text-center">
+          <div className="bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl p-12 text-center border-2 border-gray-900">
             <MapPin className="w-16 h-16 text-teal-600 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Experience Online Learning</h3>
             <p className="text-gray-600 mb-6">Book a free demo class and see how we teach online</p>
@@ -193,6 +203,7 @@ const Contact = () => {
       </section>
       
       <DemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
+      {showContactPopup && <ContactPopup onClose={() => setShowContactPopup(false)} />}
     </div>
   );
 };
