@@ -166,12 +166,12 @@ const InstituteFooter = () => {
           <p>&copy; 2024 Vspaze Institute. All rights reserved.</p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="mt-4 sm:mt-0 flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-lg transition-all hover:shadow-lg"
+            className="mt-4 sm:mt-0 bg-teal-600 hover:bg-teal-700 text-white p-3 rounded-lg transition-all hover:shadow-lg"
+            aria-label="Back to top"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
-            <span>Back to Top</span>
           </button>
         </div>
       </div>

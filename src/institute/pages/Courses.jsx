@@ -90,9 +90,10 @@ const Courses = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2 rounded-full font-semibold transition-all ${
                   selectedCategory === category
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-gradient-to-r from-teal-600 to-cyan-500 text-white shadow-lg border border-teal-400'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-teal-400'
                 }`}
+                style={selectedCategory === category ? {boxShadow: '0 0 15px rgba(20, 184, 166, 0.4)'} : {boxShadow: '0 0 8px rgba(20, 184, 166, 0.2)'}}
               >
                 {category}
               </button>
@@ -116,7 +117,8 @@ const Courses = () => {
               <Link
                 key={course._id}
                 to={`/course/${course._id}`}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden block flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] border border-teal-400"
+                style={{boxShadow: '0 0 20px rgba(20, 184, 166, 0.3), 0 10px 25px rgba(0, 0, 0, 0.1)'}}
               >
                 <div className="bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center">
                   <div className="w-20 h-20 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
@@ -161,7 +163,8 @@ const Courses = () => {
 
                   <div className="flex gap-2 mt-auto">
                     <button
-                      className="flex-1 text-center bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all"
+                      className="flex-1 text-center bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all border border-teal-400"
+                      style={{boxShadow: '0 0 10px rgba(20, 184, 166, 0.2)'}}
                     >
                       View Details
                     </button>

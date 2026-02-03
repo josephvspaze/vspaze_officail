@@ -82,7 +82,7 @@ const Certifications = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {instituteAccreditations.map((accred, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center">
+              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.3)'}}>
                 <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <accred.icon className="w-8 h-8 text-white" />
                 </div>

@@ -181,7 +181,7 @@ const Admissions = () => {
                   </select>
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-gray-900">
+              <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border border-gray-900">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">EMI Breakdown</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
@@ -243,7 +243,7 @@ const Admissions = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {scholarships.map((scholarship, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.3)'}}>
                 <div className="text-center mb-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3">
                     <scholarship.icon className="w-8 h-8 text-white" />
@@ -267,21 +267,53 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Admission Process</h2>
             <p className="text-xl text-gray-600">Simple 5-step process to join Vspaze Institute</p>
           </div>
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-teal-200"></div>
-            <div className="space-y-8">
+          <div className="relative max-w-5xl mx-auto">
+            {/* Vertical Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-teal-400"></div>
+            
+            <div className="space-y-12 md:space-y-12">
               {admissionProcess.map((step, idx) => (
-                <div key={idx} className={`flex items-center ${idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                  <div className={`w-1/2 ${idx % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
-                    <div className="bg-white p-6 rounded-2xl shadow-lg">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-gray-600">{step.description}</p>
+                <div key={idx} className="relative">
+                  {/* Down Arrow */}
+                  {idx > 0 && (
+                    <div className="flex justify-center mb-4">
+                      <svg className="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Desktop View - Circle and Content at same level */}
+                  <div className="hidden md:flex relative items-center justify-center">
+                    {/* Content Box - Positioned to left or right */}
+                    <div className={`absolute ${idx % 2 === 0 ? 'right-1/2 pr-8 md:pr-12' : 'left-1/2 pl-8 md:pl-12'} w-5/12`}>
+                      <div className="bg-white p-6 rounded-2xl shadow-lg border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
+                        <h3 className="text-lg font-bold text-gray-900 mb-1">{step.title}</h3>
+                        <p className="text-gray-600 text-sm">{step.description}</p>
+                      </div>
+                    </div>
+
+                    {/* Center Circle - On the line */}
+                    <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-teal-600 to-cyan-500 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                      <span className="text-white font-bold text-lg">{step.step}</span>
                     </div>
                   </div>
-                  <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-teal-600 to-cyan-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold">{step.step}</span>
+
+                  {/* Mobile View - Circle above, Content below */}
+                  <div className="md:hidden flex flex-col items-center">
+                    {/* Center Circle - On the line */}
+                    <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-teal-600 to-cyan-500 rounded-full flex items-center justify-center border-4 border-white shadow-lg mb-4">
+                      <span className="text-white font-bold text-lg">{step.step}</span>
+                    </div>
+
+                    {/* Content Box - Below circle, full width */}
+                    <div className="w-full px-4">
+                      <div className="bg-white p-6 rounded-2xl shadow-lg border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+                        <p className="text-gray-600 text-sm">{step.description}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-1/2"></div>
                 </div>
               ))}
             </div>
@@ -298,7 +330,7 @@ const Admissions = () => {
           </div>
           <div className="space-y-4">
             {importantDates.map((date, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-6 shadow-md flex items-center justify-between">
+              <div key={idx} className="bg-white rounded-xl p-6 shadow-md flex items-center justify-between border border-teal-400" style={{boxShadow: '0 0 10px rgba(20, 184, 166, 0.2)'}}>
                 <div>
                   <h3 className="text-lg font-bold text-gray-900">{date.event}</h3>
                   <p className="text-gray-600">{date.date}</p>

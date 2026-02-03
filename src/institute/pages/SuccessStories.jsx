@@ -42,13 +42,13 @@ const SuccessStories = () => {
       company: 'Google',
       duration: '5 months',
       story: 'From support engineer to cloud architect at Google. Dreams do come true!',
-      image: 'https://randomuser.me/api/portraits/men/25.jpg',
+      image: 'https://randomuser.me/api/portraits/men/45.jpg',
       linkedin: '#'
     }
   ];
 
   const hiringPartners = [
-    { name: 'TCS', logo: 'https://logos-world.net/wp-content/uploads/2020/09/Tata-Consultancy-Services-TCS-Logo.png', hasLogo: true },
+    { name: 'TCS', logo: '/logo.webp', hasLogo: true },
     { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg', hasLogo: true },
     { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg', hasLogo: true },
     { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg', hasLogo: true },
@@ -86,7 +86,7 @@ const SuccessStories = () => {
           </div>
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             {placementStats.map((stat, idx) => (
-              <div key={idx} className="text-center p-6 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl hover:shadow-lg transition-all">
+              <div key={idx} className="text-center p-6 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl hover:shadow-lg transition-all border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                 <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
@@ -102,21 +102,23 @@ const SuccessStories = () => {
       <section className="py-8 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold mb-2">🎉 Recent Placements (Last 30 Days)</h3>
+            <h3 className="text-2xl font-bold mb-2">Recent Placements (Last 30 Days)</h3>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {recentPlacements.map((placement, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm p-4 rounded-lg">
-                <h4 className="font-bold text-lg">{placement.name}</h4>
-                <p className="text-sm opacity-90">{placement.course}</p>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="font-bold text-yellow-300">{placement.package}</span>
-                  <span className="text-sm">{placement.days} days ago</span>
+              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
+                <h4 className="font-bold text-lg mb-1">{placement.name}</h4>
+                <p className="text-sm opacity-90 mb-3">{placement.course}</p>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-bold text-yellow-300 text-lg">{placement.package}</span>
+                  <span className="text-xs bg-white/20 px-2 py-1 rounded-full">{placement.days} days ago</span>
                 </div>
-                <div className="flex items-center mt-1 text-sm opacity-80">
+                <div className="flex items-center mb-2 text-sm opacity-90">
                   <Building className="w-4 h-4 mr-1" />
-                  {placement.company}
-                  <MapPin className="w-4 h-4 ml-2 mr-1" />
+                  <span className="font-semibold">{placement.company}</span>
+                </div>
+                <div className="flex items-center text-sm opacity-80">
+                  <MapPin className="w-4 h-4 mr-1" />
                   {placement.location}
                 </div>
               </div>
@@ -134,13 +136,13 @@ const SuccessStories = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {successStories.map((story, idx) => (
-              <div key={idx} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden">
+              <div key={idx} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                 <div className="p-6">
                   <div className="flex items-center space-x-4 mb-4">
                     <img src={story.image} alt={story.name} className="w-16 h-16 rounded-full object-cover" />
                     <div>
                       <h3 className="text-xl font-bold text-gray-900">{story.name}</h3>
-                      <p className="text-teal-600 font-semibold">{story.course}</p>
+                      <p className="text-teal-600 font-semibold text-sm">{story.course}</p>
                     </div>
                   </div>
                   
@@ -169,12 +171,14 @@ const SuccessStories = () => {
                     </div>
                   </div>
 
-                  <p className="text-gray-600 italic mb-4">"{story.story}"</p>
+                  <p className="text-gray-600 italic mb-4 text-sm leading-relaxed">"{story.story}"</p>
                   
-                  <a href={story.linkedin} className="inline-flex items-center text-teal-600 hover:text-teal-800 font-semibold">
-                    <ExternalLink className="w-4 h-4 mr-1" />
-                    View LinkedIn Profile
-                  </a>
+                  <div className="pt-3 border-t border-gray-200">
+                    <a href={story.linkedin} className="inline-flex items-center text-teal-600 hover:text-teal-800 font-semibold text-sm">
+                      <ExternalLink className="w-4 h-4 mr-1" />
+                      View LinkedIn Profile
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -196,7 +200,8 @@ const SuccessStories = () => {
                   <img 
                     src={company.logo} 
                     alt={company.name}
-                    className="w-full h-16 object-contain mb-3"
+                    className={`w-full object-contain mb-3 ${company.name === 'TCS' ? 'h-40' : 'h-16'}`}
+                    style={company.name === 'TCS' ? {mixBlendMode: 'multiply'} : {}}
                   />
                 ) : (
                   <div className="w-full h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg flex items-center justify-center mb-3">

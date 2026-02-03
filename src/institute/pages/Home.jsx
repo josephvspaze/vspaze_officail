@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Award, BookOpen, TrendingUp, Star, Code, Database, Megaphone, Cloud, Palette, Clock as ClockIcon, Target, Play, Zap, Video, ChevronDown } from 'lucide-react';
+import { ArrowRight, Users, Award, BookOpen, TrendingUp, Star, Code, Database, Megaphone, Cloud, Palette, Clock as ClockIcon, Target, Play, Zap, Video, ChevronDown, Download } from 'lucide-react';
 import DemoModal from '../components/DemoModal';
+import BrochureModal from '../components/BrochureModal';
 import api from '../../utils/api';
 
 const CAROUSEL_INTERVAL = 5000;
@@ -48,7 +49,7 @@ const TypewriterText = () => {
   }, []);
 
   return (
-    <span className="block bg-gradient-to-r from-teal-200 via-cyan-200 to-teal-200 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl min-h-[3rem]">
+    <span className="block bg-gradient-to-r from-teal-200 via-cyan-200 to-teal-200 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl min-h-[3.5rem] pb-2">
       {text}<span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>|</span>
     </span>
   );
@@ -114,7 +115,7 @@ const TestimonialCarousel = ({ testimonials }) => {
           <button 
             key={idx} 
             onClick={() => goToSlide(idx)} 
-            className={`w-3 h-3 rounded-full transition-all ${idx === current ? 'bg-black w-8' : 'bg-gray-400'}`}
+            className={`w-3 h-3 rounded-full transition-all ${idx === current ? 'bg-white w-8' : 'bg-white/50'}`}
             aria-label={`Go to testimonial ${idx + 1}`}
             aria-current={idx === current}
             role="tab"
@@ -127,6 +128,7 @@ const TestimonialCarousel = ({ testimonials }) => {
 
 const Home = () => {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -212,11 +214,11 @@ const Home = () => {
                 <div className="inline-block mb-4 px-6 py-2 bg-cyan-400/30 backdrop-blur-sm rounded-full text-cyan-100 font-semibold border border-cyan-300/50">
                    Engineering Excellence Online
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-[1.2] pb-3">
                   Master Tech Skills
                   <TypewriterText />
                 </h1>
-                <p className="text-lg sm:text-xl md:text-2xl text-teal-100 mb-10 leading-relaxed">
+                <p className="text-lg sm:text-xl md:text-2xl text-teal-100 mb-10 leading-[1.6] pb-3">
                   Learn Full Stack, Data Science, Cloud & AI from industry experts. 100% online with live coding sessions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start items-center">
@@ -224,10 +226,15 @@ const Home = () => {
                     <span>Start Learning Now</span>
                     <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform" />
                   </Link>
-                  <button onClick={() => setIsDemoModalOpen(true)} className="group bg-transparent border-4 border-teal-300 text-teal-200 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:bg-teal-300 hover:text-teal-900 transition-all flex items-center space-x-3 w-full sm:w-auto justify-center">
+                  <button onClick={() => setIsBrochureModalOpen(true)} className="group bg-transparent border-4 border-teal-300 text-teal-200 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:bg-teal-300 hover:text-teal-900 transition-all flex items-center space-x-3 w-full sm:w-auto justify-center">
+                    <Download className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <span>Get Brochure</span>
+                  </button>
+                  {/* Keep Watch Demo functionality - commented out for now */}
+                  {/* <button onClick={() => setIsDemoModalOpen(true)} className="group bg-transparent border-4 border-teal-300 text-teal-200 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:bg-teal-300 hover:text-teal-900 transition-all flex items-center space-x-3 w-full sm:w-auto justify-center">
                     <Play className="w-5 h-5 sm:w-6 sm:h-6" />
                     <span>Watch Demo</span>
-                  </button>
+                  </button> */}
                 </div>
                 <div className="mt-12 flex justify-center md:justify-start items-center space-x-4 sm:space-x-8 text-white">
                   <div className="text-center">
@@ -247,7 +254,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="hidden md:block">
-                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" alt="Developer coding on laptop with multiple screens" className="rounded-3xl shadow-2xl shadow-cyan-500/20 transform hover:scale-105 transition-all border border-cyan-500/20" loading="lazy" />
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" alt="Developer coding on laptop with multiple screens" className="rounded-3xl shadow-2xl shadow-cyan-500/20 transform hover:scale-105 transition-all border border-black" loading="lazy" />
               </div>
             </div>
           </div>
@@ -309,7 +316,7 @@ const Home = () => {
                   {courses.slice(0, 6).map((course) => {
                     const IconComponent = getIconComponent(course.name);
                     return (
-                      <div key={course._id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col">
+                      <div key={course._id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-400 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col" style={{boxShadow: '0 0 20px rgba(20, 184, 166, 0.3), 0 10px 25px rgba(0, 0, 0, 0.1)'}}>
                         <div className="relative bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center overflow-hidden">
                           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all"></div>
                           <div className="relative w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
@@ -325,7 +332,7 @@ const Home = () => {
                             </span>
                             <span className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent">₹{course.fee?.toLocaleString()}</span>
                           </div>
-                          <Link to={`/course/${course._id}`} className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all group-hover:scale-105 mt-auto">
+                          <Link to={`/course/${course._id}`} className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all group-hover:scale-105 mt-auto border border-teal-400" style={{boxShadow: '0 0 10px rgba(20, 184, 166, 0.2)'}}>
                             Explore Course →
                           </Link>
                         </div>
@@ -414,8 +421,8 @@ const Home = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4">Learn From Industry Experts</h2>
               <p className="text-lg sm:text-xl text-teal-100">Senior engineers from top tech companies</p>
             </div>
-            <div className="mb-16 hidden md:block">
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Tech team collaborating on project" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto max-w-4xl border border-teal-500/20" loading="lazy" />
+            <div className="mb-12 hidden md:block">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Tech team collaborating on project" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto border border-teal-500/20" loading="lazy" style={{ maxWidth: '50%' }} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {[
@@ -436,12 +443,18 @@ const Home = () => {
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <p className="text-gray-700 mb-4 h-12 line-clamp-2 font-semibold">{member.specialization}</p>
-                    <div className="flex justify-between items-center pb-4 border-b border-teal-200/30">
+                    <div className="flex justify-between items-center pb-4 border-b border-teal-200/30 mb-4">
                       <span className="flex items-center text-teal-600 font-semibold text-sm">
                         <Award className="w-5 h-5 mr-2" aria-hidden="true" /> {member.qualification}
                       </span>
                       <span className="text-lg font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent">{member.experience}</span>
                     </div>
+                    <Link 
+                      to={`/faculty/${member.id}`} 
+                      className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-3 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all mt-auto"
+                    >
+                      View Profile
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -465,8 +478,8 @@ const Home = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4">What Our Students Say</h2>
               <p className="text-lg sm:text-xl text-white/90">Join thousands of successful alumni</p>
             </div>
-            <div className="mb-16 hidden md:block">
-              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80" alt="Happy students celebrating graduation and success" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto max-w-4xl border border-white/20" loading="lazy" />
+            <div className="mb-12 hidden md:block">
+              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80" alt="Happy students celebrating graduation and success" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto border border-white/20" loading="lazy" style={{ maxWidth: '50%' }} />
             </div>
             <TestimonialCarousel testimonials={testimonials} />
           </div>
@@ -483,7 +496,11 @@ const Home = () => {
             
             <div className="space-y-4">
               {[0, 1, 2].map((rowIndex) => (
-                <div key={rowIndex} className="flex animate-scroll-left gap-4" style={{ animationDelay: `${rowIndex * 0.5}s` }}>
+                <div 
+                  key={rowIndex} 
+                  className={`flex gap-4 ${rowIndex === 1 ? 'animate-scroll-right' : 'animate-scroll-left'}`}
+                  style={{ animationDelay: `${rowIndex * 0.5}s` }}
+                >
                   {[...Array(2)].map((_, dupIndex) => (
                     <div key={dupIndex} className="flex gap-4 flex-shrink-0">
                       {[
@@ -525,11 +542,25 @@ const Home = () => {
               }
             }
             
+            @keyframes scroll-right {
+              0% {
+                transform: translateX(-50%);
+              }
+              100% {
+                transform: translateX(0);
+              }
+            }
+            
             .animate-scroll-left {
               animation: scroll-left 30s linear infinite;
             }
             
-            .animate-scroll-left:hover {
+            .animate-scroll-right {
+              animation: scroll-right 30s linear infinite;
+            }
+            
+            .animate-scroll-left:hover,
+            .animate-scroll-right:hover {
               animation-play-state: paused;
             }
           `}</style>
@@ -603,7 +634,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden border-t border-white/10">
+        <section className="py-14 relative overflow-hidden border-t border-white/10" style={{ marginTop: '-10px' }}>
           <div className="absolute inset-0" aria-hidden="true">
             <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl top-0 left-0"></div>
             <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl bottom-0 right-0"></div>
@@ -627,6 +658,7 @@ const Home = () => {
         </section>
 
         <DemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
+        <BrochureModal isOpen={isBrochureModalOpen} onClose={() => setIsBrochureModalOpen(false)} />
       </div>
     </ErrorBoundary>
   );

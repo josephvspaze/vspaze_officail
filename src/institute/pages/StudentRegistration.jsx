@@ -82,8 +82,8 @@ const StudentRegistration = () => {
   if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-start justify-center p-4 pt-20">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center border border-teal-400" style={{boxShadow: '0 0 20px rgba(20, 184, 166, 0.3)'}}>
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-teal-400">
             <GraduationCap className="w-10 h-10 text-green-600" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Registration Successful!</h2>
@@ -92,7 +92,7 @@ const StudentRegistration = () => {
           </p>
           <button
             onClick={() => navigate('/')}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl transition-all"
+            className="bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl transition-all"
           >
             Back to Home
           </button>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Download } from 'lucide-react';
 import DemoModal from '../components/DemoModal';
 import ContactPopup from '../components/ContactPopup';
+import BrochureModal from '../components/BrochureModal';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Contact = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
   const [showContactPopup, setShowContactPopup] = useState(false);
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const Contact = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Information</h2>
               
               <div className="space-y-6 flex-1 flex flex-col justify-between">
-                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1">
+                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1 border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                   <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-6 h-6 text-teal-600" />
                   </div>
@@ -66,7 +68,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1">
+                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1 border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                   <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Phone className="w-6 h-6 text-cyan-600" />
                   </div>
@@ -77,7 +79,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1">
+                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1 border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                   <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Mail className="w-6 h-6 text-teal-600" />
                   </div>
@@ -88,7 +90,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1">
+                <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex-1 border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                   <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Clock className="w-6 h-6 text-cyan-600" />
                   </div>
@@ -102,7 +104,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
               
               {submitted && (
@@ -191,18 +193,20 @@ const Contact = () => {
       {/* Map Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl p-12 text-center border-2 border-gray-900">
-            <MapPin className="w-16 h-16 text-teal-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Experience Online Learning</h3>
-            <p className="text-gray-600 mb-6">Book a free demo class and see how we teach online</p>
-            <button onClick={() => setIsDemoModalOpen(true)} className="inline-block bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all">
-              Book Free Demo Class
+          <div className="bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl p-12 text-center border border-teal-400" style={{boxShadow: '0 0 20px rgba(20, 184, 166, 0.3)'}}>
+            <Download className="w-16 h-16 text-teal-600 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Download Course Brochures</h3>
+            <p className="text-gray-600 mb-6">Get detailed information about our courses and programs</p>
+            <button onClick={() => setIsBrochureModalOpen(true)} className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-2xl transition-all">
+              <Download className="w-5 h-5" />
+              <span>Download Brochures</span>
             </button>
           </div>
         </div>
       </section>
       
       <DemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
+      <BrochureModal isOpen={isBrochureModalOpen} onClose={() => setIsBrochureModalOpen(false)} />
       {showContactPopup && <ContactPopup onClose={() => setShowContactPopup(false)} />}
     </div>
   );

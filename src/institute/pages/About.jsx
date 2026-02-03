@@ -31,19 +31,19 @@ const About = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-teal-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+              <div className="bg-teal-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.3)'}}>
                 <h3 className="text-4xl font-bold text-teal-600 mb-2">500+</h3>
                 <p className="text-gray-700">Online Students</p>
               </div>
-              <div className="bg-cyan-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+              <div className="bg-cyan-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform border border-cyan-400" style={{boxShadow: '0 0 15px rgba(34, 211, 238, 0.3)'}}>
                 <h3 className="text-4xl font-bold text-cyan-600 mb-2">25+</h3>
                 <p className="text-gray-700">Expert Faculty</p>
               </div>
-              <div className="bg-teal-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+              <div className="bg-teal-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform border border-teal-400" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.3)'}}>
                 <h3 className="text-4xl font-bold text-teal-600 mb-2">15+</h3>
                 <p className="text-gray-700">Online Courses</p>
               </div>
-              <div className="bg-cyan-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform">
+              <div className="bg-cyan-50 p-6 rounded-xl text-center transform hover:scale-105 transition-transform border border-cyan-400" style={{boxShadow: '0 0 15px rgba(34, 211, 238, 0.3)'}}>
                 <h3 className="text-4xl font-bold text-cyan-600 mb-2">100%</h3>
                 <p className="text-gray-700">Online Learning</p>
               </div>
@@ -56,7 +56,7 @@ const About = () => {
       <section className="py-16 bg-gradient-to-br from-teal-50 to-cyan-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow border border-teal-400" style={{boxShadow: '0 0 20px rgba(20, 184, 166, 0.3)'}}>
               <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6">
                 <Target className="w-8 h-8 text-teal-600" />
               </div>
@@ -65,7 +65,7 @@ const About = () => {
                 To provide world-class online education that empowers students with practical skills and knowledge from anywhere in India, enabling them to excel in their careers and contribute meaningfully to society.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow border border-cyan-400" style={{boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)'}}>
               <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-6">
                 <Eye className="w-8 h-8 text-cyan-600" />
               </div>
@@ -91,15 +91,19 @@ const About = () => {
               { icon: Heart, title: 'Integrity', desc: 'Honest and transparent in all our dealings', color: 'cyan' },
               { icon: Zap, title: 'Innovation', desc: 'Cutting-edge online learning technology', color: 'teal' },
               { icon: Shield, title: 'Trust', desc: 'Building lasting relationships with students', color: 'cyan' }
-            ].map((value, idx) => (
-              <div key={idx} className="text-center p-6 rounded-xl hover:bg-gray-50 transition-all transform hover:-translate-y-2">
-                <div className={`w-16 h-16 bg-${value.color}-100 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  <value.icon className={`w-8 h-8 text-${value.color}-600`} />
+            ].map((value, idx) => {
+              const borderColor = value.color === 'teal' ? 'border-teal-400' : 'border-cyan-400';
+              const glowColor = value.color === 'teal' ? 'rgba(20, 184, 166, 0.3)' : 'rgba(34, 211, 238, 0.3)';
+              return (
+                <div key={idx} className={`text-center p-6 rounded-xl hover:bg-gray-50 transition-all transform hover:-translate-y-2 border ${borderColor}`} style={{boxShadow: `0 0 15px ${glowColor}`}}>
+                  <div className={`w-16 h-16 bg-${value.color}-100 rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <value.icon className={`w-8 h-8 text-${value.color}-600`} />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
+                  <p className="text-gray-600">{value.desc}</p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

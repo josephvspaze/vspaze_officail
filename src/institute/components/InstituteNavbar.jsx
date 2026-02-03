@@ -60,7 +60,7 @@ const InstituteNavbar = () => {
     <nav className="bg-teal-700/75 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-transparent rounded-full flex items-center justify-center border-2 border-white">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
@@ -104,13 +104,12 @@ const InstituteNavbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`font-medium transition-colors ${
-                    isActive(item.path)
-                      ? 'text-cyan-200'
-                      : 'text-white hover:text-cyan-200'
-                  }`}
+                  className="relative font-medium text-white hover:text-cyan-200 transition-colors group"
                 >
                   {item.name}
+                  {isActive(item.path) && (
+                    <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 animate-draw-line"></span>
+                  )}
                 </Link>
               )
             ))}
@@ -131,6 +130,20 @@ const InstituteNavbar = () => {
         </div>
       </div>
 
+      <style jsx>{`
+        @keyframes drawLine {
+          from {
+            width: 0;
+          }
+          to {
+            width: 100%;
+          }
+        }
+        
+        .animate-draw-line {
+          animation: drawLine 0.3s ease-out forwards;
+        }
+      `}</style>
     </nav>
 
     {/* Mobile Menu Overlay */}

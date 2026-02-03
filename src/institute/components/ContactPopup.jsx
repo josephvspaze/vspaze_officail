@@ -37,19 +37,22 @@ const ContactPopup = ({ onClose }) => {
       <>
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50" onClick={onClose} />
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center relative">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center relative border border-teal-400" style={{boxShadow: '0 0 25px rgba(20, 184, 166, 0.4)'}}>
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
             >
               <X className="w-6 h-6" />
             </button>
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <MessageSquare className="w-10 h-10 text-green-600" />
+            <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-teal-400">
+              <MessageSquare className="w-10 h-10 text-teal-600" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h2>
-            <p className="text-gray-600 text-lg">
-              We will call you back soon
+            <p className="text-gray-600 text-lg mb-2">
+              We received your request successfully.
+            </p>
+            <p className="text-teal-600 font-semibold text-lg">
+              We will call you back soon!
             </p>
           </div>
         </div>

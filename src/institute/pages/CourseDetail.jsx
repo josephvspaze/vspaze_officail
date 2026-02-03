@@ -84,7 +84,7 @@ const CourseDetail = () => {
             <h2 className="text-4xl font-extrabold text-white mb-8">Course Curriculum</h2>
             <div className="space-y-4">
               {courseModules.length > 0 ? courseModules.map((module, idx) => (
-                <div key={idx} className="bg-slate-800 border border-teal-500/20 rounded-2xl overflow-hidden">
+                <div key={idx} className="bg-slate-800 border border-teal-400 rounded-2xl overflow-hidden" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                   <button onClick={() => setExpandedModule(expandedModule === idx ? null : idx)} className="w-full flex items-center justify-between p-6 hover:bg-slate-700/50 transition-colors">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center">
@@ -116,7 +116,7 @@ const CourseDetail = () => {
                   )}
                 </div>
               )) : (
-                <div className="bg-slate-800 border border-teal-500/20 rounded-2xl p-8 text-center">
+                <div className="bg-slate-800 border border-teal-400 rounded-2xl p-8 text-center" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
                   <p className="text-cyan-100">Syllabus details coming soon...</p>
                 </div>
               )}
@@ -125,7 +125,7 @@ const CourseDetail = () => {
 
           {/* Sidebar */}
           <div>
-            <div className="bg-slate-800 border border-teal-500/20 rounded-2xl p-6 sticky top-6">
+            <div className="bg-slate-800 border border-teal-400 rounded-2xl p-6 sticky top-6" style={{boxShadow: '0 0 15px rgba(20, 184, 166, 0.2)'}}>
               <h3 className="text-2xl font-bold text-white mb-6">What You'll Learn</h3>
               <ul className="space-y-3 mb-6">
                 {course.subjects && course.subjects.map((item, idx) => (
@@ -137,7 +137,7 @@ const CourseDetail = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/student-registration" className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all">
+              <Link to="/student-registration" className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all border border-teal-400" style={{boxShadow: '0 0 10px rgba(20, 184, 166, 0.2)'}}>
                 Enroll Now
               </Link>
             </div>
