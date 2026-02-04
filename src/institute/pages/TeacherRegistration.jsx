@@ -57,10 +57,10 @@ const TeacherRegistration = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <GraduationCap className="w-10 h-10 text-green-600" />
+      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-teal-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center border-2 border-teal-400">
+          <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-teal-400">
+            <GraduationCap className="w-10 h-10 text-teal-600" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Application Submitted!</h2>
           <p className="text-gray-600 mb-6">
@@ -68,7 +68,7 @@ const TeacherRegistration = () => {
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
+            className="bg-gradient-to-r from-teal-600 to-cyan-500 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
           >
             Submit Another Application
           </button>
@@ -78,12 +78,12 @@ const TeacherRegistration = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-teal-50 py-12 px-4">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-teal-200">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <GraduationCap className="w-10 h-10 text-white" />
+            <div className="w-16 h-16 bg-transparent rounded-full border-2 border-teal-600 flex items-center justify-center mx-auto mb-4">
+              <GraduationCap className="w-10 h-10 text-teal-600" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Faculty Application</h2>
             <p className="text-gray-600">Join our team of expert educators at Vspaze Institute</p>
@@ -98,7 +98,7 @@ const TeacherRegistration = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                   placeholder="Enter your full name"
                   required
                 />
@@ -113,7 +113,7 @@ const TeacherRegistration = () => {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                   placeholder="your.email@example.com"
                   required
                 />
@@ -128,7 +128,7 @@ const TeacherRegistration = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                   placeholder="9876543210"
                   pattern="[0-9]{10}"
                   maxLength="10"
@@ -144,7 +144,7 @@ const TeacherRegistration = () => {
                 <select
                   value={formData.specialization}
                   onChange={(e) => setFormData({...formData, specialization: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none appearance-none"
                   required
                 >
                   <option value="">Select your specialization</option>
@@ -165,7 +165,7 @@ const TeacherRegistration = () => {
                 <select
                   value={formData.experience}
                   onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none appearance-none"
                   required
                 >
                   <option value="">Select experience</option>
@@ -186,7 +186,7 @@ const TeacherRegistration = () => {
                   type="text"
                   value={formData.qualification}
                   onChange={(e) => setFormData({...formData, qualification: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                   placeholder="e.g., M.Tech in Computer Science"
                   required
                 />
@@ -201,7 +201,7 @@ const TeacherRegistration = () => {
                   type="url"
                   value={formData.resume}
                   onChange={(e) => setFormData({...formData, resume: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                   placeholder="https://drive.google.com/your-resume"
                 />
               </div>
@@ -212,7 +212,7 @@ const TeacherRegistration = () => {
               <textarea
                 value={formData.bio}
                 onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
                 placeholder="Tell us about your teaching experience, industry background, and why you want to join Vspaze..."
                 rows="4"
                 required
@@ -222,7 +222,7 @@ const TeacherRegistration = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-3 rounded-xl font-semibold hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Submitting...' : 'Submit Application'}
             </button>
@@ -233,6 +233,31 @@ const TeacherRegistration = () => {
           </p>
         </div>
       </div>
+
+      <style jsx>{`
+        select {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
+          background-size: 1em;
+          padding-right: 2.5rem;
+        }
+        
+        select option {
+          padding: 12px;
+          border-radius: 8px;
+          background-color: white;
+        }
+        
+        select option:hover {
+          background-color: #f0fdfa;
+        }
+        
+        select option:checked {
+          background-color: #14b8a6;
+          color: white;
+        }
+      `}</style>
     </div>
   );
 };

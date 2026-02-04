@@ -99,7 +99,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Recent Placements Ticker */}
-      <section className="py-8 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
+      <section className="py-8 bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold mb-2">Recent Placements (Last 30 Days)</h3>
@@ -195,16 +195,16 @@ const SuccessStories = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {hiringPartners.map((company, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+              <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105 flex flex-col items-center justify-center h-40 border-2 border-gray-200">
                 {company.hasLogo ? (
                   <img 
                     src={company.logo} 
                     alt={company.name}
-                    className={`w-full object-contain mb-3 ${company.name === 'TCS' ? 'h-40' : 'h-16'}`}
-                    style={company.name === 'TCS' ? {mixBlendMode: 'multiply'} : {}}
+                    className="w-full h-20 object-contain mb-3"
+                    style={{mixBlendMode: 'multiply'}}
                   />
                 ) : (
-                  <div className="w-full h-16 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg flex items-center justify-center mb-3">
+                  <div className="w-full h-20 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg flex items-center justify-center mb-3">
                     <span className="text-white font-bold text-lg">{company.name}</span>
                   </div>
                 )}

@@ -124,10 +124,10 @@ const About = () => {
               { icon: Heart, title: '12/7 Support', desc: 'Online doubt clearing and mentorship support' },
               { icon: Shield, title: 'Placement Assistance', desc: 'Dedicated online placement support' }
             ].map((item, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all">
-                <item.icon className="w-12 h-12 mb-4" />
+              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all border border-white/30 flex flex-col h-full">
+                <item.icon className="w-12 h-12 mb-4 flex-shrink-0" />
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="opacity-90">{item.desc}</p>
+                <p className="opacity-90 flex-grow">{item.desc}</p>
               </div>
             ))}
           </div>

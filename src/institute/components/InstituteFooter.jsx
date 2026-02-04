@@ -16,8 +16,8 @@ const InstituteFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center border-2 border-white">
+                <GraduationCap className="w-5 h-5 text-white" strokeWidth={2} />
               </div>
               <span className="text-2xl font-bold">Vspaze</span>
             </div>
@@ -49,28 +49,38 @@ const InstituteFooter = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className={`text-gray-400 hover:text-white transition-colors ${isActive('/') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/') ? 'text-white' : ''}`}>
                   Home
+                  {isActive('/') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/about" className={`text-gray-400 hover:text-white transition-colors ${isActive('/about') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/about" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/about') ? 'text-white' : ''}`}>
                   About Us
+                  {isActive('/about') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/courses" className={`text-gray-400 hover:text-white transition-colors ${isActive('/courses') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/courses" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/courses') ? 'text-white' : ''}`}>
                   Courses
+                  {isActive('/courses') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/faculty" className={`text-gray-400 hover:text-white transition-colors ${isActive('/faculty') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/faculty" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/faculty') ? 'text-white' : ''}`}>
                   Faculty
+                  {isActive('/faculty') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className={`text-gray-400 hover:text-white transition-colors ${isActive('/contact') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/contact" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/contact') ? 'text-white' : ''}`}>
                   Contact
+                  {isActive('/contact') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
             </ul>
@@ -80,28 +90,38 @@ const InstituteFooter = () => {
             <h3 className="text-lg font-semibold mb-4">Popular Courses</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Development') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Development') ? 'text-white' : ''}`}>
                   Full Stack Development
+                  {isCourseCategory('Development') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Data Science" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Data Science') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/courses?category=Data Science" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Data Science') ? 'text-white' : ''}`}>
                   Data Science & AI
+                  {isCourseCategory('Data Science') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Marketing" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Marketing') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/courses?category=Marketing" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Marketing') ? 'text-white' : ''}`}>
                   Digital Marketing
+                  {isCourseCategory('Marketing') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Cloud" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Cloud') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/courses?category=Cloud" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Cloud') ? 'text-white' : ''}`}>
                   Cloud Computing
+                  {isCourseCategory('Cloud') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`text-gray-400 hover:text-white transition-colors ${isCourseCategory('Development') ? 'text-white border-b-2 border-blue-500 pb-1' : ''}`}>
+                <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Development') ? 'text-white' : ''}`}>
                   Python Programming
+                  {isCourseCategory('Development') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
             </ul>
@@ -140,11 +160,23 @@ const InstituteFooter = () => {
                 <MapPin className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
                 <span className="text-gray-400">Vspaze Institute, Tech Park, Bangalore, India</span>
               </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                <a href="tel:+919876543210" className="text-gray-400 hover:text-white transition-colors">
-                  +91 98765 43210
-                </a>
+              <li className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                  <a href="tel:+919876543210" className="text-gray-400 hover:text-white transition-colors">
+                    +91 98765 43210
+                  </a>
+                </div>
+                {/* Scroll to Top Button - Right side of phone numbers */}
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="lg:hidden bg-transparent hover:bg-white/10 text-white p-2.5 rounded-lg transition-all border border-white/50 hover:border-white ml-4"
+                  aria-label="Back to top"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                </button>
               </li>
               <li className="flex items-center space-x-3">
                 <PhoneCall className="w-5 h-5 text-blue-500 flex-shrink-0" />
@@ -157,24 +189,40 @@ const InstituteFooter = () => {
                 <a href="mailto:info@vspaze.com" className="text-gray-400 hover:text-white transition-colors">
                   info@vspaze.com
                 </a>
+                {/* Desktop Scroll to Top Button - Aligned with mail */}
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="hidden lg:block bg-transparent hover:bg-white/10 text-white p-2.5 rounded-lg transition-all border border-white/50 hover:border-white ml-auto"
+                  aria-label="Back to top"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                </button>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-gray-400">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>&copy; 2024 Vspaze Institute. All rights reserved.</p>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="mt-4 sm:mt-0 bg-teal-600 hover:bg-teal-700 text-white p-3 rounded-lg transition-all hover:shadow-lg"
-            aria-label="Back to top"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          </button>
         </div>
       </div>
+
+      <style>{`
+        @keyframes drawLine {
+          from {
+            width: 0;
+          }
+          to {
+            width: 100%;
+          }
+        }
+        
+        .animate-draw-line {
+          animation: drawLine 0.3s ease-out forwards;
+        }
+      `}</style>
     </footer>
   );
 };

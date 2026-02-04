@@ -14,9 +14,9 @@ const CountdownBanner = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Set target date to 10 days from now
+    // Set target date to 20 days from now
     const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 10);
+    targetDate.setDate(targetDate.getDate() + 20);
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -87,7 +87,7 @@ const CountdownBanner = () => {
 
             <div className="text-center">
               <span className="text-xs md:text-sm font-bold text-gray-900">
-                ENDS SOON: 20% off expert-led bootcamps
+                Ends Soon: 20% Off Expert-Led Bootcamps
               </span>
             </div>
           </div>
@@ -95,7 +95,7 @@ const CountdownBanner = () => {
           {/* Right - Register Button */}
           <button 
             onClick={() => navigate('/student-registration')}
-            className="hidden md:flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-xl transition-all hover:scale-105"
+            className="hidden md:flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-xl transition-all hover:scale-105"
           >
             <LogIn className="w-4 h-4" />
             <span>Register Now</span>

@@ -108,8 +108,9 @@ const InstituteNavbar = () => {
                 >
                   {item.name}
                   {isActive(item.path) && (
-                    <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 animate-draw-line"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-cyan-200 animate-draw-line"></span>
                   )}
+                  <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               )
             ))}
