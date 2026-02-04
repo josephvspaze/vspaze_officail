@@ -99,7 +99,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Recent Placements Ticker */}
-      <section className="py-8 bg-gradient-to-r from-teal-900 via-teal-800 to-teal-900 text-white">
+      <section className="py-8 bg-gradient-to-r from-teal-600 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold mb-2">Recent Placements (Last 30 Days)</h3>

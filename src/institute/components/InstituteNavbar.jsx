@@ -79,10 +79,11 @@ const InstituteNavbar = () => {
                       e.stopPropagation();
                       setDropdownOpen(dropdownOpen === idx ? null : idx);
                     }}
-                    className="flex items-center space-x-1 font-medium text-white hover:text-cyan-200 transition-colors"
+                    className="relative flex items-center space-x-1 font-medium text-white hover:text-cyan-200 transition-colors group"
                   >
                     <span>{item.name}</span>
                     <ChevronDown className="w-4 h-4" />
+                    <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 w-0 group-hover:w-full transition-all duration-300"></span>
                   </button>
                   {dropdownOpen === idx && (
                     <div className="absolute top-full left-0 mt-2 w-48 bg-teal-700/80 backdrop-blur-md rounded-lg shadow-lg border border-white/10 py-2 z-50">
@@ -91,10 +92,16 @@ const InstituteNavbar = () => {
                           key={subIdx}
                           to={subItem.path}
                           onClick={() => setDropdownOpen(null)}
-                          className="flex items-center space-x-2 px-4 py-2 text-white hover:bg-white/10 hover:text-cyan-200 transition-colors"
+                          className="flex items-center space-x-2 px-4 py-2 text-white hover:bg-white/10 hover:text-cyan-200 transition-colors group"
                         >
                           <subItem.icon className="w-4 h-4" />
-                          <span>{subItem.name}</span>
+                          <span className="relative">
+                            {subItem.name}
+                            {isActive(subItem.path) && (
+                              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-cyan-200"></span>
+                            )}
+                            <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 w-0 group-hover:w-full transition-all duration-300"></span>
+                          </span>
                         </Link>
                       ))}
                     </div>
@@ -116,9 +123,10 @@ const InstituteNavbar = () => {
             ))}
             <Link
               to="/student-login"
-              className="text-white hover:text-cyan-200 font-medium transition-colors"
+              className="relative text-white hover:text-cyan-200 font-medium transition-colors group"
             >
               Student Login
+              <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 w-0 group-hover:w-full transition-all duration-300"></span>
             </Link>
           </div>
 
@@ -161,8 +169,8 @@ const InstituteNavbar = () => {
     }`}>
         <div className="p-4 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/40">
-              <GraduationCap className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+              <img src="/icon.png" alt="Vspaze" className="w-5 h-5 object-contain" />
             </div>
             <span className="font-bold text-white">Vspaze</span>
           </div>

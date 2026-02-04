@@ -1,5 +1,6 @@
 import React from 'react';
-import { GraduationCap, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, PhoneCall } from 'lucide-react';
+import { GraduationCap, Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, Printer } from 'lucide-react';
+import { TbDeviceLandlinePhone } from 'react-icons/tb';
 import { Link, useLocation } from 'react-router-dom';
 
 const InstituteFooter = () => {
@@ -131,23 +132,27 @@ const InstituteFooter = () => {
             <h3 className="text-lg font-semibold mb-4">Certifications</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                   AWS Certified
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                   Google Certified
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                   Microsoft Certified
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
               <li>
-                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/certifications" onClick={() => window.scrollTo(0, 0)} className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                   Industry Recognized
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
             </ul>
@@ -163,40 +168,39 @@ const InstituteFooter = () => {
               <li className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                  <a href="tel:+919876543210" className="text-gray-400 hover:text-white transition-colors">
+                  <a href="tel:+919876543210" className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                     +91 98765 43210
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </div>
-                {/* Scroll to Top Button - Right side of phone numbers */}
-                <button
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="lg:hidden bg-transparent hover:bg-white/10 text-white p-2.5 rounded-lg transition-all border border-white/50 hover:border-white ml-4"
-                  aria-label="Back to top"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                  </svg>
-                </button>
               </li>
               <li className="flex items-center space-x-3">
-                <PhoneCall className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                <a href="tel:08012345678" className="text-gray-400 hover:text-white transition-colors">
+                <TbDeviceLandlinePhone className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <a href="tel:08012345678" className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                   080-1234-5678
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </a>
+              </li>
+              <li className="flex items-center space-x-3">
+                <Printer className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <span className="relative inline-block text-gray-400 group">
+                  080-4567-8901
+                </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                <a href="mailto:info@vspaze.com" className="text-gray-400 hover:text-white transition-colors">
+                <a href="mailto:info@vspaze.com" className="relative inline-block text-gray-400 hover:text-white transition-colors group">
                   info@vspaze.com
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                {/* Desktop Scroll to Top Button - Aligned with mail */}
+                {/* Mobile Scroll to Top Button - Aligned with email */}
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="hidden lg:block bg-transparent hover:bg-white/10 text-white p-2.5 rounded-lg transition-all border border-white/50 hover:border-white ml-auto"
+                  className="lg:hidden bg-white hover:bg-gray-100 text-gray-900 p-2.5 rounded-lg transition-all shadow-lg ml-auto"
                   aria-label="Back to top"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                   </svg>
                 </button>
               </li>
@@ -204,8 +208,18 @@ const InstituteFooter = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Vspaze Institute. All rights reserved.</p>
+        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col lg:flex-row items-center justify-between text-gray-400">
+          <p className="mb-4 lg:mb-0">&copy; 2024 Vspaze Institute. All rights reserved.</p>
+          {/* Desktop Scroll to Top Button - In copyright section, arrow only */}
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="hidden lg:flex items-center justify-center bg-white hover:bg-gray-100 text-gray-900 p-2.5 rounded-lg transition-all shadow-lg"
+            aria-label="Back to top"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+          </button>
         </div>
       </div>
 

@@ -115,7 +115,7 @@ const About = () => {
             <h2 className="text-4xl font-bold mb-4">Why Students Choose Us</h2>
             <p className="text-xl opacity-90">What makes Vspaze Institute stand out</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 auto-rows-fr">
             {[
               { icon: Monitor, title: 'Live Online Classes', desc: 'Interactive live sessions with industry professionals' },
               { icon: TrendingUp, title: 'Career Growth', desc: '95% of our students get placed in top companies' },
@@ -124,10 +124,10 @@ const About = () => {
               { icon: Heart, title: '12/7 Support', desc: 'Online doubt clearing and mentorship support' },
               { icon: Shield, title: 'Placement Assistance', desc: 'Dedicated online placement support' }
             ].map((item, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all border border-white/30 flex flex-col h-full">
+              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all border border-white/30 flex flex-col">
                 <item.icon className="w-12 h-12 mb-4 flex-shrink-0" />
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="opacity-90 flex-grow">{item.desc}</p>
+                <p className="opacity-90">{item.desc}</p>
               </div>
             ))}
           </div>
