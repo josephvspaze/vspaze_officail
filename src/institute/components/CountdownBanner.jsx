@@ -42,20 +42,36 @@ const CountdownBanner = () => {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const formatTime = (value) => String(value).padStart(2, '0');
 
-  if (!isVisible || isScrolled) return null;
+  if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative overflow-hidden">
+    <div 
+      className={`bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative overflow-hidden transition-all duration-300 ease-in-out ${
+        isScrolled ? 'max-h-0 opacity-0 border-b-0' : 'max-h-20 opacity-100'
+      }`}
+      style={{ 
+        transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 0.3s ease-in-out, max-height 0.3s ease-in-out, opacity 0.3s ease-in-out'
+      }}
+    >
       <div className="absolute inset-0 bg-yellow-500/20 animate-pulse"></div>
       
       <div className="max-w-7xl mx-auto px-4 py-3 relative z-10">
