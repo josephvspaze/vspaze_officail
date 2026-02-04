@@ -1,7 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, Mail, Phone, BookOpen, MapPin, GraduationCap, Camera } from 'lucide-react';
+import { User, Mail, Phone, BookOpen, MapPin, GraduationCap, Camera, ChevronDown } from 'lucide-react';
 import api from '../../utils/api';
+
+const CustomSelect = ({ value, onChange, options, placeholder, icon: Icon, required }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(opt => opt.value === value);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none cursor-pointer bg-white flex items-center justify-between"
+      >
+        {Icon && <Icon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />}
+        <span className={value ? 'text-gray-900' : 'text-gray-400'}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </div>
+      
+      {isOpen && (
+        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-2xl max-h-60 overflow-y-auto">
+          {options.map((option) => (
+            <div
+              key={option.value}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+              className={`px-4 py-3 cursor-pointer transition-colors first:rounded-t-xl last:rounded-b-xl ${
+                value === option.value
+                  ? 'bg-teal-500 text-white'
+                  : 'hover:bg-teal-50 text-gray-900'
+              }`}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const StudentRegistration = () => {
   const navigate = useNavigate();
@@ -217,22 +270,20 @@ const StudentRegistration = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Select Course <span className="text-red-600">*</span></label>
-              <div className="relative">
-                <BookOpen className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <select
-                  value={formData.course}
-                  onChange={(e) => setFormData({...formData, course: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white appearance-none"
-                  required
-                >
-                  <option value="">Choose a course</option>
-                  {courses.map((course) => (
-                    <option key={course._id} value={course.name}>
-                      {course.name} - ₹{course.fee}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                value={formData.course}
+                onChange={(value) => setFormData({...formData, course: value})}
+                options={[
+                  { value: '', label: 'Choose a course' },
+                  ...courses.map(course => ({
+                    value: course.name,
+                    label: `${course.name} - ₹${course.fee}`
+                  }))
+                ]}
+                placeholder="Choose a course"
+                icon={BookOpen}
+                required
+              />
             </div>
 
             <div>
@@ -264,31 +315,6 @@ const StudentRegistration = () => {
           </p>
         </div>
       </div>
-
-      <style jsx>{`
-        select {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
-          background-repeat: no-repeat;
-          background-position: right 1rem center;
-          background-size: 1em;
-          padding-right: 2.5rem;
-        }
-        
-        select option {
-          padding: 12px;
-          border-radius: 8px;
-          background-color: white;
-        }
-        
-        select option:hover {
-          background-color: #f0fdfa;
-        }
-        
-        select option:checked {
-          background-color: #14b8a6;
-          color: white;
-        }
-      `}</style>
     </div>
   );
 };

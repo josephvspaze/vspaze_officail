@@ -12,7 +12,8 @@ const Faculty = () => {
 
   const fetchFaculty = async () => {
     try {
-      const response = await api.get('/admin/faculty/public');
+      // Use /faculty endpoint (becomes https://vspaze.com/api/faculty)
+      const response = await api.get('/faculty');
       setFaculty(response.data.faculty || []);
     } catch (error) {
       console.error('Error fetching faculty:', error);

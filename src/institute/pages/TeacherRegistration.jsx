@@ -1,6 +1,59 @@
-import React, { useState } from 'react';
-import { User, Mail, Phone, BookOpen, FileText, GraduationCap, Award } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { User, Mail, Phone, BookOpen, FileText, GraduationCap, Award, ChevronDown } from 'lucide-react';
 import api from '../../utils/api';
+
+const CustomSelect = ({ value, onChange, options, placeholder, icon: Icon, required }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(opt => opt.value === value);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none cursor-pointer bg-white flex items-center justify-between"
+      >
+        {Icon && <Icon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />}
+        <span className={value ? 'text-gray-900' : 'text-gray-400'}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </div>
+      
+      {isOpen && (
+        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-2xl max-h-60 overflow-y-auto">
+          {options.map((option) => (
+            <div
+              key={option.value}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+              className={`px-4 py-3 cursor-pointer transition-colors first:rounded-t-xl last:rounded-b-xl ${
+                value === option.value
+                  ? 'bg-teal-500 text-white'
+                  : 'hover:bg-teal-50 text-gray-900'
+              }`}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const TeacherRegistration = () => {
   const [formData, setFormData] = useState({
@@ -139,43 +192,41 @@ const TeacherRegistration = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Specialization <span className="text-red-500">*</span></label>
-              <div className="relative">
-                <BookOpen className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <select
-                  value={formData.specialization}
-                  onChange={(e) => setFormData({...formData, specialization: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none appearance-none"
-                  required
-                >
-                  <option value="">Select your specialization</option>
-                  <option value="Full Stack Development">Full Stack Development</option>
-                  <option value="Data Science & AI">Data Science & AI</option>
-                  <option value="Digital Marketing">Digital Marketing</option>
-                  <option value="Cloud Computing">Cloud Computing</option>
-                  <option value="UI/UX Design">UI/UX Design</option>
-                  <option value="Python Programming">Python Programming</option>
-                </select>
-              </div>
+              <CustomSelect
+                value={formData.specialization}
+                onChange={(value) => setFormData({...formData, specialization: value})}
+                options={[
+                  { value: '', label: 'Select your specialization' },
+                  { value: 'Full Stack Development', label: 'Full Stack Development' },
+                  { value: 'Data Science & AI', label: 'Data Science & AI' },
+                  { value: 'Digital Marketing', label: 'Digital Marketing' },
+                  { value: 'Cloud Computing', label: 'Cloud Computing' },
+                  { value: 'UI/UX Design', label: 'UI/UX Design' },
+                  { value: 'Python Programming', label: 'Python Programming' }
+                ]}
+                placeholder="Select your specialization"
+                icon={BookOpen}
+                required
+              />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Years of Experience <span className="text-red-500">*</span></label>
-              <div className="relative">
-                <Award className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <select
-                  value={formData.experience}
-                  onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none appearance-none"
-                  required
-                >
-                  <option value="">Select experience</option>
-                  <option value="1-3 years">1-3 years</option>
-                  <option value="3-5 years">3-5 years</option>
-                  <option value="5-8 years">5-8 years</option>
-                  <option value="8-12 years">8-12 years</option>
-                  <option value="12+ years">12+ years</option>
-                </select>
-              </div>
+              <CustomSelect
+                value={formData.experience}
+                onChange={(value) => setFormData({...formData, experience: value})}
+                options={[
+                  { value: '', label: 'Select experience' },
+                  { value: '1-3 years', label: '1-3 years' },
+                  { value: '3-5 years', label: '3-5 years' },
+                  { value: '5-8 years', label: '5-8 years' },
+                  { value: '8-12 years', label: '8-12 years' },
+                  { value: '12+ years', label: '12+ years' }
+                ]}
+                placeholder="Select experience"
+                icon={Award}
+                required
+              />
             </div>
 
             <div>
@@ -229,35 +280,10 @@ const TeacherRegistration = () => {
           </form>
 
           <p className="text-center text-gray-600 text-sm mt-6">
-            We'll review your application and get back to you within 3-5 business days.
+            We'll review your application and get back to you soon.
           </p>
         </div>
       </div>
-
-      <style jsx>{`
-        select {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
-          background-repeat: no-repeat;
-          background-position: right 1rem center;
-          background-size: 1em;
-          padding-right: 2.5rem;
-        }
-        
-        select option {
-          padding: 12px;
-          border-radius: 8px;
-          background-color: white;
-        }
-        
-        select option:hover {
-          background-color: #f0fdfa;
-        }
-        
-        select option:checked {
-          background-color: #14b8a6;
-          color: white;
-        }
-      `}</style>
     </div>
   );
 };
