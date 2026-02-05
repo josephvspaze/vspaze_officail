@@ -87,7 +87,7 @@ const InstituteNavbar = () => {
                     className="relative flex items-center space-x-1 font-medium text-white hover:text-cyan-200 transition-colors group"
                   >
                     <span>{item.name}</span>
-                    <ChevronDown className="w-4 h-4" />
+                    <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen === idx ? 'rotate-180' : ''}`} />
                     <span className="absolute -bottom-1 left-0 h-0.5 bg-cyan-200 w-0 group-hover:w-full transition-all duration-300"></span>
                   </button>
                   {dropdownOpen === idx && (

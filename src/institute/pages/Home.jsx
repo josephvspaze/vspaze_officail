@@ -74,7 +74,7 @@ class ErrorBoundary extends React.Component {
 }
 
 const TestimonialCarousel = ({ testimonials }) => {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(testimonials.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
 
   // Duplicate testimonials for infinite loop
@@ -82,7 +82,6 @@ const TestimonialCarousel = ({ testimonials }) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIsTransitioning(true);
       setCurrent((prev) => prev + 1);
     }, CAROUSEL_INTERVAL);
     return () => clearInterval(timer);
@@ -94,6 +93,19 @@ const TestimonialCarousel = ({ testimonials }) => {
       setTimeout(() => {
         setIsTransitioning(false);
         setCurrent(testimonials.length);
+        setTimeout(() => {
+          setIsTransitioning(true);
+        }, 50);
+      }, 500);
+    }
+    // Reset to middle set when reaching the beginning
+    if (current <= 0) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrent(testimonials.length);
+        setTimeout(() => {
+          setIsTransitioning(true);
+        }, 50);
       }, 500);
     }
   }, [current, testimonials.length]);
@@ -107,7 +119,7 @@ const TestimonialCarousel = ({ testimonials }) => {
     <div className="relative" role="region" aria-label="Student testimonials carousel">
       <div className="overflow-hidden">
         <div 
-          className={`flex ${isTransitioning ? 'transition-transform duration-500 ease-out' : ''}`} 
+          className={`flex ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`} 
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {extendedTestimonials.map((testimonial, idx) => (
@@ -574,39 +586,36 @@ const Home = () => {
           
           <style jsx>{`
             @keyframes scroll-left {
-              0% {
-                transform: translateX(0);
+              from {
+                transform: translateX(0%);
               }
-              100% {
+              to {
                 transform: translateX(calc(-100% / 3));
               }
             }
             
             @keyframes scroll-right {
-              0% {
+              from {
                 transform: translateX(calc(-100% / 3));
               }
-              100% {
-                transform: translateX(0);
+              to {
+                transform: translateX(0%);
               }
+            }
+            
+            .animate-scroll-left,
+            .animate-scroll-right {
+              animation-duration: 60s;
+              animation-timing-function: linear;
+              animation-iteration-count: infinite;
             }
             
             .animate-scroll-left {
-              animation: scroll-left 50s linear infinite;
+              animation-name: scroll-left;
             }
             
             .animate-scroll-right {
-              animation: scroll-right 50s linear infinite;
-            }
-            
-            @media (max-width: 768px) {
-              .animate-scroll-left {
-                animation: scroll-left 35s linear infinite;
-              }
-              
-              .animate-scroll-right {
-                animation: scroll-right 35s linear infinite;
-              }
+              animation-name: scroll-right;
             }
             
             .animate-scroll-left:hover,
