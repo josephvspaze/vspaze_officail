@@ -161,10 +161,6 @@ const InstituteFooter = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
             <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
-                <span className="text-gray-400">Vspaze Institute, Tech Park, Bangalore, India</span>
-              </li>
               <li className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
@@ -183,8 +179,9 @@ const InstituteFooter = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Printer className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                <span className="relative inline-block text-gray-400 group">
+                <span className="relative inline-block text-gray-400 hover:text-white transition-colors group cursor-default">
                   080-4567-8901
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </span>
               </li>
               <li className="flex items-center space-x-3">

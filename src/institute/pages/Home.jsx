@@ -243,7 +243,7 @@ const Home = () => {
                   Learn Full Stack, Data Science, Cloud & AI from industry experts. 100% online with live coding sessions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center md:justify-start items-center">
-                  <Link to="/student-registration" className="group bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:shadow-2xl hover:shadow-teal-500/50 ring-2 ring-black transition-all transform hover:scale-105 flex items-center space-x-3 w-full sm:w-auto justify-center">
+                  <Link to="/student-registration" className="group bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:shadow-2xl hover:shadow-teal-500/50 ring-[0.5px] ring-black transition-all transform hover:scale-105 flex items-center space-x-3 w-full sm:w-auto justify-center">
                     <span>Start Learning Now</span>
                     <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform" />
                   </Link>
@@ -516,54 +516,59 @@ const Home = () => {
             </div>
             
             <div className="space-y-4">
-              {[0, 1, 2].map((rowIndex) => (
-                <div 
-                  key={rowIndex} 
-                  className={`flex gap-4 ${rowIndex === 1 ? 'animate-scroll-right' : 'animate-scroll-left'}`}
-                  onContextMenu={(e) => e.preventDefault()}
-                >
-                  {[...Array(4)].map((_, dupIndex) => (
-                    <div key={dupIndex} className="flex gap-4 flex-shrink-0">
-                      {[
-                        { name: 'Jaya Prathyusha', role: 'Senior Tech Associate', company: 'Bank of America', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80' },
-                        { name: 'Lahari', role: 'Software Engineer', company: 'Cyient', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
-                        { name: 'Maddineni Bhargava', role: 'ML Engineer (Intern)', company: 'Microsoft', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
-                        { name: 'Krishna Murthy', role: 'Software Engineer', company: 'Cyient', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
-                        { name: 'Shailesh', role: 'Member Technical', company: 'Zolo', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80' },
-                        { name: 'Dinesh Kumar', role: 'Software Analyst', company: 'Capgemini', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80' },
-                        { name: 'Surya Sai', role: 'System Engineer Trainee', company: 'Infosys', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' }
-                      ].map((student, index) => (
-                        <div key={index} className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-xl flex-shrink-0 w-44">
-                          {/* Mobile: Horizontal Layout */}
-                          <div className="flex md:hidden items-center space-x-2">
-                            <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-teal-400">
-                              <img src={student.image} alt={student.name} className="w-full h-full object-cover pointer-events-none select-none" loading="lazy" draggable="false" />
+              {[0, 1, 2].map((rowIndex) => {
+                const students = [
+                  { name: 'Jaya Prathyusha', role: 'Senior Tech Associate', company: 'Bank of America', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80' },
+                  { name: 'Lahari', role: 'Software Engineer', company: 'Cyient', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
+                  { name: 'Maddineni Bhargava', role: 'ML Engineer (Intern)', company: 'Microsoft', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
+                  { name: 'Krishna Murthy', role: 'Software Engineer', company: 'Cyient', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
+                  { name: 'Shailesh', role: 'Member Technical', company: 'Zolo', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80' },
+                  { name: 'Dinesh Kumar', role: 'Software Analyst', company: 'Capgemini', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80' },
+                  { name: 'Surya Sai', role: 'System Engineer Trainee', company: 'Infosys', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' }
+                ];
+                
+                return (
+                  <div 
+                    key={rowIndex} 
+                    className={`flex gap-4 ${rowIndex === 1 ? 'animate-scroll-right' : 'animate-scroll-left'}`}
+                    onContextMenu={(e) => e.preventDefault()}
+                  >
+                    {/* Duplicate the entire student list 3 times for seamless loop */}
+                    {[...Array(3)].map((_, setIndex) => (
+                      <div key={setIndex} className="flex gap-4 flex-shrink-0">
+                        {students.map((student, index) => (
+                          <div key={`${setIndex}-${index}`} className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-xl flex-shrink-0 w-44">
+                            {/* Mobile: Horizontal Layout */}
+                            <div className="flex md:hidden items-center space-x-2">
+                              <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-teal-400">
+                                <img src={student.image} alt={student.name} className="w-full h-full object-cover pointer-events-none select-none" loading="lazy" draggable="false" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h4 className="text-white font-semibold text-xs mb-0.5 truncate select-none">{student.name}</h4>
+                                <p className="text-teal-200 text-xs mb-1 truncate select-none">{student.role}</p>
+                                <div className="inline-block bg-white/20 px-2 py-0.5 rounded-full">
+                                  <span className="text-white text-xs font-semibold select-none">{student.company}</span>
+                                </div>
+                              </div>
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className="text-white font-semibold text-xs mb-0.5 truncate select-none">{student.name}</h4>
-                              <p className="text-teal-200 text-xs mb-1 truncate select-none">{student.role}</p>
-                              <div className="inline-block bg-white/20 px-2 py-0.5 rounded-full">
+                            {/* Desktop: Vertical Layout */}
+                            <div className="hidden md:flex flex-col items-center text-center">
+                              <div className="w-16 h-16 rounded-full overflow-hidden mb-2 border-2 border-teal-400 group-hover:border-cyan-400 transition-colors">
+                                <img src={student.image} alt={student.name} className="w-full h-full object-cover pointer-events-none select-none" loading="lazy" draggable="false" />
+                              </div>
+                              <h4 className="text-white font-semibold text-sm mb-1 select-none truncate w-full">{student.name}</h4>
+                              <p className="text-teal-200 text-xs mb-2 select-none truncate w-full">{student.role}</p>
+                              <div className="bg-white/20 px-3 py-1 rounded-full">
                                 <span className="text-white text-xs font-semibold select-none">{student.company}</span>
                               </div>
                             </div>
                           </div>
-                          {/* Desktop: Vertical Layout */}
-                          <div className="hidden md:flex flex-col items-center text-center">
-                            <div className="w-16 h-16 rounded-full overflow-hidden mb-2 border-2 border-teal-400 group-hover:border-cyan-400 transition-colors">
-                              <img src={student.image} alt={student.name} className="w-full h-full object-cover pointer-events-none select-none" loading="lazy" draggable="false" />
-                            </div>
-                            <h4 className="text-white font-semibold text-sm mb-1 select-none truncate w-full">{student.name}</h4>
-                            <p className="text-teal-200 text-xs mb-2 select-none truncate w-full">{student.role}</p>
-                            <div className="bg-white/20 px-3 py-1 rounded-full">
-                              <span className="text-white text-xs font-semibold select-none">{student.company}</span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              ))}
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
           
@@ -573,13 +578,13 @@ const Home = () => {
                 transform: translateX(0);
               }
               100% {
-                transform: translateX(-25%);
+                transform: translateX(calc(-100% / 3));
               }
             }
             
             @keyframes scroll-right {
               0% {
-                transform: translateX(-25%);
+                transform: translateX(calc(-100% / 3));
               }
               100% {
                 transform: translateX(0);
@@ -587,20 +592,20 @@ const Home = () => {
             }
             
             .animate-scroll-left {
-              animation: scroll-left 30s linear infinite;
+              animation: scroll-left 50s linear infinite;
             }
             
             .animate-scroll-right {
-              animation: scroll-right 30s linear infinite;
+              animation: scroll-right 50s linear infinite;
             }
             
             @media (max-width: 768px) {
               .animate-scroll-left {
-                animation: scroll-left 25s linear infinite;
+                animation: scroll-left 35s linear infinite;
               }
               
               .animate-scroll-right {
-                animation: scroll-right 25s linear infinite;
+                animation: scroll-right 35s linear infinite;
               }
             }
             
