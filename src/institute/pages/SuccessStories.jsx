@@ -68,7 +68,7 @@ const SuccessStories = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Success Stories</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -78,7 +78,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Live Placement Stats */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Placement Statistics</h2>
@@ -99,7 +99,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Recent Placements Ticker */}
-      <section className="py-8 bg-gradient-to-r from-teal-600 to-cyan-600 text-white">
+      <section className="py-4 md:py-6 bg-gradient-to-r from-teal-600 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold mb-2">Recent Placements (Last 30 Days)</h3>
@@ -128,7 +128,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Success Stories */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Career Transformation Stories</h2>
@@ -187,7 +187,7 @@ const SuccessStories = () => {
       </section>
 
       {/* Hiring Partners */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Hiring Partners</h2>
@@ -216,7 +216,7 @@ const SuccessStories = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
+      <section className="py-10 md:py-12 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Write Your Success Story?</h2>
           <p className="text-xl mb-8 opacity-90">Join 500+ students who transformed their careers with us</p>

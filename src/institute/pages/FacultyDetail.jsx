@@ -7,6 +7,47 @@ import { ArrowLeft, Award, BookOpen, Users, Calendar, Star, Mail, Phone, Linkedi
 const FacultyDetail = () => {
   const { id } = useParams();
   const [facultyMember, setFacultyMember] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Mock faculty data as fallback
+  const mockFacultyData = [
+    { 
+      _id: '1', 
+      name: 'Dr. Rajesh Kumar', 
+      specialization: 'Full Stack Development', 
+      qualification: 'M.Tech, IIT Delhi', 
+      experience: '12+ Years',
+      bio: 'Passionate educator with extensive industry experience in building scalable web applications',
+      assignedCourses: ['Full Stack Development', 'React.js', 'Node.js']
+    },
+    { 
+      _id: '2', 
+      name: 'Priya Sharma', 
+      specialization: 'Data Science & AI', 
+      qualification: 'PhD in Computer Science', 
+      experience: '10+ Years',
+      bio: 'Expert in machine learning and artificial intelligence with research background',
+      assignedCourses: ['Data Science', 'Machine Learning', 'Python']
+    },
+    { 
+      _id: '3', 
+      name: 'Amit Patel', 
+      specialization: 'Cloud Computing', 
+      qualification: 'B.Tech, AWS Certified', 
+      experience: '8+ Years',
+      bio: 'Cloud architecture specialist with hands-on experience in AWS and Azure',
+      assignedCourses: ['Cloud Computing', 'AWS', 'DevOps']
+    },
+    { 
+      _id: '4', 
+      name: 'Sneha Reddy', 
+      specialization: 'Digital Marketing', 
+      qualification: 'MBA, Google Certified', 
+      experience: '7+ Years',
+      bio: 'Digital marketing strategist with proven track record in brand building',
+      assignedCourses: ['Digital Marketing', 'SEO', 'Social Media Marketing']
+    }
+  ];
 
   useEffect(() => {
     fetchFacultyMember();
@@ -14,17 +55,50 @@ const FacultyDetail = () => {
 
   const fetchFacultyMember = async () => {
     try {
-      const response = await api.get('/admin/faculty');
+      setLoading(true);
+      const response = await api.get('/faculty');
       const faculty = response.data.faculty || [];
       const member = faculty.find(f => f._id === id);
-      setFacultyMember(member);
+      
+      if (member) {
+        setFacultyMember(member);
+      } else {
+        // Fallback to mock data if not found in API
+        const mockMember = mockFacultyData.find(f => f._id === id);
+        setFacultyMember(mockMember || mockFacultyData[0]);
+      }
     } catch (error) {
       console.error('Error fetching faculty:', error);
+      // Use mock data as fallback
+      const mockMember = mockFacultyData.find(f => f._id === id);
+      setFacultyMember(mockMember || mockFacultyData[0]);
+    } finally {
+      setLoading(false);
     }
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mb-4"></div>
+          <p className="text-gray-600">Loading faculty details...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!facultyMember) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Faculty member not found</div>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Faculty member not found</h2>
+          <Link to="/faculty" className="text-teal-600 hover:text-teal-700">
+            Back to Faculty
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const achievements = [
@@ -50,7 +124,7 @@ const FacultyDetail = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/faculty" className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors">
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -73,7 +147,7 @@ const FacultyDetail = () => {
                 </div>
               </div>
               <div className="flex space-x-4">
-                <a href="#" className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-white/30 transition-colors">
+                <a href="mailto:info@vspaze.com" className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-white/30 transition-colors">
                   <Mail className="w-5 h-5 inline mr-2" />
                   Email
                 </a>
@@ -84,11 +158,11 @@ const FacultyDetail = () => {
               </div>
             </div>
             <div className="text-center">
-              <img 
-                src={`https://randomuser.me/api/portraits/${parseInt(id) % 2 === 0 ? 'men' : 'women'}/${20 + parseInt(id)}.jpg`}
-                alt={facultyMember.name}
-                className="w-80 h-80 rounded-full mx-auto shadow-2xl border-8 border-white/20"
-              />
+              <div className="w-80 h-80 rounded-full mx-auto shadow-2xl border-8 border-white/20 bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center">
+                <span className="text-9xl font-bold text-white">
+                  {facultyMember.name?.split(' ').map(n => n[0]).join('') || 'F'}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +206,7 @@ const FacultyDetail = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Student Reviews</h2>
               <div className="space-y-6">
                 {studentReviews.map((review, idx) => (
-                  <div key={idx} className="border-l-4 border-blue-500 pl-6">
+                  <div key={idx} className="border-l-4 border-teal-500 pl-6">
                     <div className="flex items-center mb-2">
                       <div className="flex items-center mr-4">
                         {[...Array(review.rating)].map((_, i) => (
@@ -153,13 +227,13 @@ const FacultyDetail = () => {
             {/* Courses Teaching */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <BookOpen className="w-6 h-6 mr-2 text-blue-600" />
+                <BookOpen className="w-6 h-6 mr-2 text-teal-600" />
                 Courses Teaching
               </h3>
               <div className="space-y-3">
                 {(facultyMember.assignedCourses || []).map((course, idx) => (
-                  <div key={idx} className="bg-blue-50 p-3 rounded-lg">
-                    <span className="font-semibold text-blue-800">{typeof course === 'string' ? course : course.name}</span>
+                  <div key={idx} className="bg-teal-50 p-3 rounded-lg border border-teal-200">
+                    <span className="font-semibold text-teal-800">{typeof course === 'string' ? course : course.name}</span>
                   </div>
                 ))}
               </div>
@@ -171,7 +245,7 @@ const FacultyDetail = () => {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Students Taught</span>
-                  <span className="font-bold text-2xl text-blue-600">500+</span>
+                  <span className="font-bold text-2xl text-teal-600">500+</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Average Rating</span>
@@ -179,11 +253,11 @@ const FacultyDetail = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Years Teaching</span>
-                  <span className="font-bold text-2xl text-green-600">8+</span>
+                  <span className="font-bold text-2xl text-cyan-600">8+</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Success Rate</span>
-                  <span className="font-bold text-2xl text-purple-600">95%</span>
+                  <span className="font-bold text-2xl text-teal-700">95%</span>
                 </div>
               </div>
             </div>
@@ -193,24 +267,24 @@ const FacultyDetail = () => {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Upcoming Classes</h3>
               <div className="space-y-3">
                 {upcomingClasses.map((class_, idx) => (
-                  <div key={idx} className="border border-gray-200 p-3 rounded-lg">
+                  <div key={idx} className="border border-teal-200 bg-teal-50 p-3 rounded-lg">
                     <div className="font-semibold text-gray-900">{class_.topic}</div>
                     <div className="text-sm text-gray-600 mt-1">
                       {class_.date} at {class_.time}
                     </div>
-                    <div className="text-sm text-blue-600">{class_.duration}</div>
+                    <div className="text-sm text-teal-600 font-semibold">{class_.duration}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Contact */}
-            <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-2xl shadow-lg p-6">
+            <div className="bg-gradient-to-br from-teal-600 to-cyan-600 text-white rounded-2xl shadow-lg p-6">
               <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
               <p className="mb-4 opacity-90">Have questions about the courses or need career guidance?</p>
               <Link 
                 to="/contact"
-                className="block text-center bg-white text-blue-600 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
+                className="block text-center bg-white text-teal-600 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
               >
                 Contact Now
               </Link>

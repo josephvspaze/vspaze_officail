@@ -40,7 +40,7 @@ const Contact = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Get In Touch</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -50,7 +50,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Info & Form */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-stretch">
             {/* Contact Information */}
@@ -191,7 +191,7 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl p-12 text-center border border-teal-400" style={{boxShadow: '0 0 20px rgba(20, 184, 166, 0.3)'}}>
             <Download className="w-16 h-16 text-teal-600 mx-auto mb-4" />

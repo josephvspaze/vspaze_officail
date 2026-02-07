@@ -25,7 +25,7 @@ const Faculty = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Meet Our Expert Faculty</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -35,7 +35,7 @@ const Faculty = () => {
       </section>
 
       {/* Faculty Grid */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-8">
             {faculty.map((member) => (
@@ -101,7 +101,7 @@ const Faculty = () => {
       </section>
 
       {/* Join Our Team */}
-      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
+      <section className="py-10 md:py-12 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Want to Join Our Faculty Team?</h2>
           <p className="text-xl mb-8 opacity-90">We're always looking for passionate online educators</p>

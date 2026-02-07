@@ -75,7 +75,7 @@ const Admissions = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Admissions & Fees</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -85,7 +85,7 @@ const Admissions = () => {
       </section>
 
       {/* Fee Structure */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Course Fee Structure</h2>
@@ -210,7 +210,7 @@ const Admissions = () => {
       </section>
 
       {/* Payment Plans */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Flexible Payment Plans</h2>
@@ -235,7 +235,7 @@ const Admissions = () => {
       </section>
 
       {/* Scholarships */}
-      <section className="py-16 bg-gradient-to-br from-teal-50 to-cyan-50">
+      <section className="py-10 md:py-12 bg-gradient-to-br from-teal-50 to-cyan-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Scholarship Programs</h2>
@@ -261,7 +261,7 @@ const Admissions = () => {
       </section>
 
       {/* Admission Process */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Admission Process</h2>
@@ -322,7 +322,7 @@ const Admissions = () => {
       </section>
 
       {/* Important Dates */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-12 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Important Dates</h2>
@@ -349,7 +349,7 @@ const Admissions = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
+      <section className="py-10 md:py-12 bg-gradient-to-r from-teal-900 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
           <p className="text-xl mb-8 opacity-90">Apply now and secure your seat in the next batch</p>

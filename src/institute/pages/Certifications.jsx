@@ -35,7 +35,7 @@ const Certifications = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-20">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-500 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Certifications & Accreditations</h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
@@ -45,7 +45,7 @@ const Certifications = () => {
       </section>
 
       {/* Industry Certifications */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Industry Certifications Offered</h2>
@@ -74,7 +74,7 @@ const Certifications = () => {
       </section>
 
       {/* Institute Accreditations */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Institute Accreditations</h2>
@@ -95,7 +95,7 @@ const Certifications = () => {
       </section>
 
       {/* Partnership Certificates */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Partnership Certificates</h2>
@@ -121,7 +121,7 @@ const Certifications = () => {
       </section>
 
       {/* Quality Assurance Standards */}
-      <section className="py-16 bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-600 text-white">
+      <section className="py-10 md:py-12 bg-gradient-to-br from-teal-900 via-teal-800 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Quality Assurance Standards</h2>
@@ -143,7 +143,7 @@ const Certifications = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to Get Certified?</h2>
           <p className="text-xl text-gray-600 mb-8">Join our certified programs and boost your career prospects</p>

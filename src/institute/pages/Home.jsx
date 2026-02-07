@@ -74,46 +74,32 @@ class ErrorBoundary extends React.Component {
 }
 
 const TestimonialCarousel = ({ testimonials }) => {
-  const [current, setCurrent] = useState(testimonials.length);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-
-  // Duplicate testimonials for infinite loop
-  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
+      setIsTransitioning(true);
       setCurrent((prev) => prev + 1);
     }, CAROUSEL_INTERVAL);
     return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
-    // Reset to middle set when reaching the end
-    if (current >= testimonials.length * 2) {
+    if (current === testimonials.length) {
       setTimeout(() => {
         setIsTransitioning(false);
-        setCurrent(testimonials.length);
-        setTimeout(() => {
-          setIsTransitioning(true);
-        }, 50);
-      }, 500);
-    }
-    // Reset to middle set when reaching the beginning
-    if (current <= 0) {
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrent(testimonials.length);
-        setTimeout(() => {
-          setIsTransitioning(true);
-        }, 50);
+        setCurrent(0);
       }, 500);
     }
   }, [current, testimonials.length]);
 
   const goToSlide = (index) => {
     setIsTransitioning(true);
-    setCurrent(testimonials.length + index);
+    setCurrent(index);
   };
+
+  const displayIndex = current % testimonials.length;
 
   return (
     <div className="relative" role="region" aria-label="Student testimonials carousel">
@@ -122,7 +108,7 @@ const TestimonialCarousel = ({ testimonials }) => {
           className={`flex ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`} 
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
-          {extendedTestimonials.map((testimonial, idx) => (
+          {[...testimonials, testimonials[0]].map((testimonial, idx) => (
             <div key={`${testimonial.id}-${idx}`} className="w-full flex-shrink-0 px-4">
               <div className="group bg-white border border-gray-200 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all max-w-4xl mx-auto">
                 <div className="flex items-center mb-6" aria-label={`${testimonial.rating} star rating`}>
@@ -148,9 +134,9 @@ const TestimonialCarousel = ({ testimonials }) => {
           <button 
             key={idx} 
             onClick={() => goToSlide(idx)} 
-            className={`w-3 h-3 rounded-full transition-all ${(current % testimonials.length) === idx ? 'bg-white w-8' : 'bg-white/50'}`}
+            className={`w-3 h-3 rounded-full transition-all ${displayIndex === idx ? 'bg-white w-8' : 'bg-white/50'}`}
             aria-label={`Go to testimonial ${idx + 1}`}
-            aria-current={(current % testimonials.length) === idx}
+            aria-current={displayIndex === idx}
             role="tab"
           />
         ))}
@@ -234,7 +220,7 @@ const Home = () => {
     <ErrorBoundary>
       <div className="bg-gradient-to-b from-teal-900 via-teal-800 to-cyan-500 select-none" onContextMenu={(e) => e.preventDefault()}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-teal-900 to-cyan-400 py-12 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-teal-900 to-cyan-400 py-8 md:py-12 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="absolute w-96 h-96 bg-teal-300/30 rounded-full blur-3xl top-0 -left-20"></div>
             <div className="absolute w-96 h-96 bg-cyan-300/30 rounded-full blur-3xl top-0 right-0"></div>
@@ -294,7 +280,7 @@ const Home = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 relative border-t border-white/10">
+        <section className="py-10 md:py-12 relative border-t border-white/10">
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -317,7 +303,7 @@ const Home = () => {
         </section>
 
         {/* Featured Courses */}
-        <section className="py-20 border-t border-white/10">
+        <section className="py-10 md:py-12 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <div className="inline-block px-6 py-2 bg-teal-500/20 text-teal-300 rounded-full font-semibold mb-4 border border-teal-400/30">
@@ -385,7 +371,7 @@ const Home = () => {
         </section>
 
         {/* Motivational Quote Banner */}
-        <section className="py-16 border-t border-white/10 relative overflow-hidden">
+        <section className="py-8 md:py-10 border-t border-white/10 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-cyan-500 to-teal-600"></div>
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -416,7 +402,7 @@ const Home = () => {
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-20 border-t border-white/10">
+        <section className="py-10 md:py-12 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4">Why Choose Vspaze?</h2>
@@ -445,7 +431,7 @@ const Home = () => {
         </section>
 
         {/* Faculty Highlights */}
-        <section className="py-20 border-t border-white/10">
+        <section className="py-10 md:py-12 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <div className="inline-block px-6 py-2 bg-teal-500/20 text-teal-300 rounded-full font-semibold mb-4 border border-teal-400/30">
@@ -502,7 +488,7 @@ const Home = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 border-t border-white/10">
+        <section className="py-10 md:py-12 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <div className="inline-block px-6 py-2 bg-white/20 text-white rounded-full font-semibold mb-4 border border-white/30">
@@ -519,7 +505,7 @@ const Home = () => {
         </section>
 
         {/* Our Students Success Stories */}
-        <section className="py-20 border-t border-white/10 bg-white/5 overflow-hidden">
+        <section className="py-10 md:py-12 border-t border-white/10 bg-white/5 overflow-hidden">
           <div className="w-full px-0">
             <div className="text-center mb-12 px-4">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4">
@@ -530,13 +516,13 @@ const Home = () => {
             <div className="space-y-4">
               {[0, 1, 2].map((rowIndex) => {
                 const students = [
-                  { name: 'Jaya Prathyusha', role: 'Senior Tech Associate', company: 'Bank of America', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80' },
+                  { name: 'Jaya Prathyusha', role: 'Senior Tech Associate', company: 'BofA', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80' },
                   { name: 'Lahari', role: 'Software Engineer', company: 'Cyient', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
                   { name: 'Maddineni Bhargava', role: 'ML Engineer (Intern)', company: 'Microsoft', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
                   { name: 'Krishna Murthy', role: 'Software Engineer', company: 'Cyient', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
                   { name: 'Shailesh', role: 'Member Technical', company: 'Zolo', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80' },
                   { name: 'Dinesh Kumar', role: 'Software Analyst', company: 'Capgemini', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80' },
-                  { name: 'Surya Sai', role: 'System Engineer Trainee', company: 'Infosys', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' }
+                  { name: 'Surya Sai', role: 'System Engineer', company: 'Infosys', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' }
                 ];
                 
                 return (
@@ -558,7 +544,7 @@ const Home = () => {
                               <div className="flex-1 min-w-0">
                                 <h4 className="text-white font-semibold text-xs mb-0.5 truncate select-none">{student.name}</h4>
                                 <p className="text-teal-200 text-xs mb-1 truncate select-none">{student.role}</p>
-                                <div className="inline-block bg-white/20 px-2 py-0.5 rounded-full">
+                                <div className="inline-block bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">
                                   <span className="text-white text-xs font-semibold select-none">{student.company}</span>
                                 </div>
                               </div>
@@ -587,27 +573,45 @@ const Home = () => {
           <style jsx>{`
             @keyframes scroll-left {
               from {
-                transform: translateX(0%);
+                transform: translate3d(0%, 0, 0);
               }
               to {
-                transform: translateX(calc(-100% / 3));
+                transform: translate3d(calc(-100% / 3), 0, 0);
               }
             }
             
             @keyframes scroll-right {
               from {
-                transform: translateX(calc(-100% / 3));
+                transform: translate3d(calc(-100% / 3), 0, 0);
               }
               to {
-                transform: translateX(0%);
+                transform: translate3d(0%, 0, 0);
               }
             }
             
             .animate-scroll-left,
             .animate-scroll-right {
-              animation-duration: 60s;
               animation-timing-function: linear;
               animation-iteration-count: infinite;
+              will-change: transform;
+              backface-visibility: hidden;
+              perspective: 1000px;
+            }
+            
+            /* Faster animation for mobile */
+            @media (max-width: 768px) {
+              .animate-scroll-left,
+              .animate-scroll-right {
+                animation-duration: 25s;
+              }
+            }
+            
+            /* Slower animation for desktop */
+            @media (min-width: 769px) {
+              .animate-scroll-left,
+              .animate-scroll-right {
+                animation-duration: 40s;
+              }
             }
             
             .animate-scroll-left {
@@ -626,7 +630,7 @@ const Home = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 border-t border-white/10">
+        <section className="py-10 md:py-12 border-t border-white/10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="inline-block px-6 py-2 bg-teal-500/20 text-teal-300 rounded-full font-semibold mb-4 border border-teal-400/30">
@@ -693,7 +697,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-14 relative overflow-hidden border-t border-white/10" style={{ marginTop: '-10px' }}>
+        <section className="py-8 md:py-10 relative overflow-hidden border-t border-white/10">
           <div className="absolute inset-0" aria-hidden="true">
             <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl top-0 left-0"></div>
             <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl bottom-0 right-0"></div>
