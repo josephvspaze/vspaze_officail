@@ -124,7 +124,7 @@ const InstituteFooter = () => {
               </li>
               <li>
                 <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Development') ? 'text-white' : ''}`}>
-                  Python Programming
+                  {/* Python Programming */}
                   {isCourseCategory('Development') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
                   <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>

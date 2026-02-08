@@ -528,7 +528,7 @@ const Home = () => {
                 return (
                   <div 
                     key={rowIndex} 
-                    className={`flex gap-4 ${rowIndex === 1 ? 'animate-scroll-right' : 'animate-scroll-left'}`}
+                    className={`flex gap-4 ${rowIndex === 1 ? 'animate-scroll-right-slow' : rowIndex === 0 ? 'animate-scroll-left' : 'animate-scroll-left'}`}
                     onContextMenu={(e) => e.preventDefault()}
                   >
                     {/* Duplicate the entire student list 3 times for seamless loop */}
@@ -590,7 +590,8 @@ const Home = () => {
             }
             
             .animate-scroll-left,
-            .animate-scroll-right {
+            .animate-scroll-right,
+            .animate-scroll-right-slow {
               animation-timing-function: linear;
               animation-iteration-count: infinite;
               will-change: transform;
@@ -598,18 +599,24 @@ const Home = () => {
               perspective: 1000px;
             }
             
-            /* Faster animation for mobile */
+            /* Mobile: All rows fast */
             @media (max-width: 768px) {
-              .animate-scroll-left,
-              .animate-scroll-right {
-                animation-duration: 25s;
+              .animate-scroll-left {
+                animation-duration: 15s;
+              }
+              
+              .animate-scroll-right-slow {
+                animation-duration: 15s;
               }
             }
             
-            /* Slower animation for desktop */
+            /* Desktop: Top/bottom fast, middle slow */
             @media (min-width: 769px) {
-              .animate-scroll-left,
-              .animate-scroll-right {
+              .animate-scroll-left {
+                animation-duration: 20s;
+              }
+              
+              .animate-scroll-right-slow {
                 animation-duration: 40s;
               }
             }
@@ -618,12 +625,12 @@ const Home = () => {
               animation-name: scroll-left;
             }
             
-            .animate-scroll-right {
+            .animate-scroll-right-slow {
               animation-name: scroll-right;
             }
             
             .animate-scroll-left:hover,
-            .animate-scroll-right:hover {
+            .animate-scroll-right-slow:hover {
               animation-play-state: paused;
             }
           `}</style>

@@ -76,8 +76,6 @@ const InstituteNavbar = () => {
                 <div 
                   key={idx} 
                   className="relative"
-                  onMouseEnter={() => setDropdownOpen(idx)}
-                  onMouseLeave={() => setDropdownOpen(null)}
                 >
                   <button
                     onClick={(e) => {
@@ -188,27 +186,21 @@ const InstituteNavbar = () => {
           {navItems.map((item, idx) => (
             item.dropdown ? (
               <div key={idx} className="mb-2">
-                <div className="flex items-center space-x-3 px-4 py-3 text-white font-medium">
-                  <item.icon className="w-5 h-5" />
-                  <span>{item.name}</span>
-                </div>
-                <div className="ml-4 space-y-1">
-                  {item.dropdown.map((subItem, subIdx) => (
-                    <Link
-                      key={subIdx}
-                      to={subItem.path}
-                      onClick={() => setIsOpen(false)}
-                      className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-all ${
-                        isActive(subItem.path)
-                          ? 'bg-white/20 text-cyan-200'
-                          : 'text-cyan-100 hover:bg-white/10'
-                      }`}
-                    >
-                      <subItem.icon className="w-4 h-4" />
-                      <span className="text-sm">{subItem.name}</span>
-                    </Link>
-                  ))}
-                </div>
+                {item.dropdown.map((subItem, subIdx) => (
+                  <Link
+                    key={subIdx}
+                    to={subItem.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 transition-all ${
+                      isActive(subItem.path)
+                        ? 'bg-white/20 text-cyan-200'
+                        : 'text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <subItem.icon className="w-5 h-5" />
+                    <span className="font-medium">{subItem.name}</span>
+                  </Link>
+                ))}
               </div>
             ) : (
               <Link
