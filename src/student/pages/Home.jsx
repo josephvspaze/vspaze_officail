@@ -34,34 +34,34 @@ const Home = ({ onNavigate, onMenuClick, onNavigateToCourses }) => {
   ];
 
   return (
-    <div className="min-h-screen pb-20 md:pb-6" style={{ background: 'linear-gradient(135deg, #1a9b8e, #2db8a8)' }}>
+    <div className="min-h-screen pb-24 md:pb-6" style={{ background: 'linear-gradient(135deg, #1a9b8e, #2db8a8)' }}>
       {/* Header */}
       <div className="shadow-sm sticky top-0 z-10" style={{ background: '#0d7a6f' }}>
-        <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <button onClick={onMenuClick} className="md:hidden p-2 hover:bg-gray-100 rounded-full">
-                <Menu className="w-6 h-6" style={{ color: '#fff' }} />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <button onClick={onMenuClick} className="md:hidden p-2 hover:bg-white/10 rounded-full">
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: '#fff' }} />
               </button>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: '#1a9b8e' }}>
-                <span className="font-bold text-lg" style={{ color: '#fff' }}>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style={{ background: '#1a9b8e' }}>
+                <span className="font-bold text-base sm:text-lg" style={{ color: '#fff' }}>
                   {studentData?.name?.charAt(0) || 'S'}
                 </span>
               </div>
               <div>
-                <p className="text-sm" style={{ color: '#fff' }}>Welcome back!</p>
-                <p className="text-lg font-bold" style={{ color: '#fff' }}>{studentData?.name || 'Student'}</p>
+                <p className="text-xs sm:text-sm" style={{ color: '#fff' }}>Welcome back!</p>
+                <p className="text-base sm:text-lg font-bold" style={{ color: '#fff' }}>{studentData?.name || 'Student'}</p>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="p-2 hover:bg-gray-100 rounded-full">
-                <Search className="w-6 h-6" style={{ color: '#fff' }} />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <button className="p-2 hover:bg-white/10 rounded-full hidden sm:block">
+                <Search className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: '#fff' }} />
               </button>
               <button 
                 onClick={() => setShowNotifications(true)}
-                className="p-2 hover:bg-gray-100 rounded-full relative"
+                className="p-2 hover:bg-white/10 rounded-full relative"
               >
-                <Bell className="w-6 h-6" style={{ color: '#fff' }} />
+                <Bell className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: '#fff' }} />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               </button>
             </div>
@@ -115,15 +115,15 @@ const Home = ({ onNavigate, onMenuClick, onNavigateToCourses }) => {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-3 sm:gap-4">
           {quickActions.map((action) => {
             const Icon = action.icon;
             return (
               <button key={action.id} className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 hover:scale-105 transition" style={{ background: '#fff' }}>
-                  <Icon className="w-8 h-8" style={{ color: '#1a9b8e' }} />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-2 hover:scale-105 transition" style={{ background: '#fff' }}>
+                  <Icon className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: '#1a9b8e' }} />
                 </div>
-                <span className="text-sm font-medium" style={{ color: '#000' }}>{action.label}</span>
+                <span className="text-xs sm:text-sm font-medium" style={{ color: '#000' }}>{action.label}</span>
               </button>
             );
           })}

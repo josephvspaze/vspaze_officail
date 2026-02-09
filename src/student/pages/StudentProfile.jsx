@@ -23,7 +23,7 @@ const StudentProfile = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 sm:p-8">
+    <div className="max-w-4xl mx-auto p-6 sm:p-8 pb-24 md:pb-8">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">My Profile</h2>
 
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-6">

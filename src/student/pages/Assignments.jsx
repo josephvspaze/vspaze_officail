@@ -58,7 +58,7 @@ const Assignments = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 sm:p-8">
+    <div className="max-w-7xl mx-auto p-6 sm:p-8 pb-24 md:pb-8">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">My Assignments</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -87,8 +87,8 @@ const Assignments = () => {
 
       <div className="grid grid-cols-1 gap-4">
         {assignments.length > 0 ? assignments.map((assignment) => (
-          <div key={assignment.id} className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-shadow">
-            <div className="flex items-start justify-between">
+          <div key={assignment.id} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <FileText className="w-5 h-5 text-blue-600" />
@@ -101,7 +101,7 @@ const Assignments = () => {
                   {assignment.grade && <span>📊 Grade: {assignment.grade}</span>}
                 </div>
               </div>
-              <div className="flex flex-col items-end space-y-2">
+              <div className="flex flex-col sm:items-end space-y-2 mt-3 sm:mt-0">
                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                   assignment.status === 'Submitted' ? 'bg-green-100 text-green-700' :
                   assignment.status === 'Pending' ? 'bg-orange-100 text-orange-700' :
@@ -110,7 +110,7 @@ const Assignments = () => {
                   {assignment.status}
                 </span>
                 {assignment.status !== 'Submitted' && (
-                  <button className="flex items-center space-x-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
+                  <button className="flex items-center justify-center space-x-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm w-full sm:w-auto">
                     <Upload className="w-4 h-4" />
                     <span>Submit</span>
                   </button>

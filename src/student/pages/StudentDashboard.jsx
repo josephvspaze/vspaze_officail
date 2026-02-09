@@ -64,7 +64,7 @@ const StudentDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 sm:p-6 lg:p-8 pb-24 md:pb-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-8 sm:mb-10">
@@ -97,7 +97,7 @@ const StudentDashboard = () => {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Complete Payment to Unlock Full Access</h3>
                 <p className="text-gray-700 text-sm sm:text-base">Pay <span className="font-bold text-orange-600">₹{studentData.dueAmount}</span> to access all course materials, assignments, and features</p>
               </div>
-              <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md">
+              <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 sm:py-3 rounded-lg transition-colors shadow-md text-sm sm:text-base">
                 Pay Now
               </button>
             </div>
@@ -126,7 +126,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6">
           {/* Assignments */}
           <div className="bg-white rounded-2xl shadow-md p-5 sm:p-6 border border-gray-100">
             <div className="flex items-center justify-between mb-6">

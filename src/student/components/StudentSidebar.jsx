@@ -9,6 +9,7 @@ const StudentSidebar = ({ isOpen, onClose, activeSection, setActiveSection }) =>
     { id: 'courses', label: 'Course Content', icon: BookOpen },
     { id: 'practice', label: 'Live Coding', icon: Code },
     { id: 'jobs', label: 'Jobs', icon: Briefcase },
+    { id: 'notes', label: 'My Notes', icon: FileText },
     { id: 'payments', label: 'Payments', icon: CreditCard },
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'attendance', label: 'Attendance', icon: Calendar },

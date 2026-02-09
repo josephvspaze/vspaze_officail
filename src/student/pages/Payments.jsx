@@ -70,7 +70,7 @@ const Payments = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 sm:p-8">
+    <div className="max-w-7xl mx-auto p-6 sm:p-8 pb-24 md:pb-8">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">My Payments</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -106,15 +106,15 @@ const Payments = () => {
       </div>
 
       {studentData.dueAmount > 0 && (
-        <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-6 mb-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-4 sm:p-6 mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h3 className="text-lg font-bold text-gray-900 mb-1">Payment Pending</h3>
               <p className="text-gray-600">You have ₹{studentData.dueAmount} pending. Please make payment to continue.</p>
             </div>
             <button
               onClick={() => setShowPaymentModal(true)}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center space-x-2"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center space-x-2 w-full sm:w-auto"
             >
               <CreditCard className="w-5 h-5" />
               <span>Pay Now</span>
@@ -156,7 +156,7 @@ const Payments = () => {
       {/* Payment Amount Modal */}
       {showPaymentModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg w-full max-w-md">
+          <div className="bg-white rounded-xl w-full max-w-md mx-4">
             <div className="p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Enter Payment Amount</h3>
               <div className="mb-4">
@@ -171,10 +171,10 @@ const Payments = () => {
                 />
                 <p className="text-sm text-gray-600 mt-2">Due Amount: ₹{studentData.dueAmount}</p>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2">
                 <button
                   onClick={handlePayNow}
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-semibold"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-semibold"
                 >
                   Proceed to Pay
                 </button>
@@ -183,7 +183,7 @@ const Payments = () => {
                     setShowPaymentModal(false);
                     setPaymentAmount('');
                   }}
-                  className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300"
+                  className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300"
                 >
                   Cancel
                 </button>
@@ -196,7 +196,7 @@ const Payments = () => {
       {/* Dummy Payment Gateway */}
       {showGateway && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg w-full max-w-md">
+          <div className="bg-white rounded-xl w-full max-w-md mx-4">
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-t-lg">
               <h3 className="text-xl font-bold text-white">Dummy Payment Gateway</h3>
               <p className="text-blue-100 text-sm">Secure Payment Portal</p>
@@ -241,7 +241,7 @@ const Payments = () => {
                 </div>
               </div>
 
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2">
                 <button
                   onClick={handlePaymentSuccess}
                   disabled={processing}

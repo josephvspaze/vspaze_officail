@@ -72,7 +72,7 @@ const Jobs = ({ onMenuClick }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50 pb-20 md:pb-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50 pb-24 md:pb-6">
       <div className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
@@ -142,16 +142,16 @@ const Jobs = ({ onMenuClick }) => {
               </div>
             </div>
 
-            <div className="flex space-x-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button 
                 onClick={() => setSelectedJob(job)}
-                className="flex-1 px-4 py-3 border-2 border-indigo-600 text-indigo-600 rounded-xl font-medium hover:bg-indigo-50 transition"
+                className="flex-1 px-4 py-2.5 sm:py-3 border-2 border-indigo-600 text-indigo-600 rounded-xl font-medium hover:bg-indigo-50 transition text-sm sm:text-base"
               >
                 View Details
               </button>
               <button 
                 onClick={() => setApplyingJob(job)}
-                className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition flex items-center justify-center"
+                className="flex-1 px-4 py-2.5 sm:py-3 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition flex items-center justify-center text-sm sm:text-base"
               >
                 Apply Now
                 <ArrowRight className="w-4 h-4 ml-2" />

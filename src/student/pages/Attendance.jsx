@@ -46,7 +46,7 @@ const Attendance = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 sm:p-8">
+    <div className="max-w-7xl mx-auto p-6 sm:p-8 pb-24 md:pb-8">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">My Attendance</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
@@ -75,25 +75,25 @@ const Attendance = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+      <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-100">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Attendance Records</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <table className="w-full min-w-[500px]">
             <thead>
               <tr className="border-b border-gray-200">
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Date</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Subject</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Time</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Status</th>
+                <th className="text-left py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold text-gray-900">Date</th>
+                <th className="text-left py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold text-gray-900">Subject</th>
+                <th className="text-left py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold text-gray-900">Time</th>
+                <th className="text-left py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold text-gray-900">Status</th>
               </tr>
             </thead>
             <tbody>
               {attendanceData.map((record, index) => (
                 <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="py-3 px-4 text-sm text-gray-900">{new Date(record.date).toLocaleDateString()}</td>
-                  <td className="py-3 px-4 text-sm text-gray-900">{record.subject}</td>
-                  <td className="py-3 px-4 text-sm text-gray-600">{record.time}</td>
-                  <td className="py-3 px-4">
+                  <td className="py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-900">{new Date(record.date).toLocaleDateString()}</td>
+                  <td className="py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-900">{record.subject}</td>
+                  <td className="py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-600">{record.time}</td>
+                  <td className="py-3 px-3 sm:px-4">
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                       record.status === 'Present' ? 'bg-green-100 text-green-700' :
                       record.status === 'Absent' ? 'bg-red-100 text-red-700' :

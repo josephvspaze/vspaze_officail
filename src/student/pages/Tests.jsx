@@ -118,10 +118,10 @@ const Tests = () => {
     : 0;
 
   return (
-    <div className="max-w-7xl mx-auto p-6 sm:p-8">
+    <div className="max-w-7xl mx-auto p-6 sm:p-8 pb-24 md:pb-8">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Tests & Quizzes</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <FileCheck className="w-8 h-8 text-blue-600 mb-2" />
           <p className="text-gray-600 text-sm">Total Tests</p>
@@ -152,8 +152,8 @@ const Tests = () => {
             const status = getTestStatus(test);
             const scoreData = getTestScore(test);
             return (
-              <div key={test._id} className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-shadow">
-                <div className="flex items-start justify-between">
+              <div key={test._id} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-shadow">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
                       <FileCheck className="w-5 h-5 text-blue-600" />
@@ -188,11 +188,11 @@ const Tests = () => {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-col items-end space-y-2">
+                  <div className="flex flex-col sm:flex-row sm:items-end gap-2 w-full sm:w-auto">
                     {status === 'Completed' && (
                       <button 
                         onClick={() => setViewResult(test)}
-                        className="flex items-center space-x-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                        className="flex items-center justify-center space-x-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 w-full sm:w-auto"
                       >
                         <Eye className="w-4 h-4" />
                         <span>View Result</span>
@@ -201,7 +201,7 @@ const Tests = () => {
                     {status === 'Available' && (
                       <button 
                         onClick={() => handleStartTest(test)}
-                        className="flex items-center space-x-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                        className="flex items-center justify-center space-x-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-full sm:w-auto"
                       >
                         <Play className="w-4 h-4" />
                         <span>Start {test.type === 'quiz' ? 'Quiz' : 'Test'}</span>

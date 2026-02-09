@@ -18,6 +18,7 @@ import CodePractice from './pages/CodePractice';
 import Jobs from './pages/Jobs';
 import ProfileNew from './pages/ProfileNew';
 import Notifications from './pages/Notifications';
+import Notes from './pages/Notes';
 
 function StudentApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -69,6 +70,7 @@ function StudentApp() {
       case 'jobs': return <Jobs onMenuClick={() => setSidebarOpen(true)} />;
       case 'profile': return <ProfileNew onMenuClick={() => setSidebarOpen(true)} />;
       case 'notifications': return <Notifications onBack={() => setActiveSection('home')} />;
+      case 'notes': return <Notes />;
       case 'dashboard': return <StudentDashboard />;
       case 'oldProfile': return <StudentProfile />;
       case 'courses': return <CourseContent />;
@@ -93,6 +95,7 @@ function StudentApp() {
           onMenuClick={() => setSidebarOpen(!sidebarOpen)} 
           onLogout={handleLogout}
           onNotificationClick={() => setActiveSection('notifications')}
+          onLogoClick={() => setActiveSection('home')}
           hideOnMobile={['home', 'activities', 'practice', 'jobs', 'profile', 'notifications'].includes(activeSection)}
         />
         <main className="flex-1 overflow-y-auto">
