@@ -277,7 +277,7 @@ const StudentRegistration = () => {
                   { value: '', label: 'Choose a course' },
                   ...courses.map(course => ({
                     value: course.name,
-                    label: `${course.name} - ₹${course.fee}`
+                    label: course.name
                   }))
                 ]}
                 placeholder="Choose a course"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CreditCard, DollarSign, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { CreditCard, IndianRupee, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import api from '../../utils/api';
 
 const Payments = () => {
@@ -77,7 +77,7 @@ const Payments = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-              <DollarSign className="w-6 h-6 text-white" />
+              <IndianRupee className="w-6 h-6 text-white" />
             </div>
           </div>
           <p className="text-gray-600 text-sm mb-1">Total Fee</p>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, DollarSign, Users, Award, ChevronDown, ChevronUp, BookOpen, FileText, ClipboardList, Code } from 'lucide-react';
+import { ArrowLeft, Clock, IndianRupee, Users, Award, ChevronDown, ChevronUp, BookOpen, FileText, ClipboardList, Code } from 'lucide-react';
 import api from '../../utils/api';
 
 const CourseDetail = () => {
@@ -53,7 +53,7 @@ const CourseDetail = () => {
                   <span className="text-white font-semibold">{course.duration}</span>
                 </div>
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <DollarSign className="w-5 h-5 mr-2 text-cyan-300" />
+                  <IndianRupee className="w-5 h-5 mr-2 text-cyan-300" />
                   <span className="text-white font-semibold">₹{course.fee?.toLocaleString()}</span>
                 </div>
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">

@@ -179,11 +179,11 @@ const ContactPopup = ({ onClose }) => {
           </button>
 
           <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 bg-gradient-to-br from-orange-100 to-orange-50">
               <img 
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" 
                 alt="Career Expert"
-                className="w-full h-64 md:h-full object-cover"
+                className="w-full h-64 md:h-full object-contain"
               />
             </div>
             

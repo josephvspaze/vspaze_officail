@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Clock, DollarSign, Users, CheckCircle, ArrowRight, Code, Database, Megaphone, Cloud, Palette, Users as UsersIcon } from 'lucide-react';
+import { BookOpen, Clock, IndianRupee, Users, CheckCircle, ArrowRight, Code, Database, Megaphone, Cloud, Palette, Users as UsersIcon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import api from '../../utils/api';
 
@@ -140,7 +140,7 @@ const Courses = () => {
                       <span>{course.duration}</span>
                     </div>
                     <div className="flex items-center text-gray-700">
-                      <DollarSign className="w-5 h-5 mr-2 text-cyan-600" />
+                      <IndianRupee className="w-5 h-5 mr-2 text-cyan-600" />
                       <span className="font-bold text-cyan-600">₹{course.fee?.toLocaleString()}</span>
                     </div>
                   </div>

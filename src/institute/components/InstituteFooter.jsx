@@ -12,7 +12,11 @@ const InstituteFooter = () => {
   const isCourseCategory = (cat) => location.pathname === '/courses' && category === cat;
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ 
+      top: 0, 
+      left: 0,
+      behavior: 'smooth' 
+    });
   };
   
   return (
@@ -68,24 +72,24 @@ const InstituteFooter = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/courses" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/courses') ? 'text-white' : ''}`}>
+                <Link to="/courses" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/courses') && !category ? 'text-white' : ''}`}>
                   Courses
-                  {isActive('/courses') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {isActive('/courses') && !category && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
+                  {(!isActive('/courses') || category) && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
               <li>
-                <Link to="/faculty" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/faculty') ? 'text-white' : ''}`}>
+                <Link to="/faculty" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/faculty') ? 'text-white' : ''}`}>
                   Faculty
                   {isActive('/faculty') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {!isActive('/faculty') && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/contact') ? 'text-white' : ''}`}>
+                <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isActive('/contact') ? 'text-white' : ''}`}>
                   Contact
                   {isActive('/contact') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {!isActive('/contact') && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
             </ul>
@@ -98,28 +102,28 @@ const InstituteFooter = () => {
                 <Link to="/courses?category=Development" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Development') ? 'text-white' : ''}`}>
                   Full Stack Development
                   {isCourseCategory('Development') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {!isCourseCategory('Development') && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
               <li>
                 <Link to="/courses?category=Data Science" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Data Science') ? 'text-white' : ''}`}>
                   Data Science & AI
                   {isCourseCategory('Data Science') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {!isCourseCategory('Data Science') && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
               <li>
                 <Link to="/courses?category=Marketing" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Marketing') ? 'text-white' : ''}`}>
                   Digital Marketing
                   {isCourseCategory('Marketing') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {!isCourseCategory('Marketing') && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
               <li>
                 <Link to="/courses?category=Cloud" onClick={() => window.scrollTo(0, 0)} className={`relative inline-block text-gray-400 hover:text-white transition-colors group ${isCourseCategory('Cloud') ? 'text-white' : ''}`}>
                   Cloud Computing
                   {isCourseCategory('Cloud') && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-draw-line"></span>}
-                  <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+                  {!isCourseCategory('Cloud') && <span className="absolute -bottom-1 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </li>
               <li>

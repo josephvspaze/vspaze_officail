@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GraduationCap, Menu, X, Home, Info, BookOpen, Users, Award, Phone, UserPlus, Shield, DollarSign, CheckCircle, ChevronDown, User } from 'lucide-react';
+import { GraduationCap, Menu, X, Home, Info, BookOpen, Users, Award, Phone, UserPlus, Shield, IndianRupee, CheckCircle, ChevronDown, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const InstituteNavbar = () => {
@@ -43,9 +43,9 @@ const InstituteNavbar = () => {
     },
     {
       name: 'Admissions',
-      icon: DollarSign,
+      icon: IndianRupee,
       dropdown: [
-        { name: 'Fees & Payment', path: '/admissions', icon: DollarSign },
+        { name: 'Fees & Payment', path: '/admissions', icon: IndianRupee },
         { name: 'Apply Now', path: '/student-registration', icon: UserPlus }
       ]
     },
@@ -171,13 +171,11 @@ const InstituteNavbar = () => {
       isOpen ? 'translate-x-0' : '-translate-x-full'
     }`}>
         <div className="p-4 border-b border-white/10 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-              <img src="/icon.png" alt="Vspaze" className="w-5 h-5 object-contain" />
-            </div>
-            <span className="font-bold text-white">Vspaze</span>
+          <div className="flex items-center space-x-3">
+            <img src="/image.png" alt="Vspaze" className="w-12 h-12 object-contain" />
+            <span className="text-xl font-bold text-white">Vspaze</span>
           </div>
-          <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg">
+          <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
             <X className="w-6 h-6 text-white" />
           </button>
         </div>

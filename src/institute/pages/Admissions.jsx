@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DollarSign, Calendar, CreditCard, Calculator, CheckCircle, Clock, Users, Award } from 'lucide-react';
+import { IndianRupee, Calendar, CreditCard, Calculator, CheckCircle, Clock, Users, Award } from 'lucide-react';
 import api from '../../utils/api';
 
 const Admissions = () => {
@@ -29,7 +29,7 @@ const Admissions = () => {
   };
 
   const paymentPlans = [
-    { name: 'Full Payment', discount: '10%', description: 'Pay full amount upfront and save 10%', icon: DollarSign },
+    { name: 'Full Payment', discount: '10%', description: 'Pay full amount upfront and save 10%', icon: IndianRupee },
     { name: '3 Months EMI', interest: '0%', description: 'No interest for 3 months installment', icon: Calendar },
     { name: '6 Months EMI', interest: '5%', description: 'Low interest rate for 6 months', icon: CreditCard },
     { name: '12 Months EMI', interest: '8%', description: 'Extended payment period with competitive rates', icon: Calculator }

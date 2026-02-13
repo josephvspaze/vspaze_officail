@@ -64,7 +64,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
-                    <p className="text-gray-600">Vspaze Institute (Online),<br />Bangalore, Karnataka, India</p>
+                    <p className="text-gray-600">Vspaze Institute (Online),<br />Hyderabad, Telangana</p>
                   </div>
                 </div>
 
