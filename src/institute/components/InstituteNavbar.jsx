@@ -60,7 +60,7 @@ const InstituteNavbar = () => {
     <nav className="bg-teal-700/75 backdrop-blur-sm shadow-md" style={{ marginTop: '0' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-transparent rounded-full flex items-center justify-center border-2 border-white">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>

@@ -83,13 +83,13 @@ const StudentRegistration = () => {
     fetchCourses();
     
     // Scroll to top when component mounts
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   // Scroll to top when success modal shows
   useEffect(() => {
     if (submitted) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, [submitted]);
 

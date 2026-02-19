@@ -123,7 +123,7 @@ const Admissions = () => {
                   onClick={() => {
                     setSelectedCourse(course);
                     setLoanAmount(course.fee?.toString() || '45000');
-                    document.getElementById('emi-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('emi-calculator')?.scrollIntoView({ behavior: 'instant', block: 'start' });
                   }}
                   className="w-full bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-2 rounded-lg hover:shadow-lg transition-all"
                 >

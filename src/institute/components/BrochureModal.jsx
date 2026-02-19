@@ -1,61 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { X, Download, Code, Database, Megaphone, Cloud, Palette, BookOpen, CheckCircle, Sparkles, ArrowLeft, User, Mail, Phone, MapPin, GraduationCap, ChevronDown, Clock } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Download, Code, Database, Megaphone, Cloud, Palette, BookOpen, CheckCircle, Sparkles, ArrowLeft, User, Mail, Phone, MapPin, GraduationCap, Clock } from 'lucide-react';
 import api from '../../utils/api';
-
-const CustomSelect = ({ value, onChange, options, placeholder, icon: Icon, error }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const selectedOption = options.find(opt => opt.value === value);
-
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <div
-        onClick={() => setIsOpen(!isOpen)}
-        className={`w-full pl-10 pr-4 py-3 bg-slate-700/50 border ${
-          error ? 'border-red-500' : 'border-cyan-500/30'
-        } rounded-lg text-white cursor-pointer flex items-center justify-between focus:outline-none focus:border-cyan-500`}
-      >
-        {Icon && <Icon className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-400" />}
-        <span className={value ? 'text-white' : 'text-gray-400'}>
-          {selectedOption ? selectedOption.label : placeholder}
-        </span>
-        <ChevronDown className={`w-5 h-5 text-cyan-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </div>
-      
-      {isOpen && (
-        <div className="absolute z-50 w-full mt-2 bg-slate-700 border border-cyan-500/30 rounded-lg shadow-2xl max-h-60 overflow-y-auto">
-          {options.map((option) => (
-            <div
-              key={option.value}
-              onClick={() => {
-                onChange(option.value);
-                setIsOpen(false);
-              }}
-              className={`px-4 py-3 cursor-pointer transition-colors ${
-                value === option.value
-                  ? 'bg-cyan-500 text-white'
-                  : 'hover:bg-slate-600 text-white'
-              }`}
-            >
-              {option.label}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
 
 const BrochureModal = ({ isOpen, onClose }) => {
   const [step, setStep] = useState('form');
@@ -66,7 +11,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
     mobile: '',
     email: '',
     qualification: '',
-    interestedCourse: '',
     city: ''
   });
   const [formErrors, setFormErrors] = useState({});
@@ -146,10 +90,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
       errors.qualification = 'Qualification is required';
     }
     
-    if (!formData.interestedCourse) {
-      errors.interestedCourse = 'Please select a course';
-    }
-    
     if (!formData.city.trim()) {
       errors.city = 'City is required';
     }
@@ -161,7 +101,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
     if (formErrors[name]) {
       setFormErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -170,7 +109,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Here you can add API call to save form data
       console.log('Form submitted:', formData);
       setStep('courses');
     }
@@ -213,7 +151,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
       mobile: '',
       email: '',
       qualification: '',
-      interestedCourse: '',
       city: ''
     });
     setFormErrors({});
@@ -253,7 +190,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 Please fill in your details to access our course brochures
               </p>
 
-              {/* Full Name */}
               <div>
                 <label className="block text-white font-semibold mb-2 flex items-center gap-2">
                   <User className="w-4 h-4 text-cyan-400" />
@@ -270,7 +206,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 {formErrors.fullName && <p className="text-red-400 text-sm mt-1">{formErrors.fullName}</p>}
               </div>
 
-              {/* Mobile Number */}
               <div>
                 <label className="block text-white font-semibold mb-2 flex items-center gap-2">
                   <Phone className="w-4 h-4 text-cyan-400" />
@@ -288,7 +223,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 {formErrors.mobile && <p className="text-red-400 text-sm mt-1">{formErrors.mobile}</p>}
               </div>
 
-              {/* Email */}
               <div>
                 <label className="block text-white font-semibold mb-2 flex items-center gap-2">
                   <Mail className="w-4 h-4 text-cyan-400" />
@@ -305,7 +239,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 {formErrors.email && <p className="text-red-400 text-sm mt-1">{formErrors.email}</p>}
               </div>
 
-              {/* Qualification */}
               <div>
                 <label className="block text-white font-semibold mb-2 flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 text-cyan-400" />
@@ -325,35 +258,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 {formErrors.qualification && <p className="text-red-400 text-sm mt-1">{formErrors.qualification}</p>}
               </div>
 
-              {/* Interested Course */}
-              <div>
-                <label className="block text-white font-semibold mb-2 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-cyan-400" />
-                  Interested Course *
-                </label>
-                <CustomSelect
-                  value={formData.interestedCourse}
-                  onChange={(value) => {
-                    setFormData(prev => ({ ...prev, interestedCourse: value }));
-                    if (formErrors.interestedCourse) {
-                      setFormErrors(prev => ({ ...prev, interestedCourse: '' }));
-                    }
-                  }}
-                  options={[
-                    { value: '', label: 'Select a course' },
-                    ...courses.map(course => ({
-                      value: course.name,
-                      label: course.name
-                    }))
-                  ]}
-                  placeholder="Select a course"
-                  icon={BookOpen}
-                  error={formErrors.interestedCourse}
-                />
-                {formErrors.interestedCourse && <p className="text-red-400 text-sm mt-1">{formErrors.interestedCourse}</p>}
-              </div>
-
-              {/* City */}
               <div>
                 <label className="block text-white font-semibold mb-2 flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-cyan-400" />
@@ -370,7 +274,6 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 {formErrors.city && <p className="text-red-400 text-sm mt-1">{formErrors.city}</p>}
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105 mt-6"
