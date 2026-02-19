@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, ScrollRestoration } from 'react-router-dom';
 import InstituteLayout from './institute/InstituteLayout';
 import Home from './institute/pages/Home';
 import About from './institute/pages/About';
@@ -16,9 +16,21 @@ import CourseDetail from './institute/pages/CourseDetail';
 import StudentLogin from './pages/StudentLogin';
 import StudentApp from './student/StudentApp';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
 function AppRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true }}>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<InstituteLayout />}>
           <Route index element={<Home />} />

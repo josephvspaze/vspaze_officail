@@ -1,9 +1,66 @@
-import React, { useState } from 'react';
-import { X, Download, Code, Database, Megaphone, Cloud, Palette, BookOpen, CheckCircle, Sparkles, ArrowLeft, User, Mail, Phone, MapPin, GraduationCap } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Download, Code, Database, Megaphone, Cloud, Palette, BookOpen, CheckCircle, Sparkles, ArrowLeft, User, Mail, Phone, MapPin, GraduationCap, ChevronDown, Clock } from 'lucide-react';
+import api from '../../utils/api';
+
+const CustomSelect = ({ value, onChange, options, placeholder, icon: Icon, error }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(opt => opt.value === value);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className={`w-full pl-10 pr-4 py-3 bg-slate-700/50 border ${
+          error ? 'border-red-500' : 'border-cyan-500/30'
+        } rounded-lg text-white cursor-pointer flex items-center justify-between focus:outline-none focus:border-cyan-500`}
+      >
+        {Icon && <Icon className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-400" />}
+        <span className={value ? 'text-white' : 'text-gray-400'}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <ChevronDown className={`w-5 h-5 text-cyan-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </div>
+      
+      {isOpen && (
+        <div className="absolute z-50 w-full mt-2 bg-slate-700 border border-cyan-500/30 rounded-lg shadow-2xl max-h-60 overflow-y-auto">
+          {options.map((option) => (
+            <div
+              key={option.value}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+              className={`px-4 py-3 cursor-pointer transition-colors ${
+                value === option.value
+                  ? 'bg-cyan-500 text-white'
+                  : 'hover:bg-slate-600 text-white'
+              }`}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const BrochureModal = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState('form'); // 'form', 'courses', 'download'
+  const [step, setStep] = useState('form');
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',
@@ -14,50 +71,48 @@ const BrochureModal = ({ isOpen, onClose }) => {
   });
   const [formErrors, setFormErrors] = useState({});
 
-  const courses = [
-    { 
-      id: 1, 
-      name: 'Full Stack Development', 
-      icon: Code,
-      description: 'Master MERN Stack, React, Node.js & more',
-      color: 'cyan'
-    },
-    { 
-      id: 2, 
-      name: 'Data Science & AI', 
-      icon: Database,
-      description: 'Python, Machine Learning, Deep Learning',
-      color: 'purple'
-    },
-    { 
-      id: 3, 
-      name: 'Digital Marketing', 
-      icon: Megaphone,
-      description: 'SEO, Social Media, Content Marketing',
-      color: 'orange'
-    },
-    { 
-      id: 4, 
-      name: 'Cloud Computing', 
-      icon: Cloud,
-      description: 'AWS, Azure, DevOps & Cloud Architecture',
-      color: 'teal'
-    },
-    { 
-      id: 5, 
-      name: 'UI/UX Design', 
-      icon: Palette,
-      description: 'Figma, Adobe XD, User Research',
-      color: 'pink'
-    },
-    { 
-      id: 6, 
-      name: 'Python Programming', 
-      icon: Code,
-      description: 'Core Python, Django, Flask & Automation',
-      color: 'yellow'
+  useEffect(() => {
+    if (isOpen) {
+      fetchCourses();
     }
-  ];
+  }, [isOpen]);
+
+  const fetchCourses = async () => {
+    try {
+      const response = await api.get('/courses');
+      const apiCourses = response.data.courses || [];
+      const formattedCourses = apiCourses.map(course => ({
+        id: course._id,
+        name: course.name,
+        icon: getIconForCourse(course.name),
+        description: course.description,
+        color: getColorForCourse(course.name)
+      }));
+      setCourses(formattedCourses);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+
+  const getIconForCourse = (courseName) => {
+    const name = courseName.toLowerCase();
+    if (name.includes('full stack') || name.includes('web') || name.includes('mern')) return Code;
+    if (name.includes('data') || name.includes('ai')) return Database;
+    if (name.includes('marketing')) return Megaphone;
+    if (name.includes('cloud')) return Cloud;
+    if (name.includes('design') || name.includes('ui')) return Palette;
+    return Code;
+  };
+
+  const getColorForCourse = (courseName) => {
+    const name = courseName.toLowerCase();
+    if (name.includes('full stack') || name.includes('mern')) return 'cyan';
+    if (name.includes('data') || name.includes('ai')) return 'purple';
+    if (name.includes('marketing')) return 'orange';
+    if (name.includes('cloud')) return 'teal';
+    if (name.includes('design') || name.includes('ui')) return 'pink';
+    return 'yellow';
+  };
 
   const qualifications = [
     'High School',
@@ -122,9 +177,24 @@ const BrochureModal = ({ isOpen, onClose }) => {
   };
 
   const handleDownload = () => {
+    const courseName = selectedCourse.name.toLowerCase();
+    let pdfPath = '';
+    let fileName = '';
+    
+    if (courseName.includes('full stack') || courseName.includes('mern')) {
+      pdfPath = '/Vspaze Institute MERN Stack Complete Curriculum.pdf';
+      fileName = 'Vspaze-MERN-Stack-Curriculum.pdf';
+    } else if (courseName.includes('data structures') || courseName.includes('dsa') || courseName.includes('c++')) {
+      pdfPath = '/Vspaze Institute Data Structures  And Algorithms Using C Plus Plus  Complete Curriculum.pdf';
+      fileName = 'Vspaze-DSA-CPP-Curriculum.pdf';
+    } else {
+      setStep('coming-soon');
+      return;
+    }
+    
     const link = document.createElement('a');
-    link.href = '/brochure.pdf';
-    link.download = `Vspaze-${selectedCourse.name.replace(/\s+/g, '-')}-Brochure.pdf`;
+    link.href = pdfPath;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -261,17 +331,25 @@ const BrochureModal = ({ isOpen, onClose }) => {
                   <BookOpen className="w-4 h-4 text-cyan-400" />
                   Interested Course *
                 </label>
-                <select
-                  name="interestedCourse"
+                <CustomSelect
                   value={formData.interestedCourse}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-700/50 border ${formErrors.interestedCourse ? 'border-red-500' : 'border-cyan-500/30'} rounded-lg text-white focus:outline-none focus:border-cyan-500`}
-                >
-                  <option value="">Select a course</option>
-                  {courses.map((course) => (
-                    <option key={course.id} value={course.name}>{course.name}</option>
-                  ))}
-                </select>
+                  onChange={(value) => {
+                    setFormData(prev => ({ ...prev, interestedCourse: value }));
+                    if (formErrors.interestedCourse) {
+                      setFormErrors(prev => ({ ...prev, interestedCourse: '' }));
+                    }
+                  }}
+                  options={[
+                    { value: '', label: 'Select a course' },
+                    ...courses.map(course => ({
+                      value: course.name,
+                      label: course.name
+                    }))
+                  ]}
+                  placeholder="Select a course"
+                  icon={BookOpen}
+                  error={formErrors.interestedCourse}
+                />
                 {formErrors.interestedCourse && <p className="text-red-400 text-sm mt-1">{formErrors.interestedCourse}</p>}
               </div>
 
@@ -345,6 +423,35 @@ const BrochureModal = ({ isOpen, onClose }) => {
                 })}
               </div>
             </>
+          ) : step === 'coming-soon' ? (
+            <div className="text-center py-8">
+              <div className={`w-20 h-20 mx-auto mb-6 rounded-xl flex items-center justify-center border-2 ${
+                selectedCourse.color === 'cyan' ? 'bg-cyan-500/20 border-cyan-500' :
+                selectedCourse.color === 'purple' ? 'bg-purple-500/20 border-purple-500' :
+                selectedCourse.color === 'orange' ? 'bg-orange-500/20 border-orange-500' :
+                selectedCourse.color === 'teal' ? 'bg-teal-500/20 border-teal-500' :
+                selectedCourse.color === 'pink' ? 'bg-pink-500/20 border-pink-500' :
+                'bg-yellow-500/20 border-yellow-500'
+              }`}>
+                <Clock className={`w-10 h-10 ${
+                  selectedCourse.color === 'cyan' ? 'text-cyan-400' :
+                  selectedCourse.color === 'purple' ? 'text-purple-400' :
+                  selectedCourse.color === 'orange' ? 'text-orange-400' :
+                  selectedCourse.color === 'teal' ? 'text-teal-400' :
+                  selectedCourse.color === 'pink' ? 'text-pink-400' :
+                  'text-yellow-400'
+                }`} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">{selectedCourse.name}</h3>
+              <p className="text-cyan-200 text-lg mb-6">Brochure Coming Soon!</p>
+              <p className="text-cyan-300 mb-8">We're preparing a comprehensive brochure for this course. Check back soon!</p>
+              <button
+                onClick={handleBackToCourses}
+                className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition-all"
+              >
+                Back to Courses
+              </button>
+            </div>
           ) : (
             <div>
               <div className="bg-slate-700/50 rounded-xl p-4 sm:p-6 border border-cyan-500/20">

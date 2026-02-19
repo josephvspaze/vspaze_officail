@@ -68,6 +68,19 @@ const TeacherRegistration = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await api.get('/courses');
+        setCourses(response.data.courses || []);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
+    fetchCourses();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -197,12 +210,10 @@ const TeacherRegistration = () => {
                 onChange={(value) => setFormData({...formData, specialization: value})}
                 options={[
                   { value: '', label: 'Select your specialization' },
-                  { value: 'Full Stack Development', label: 'Full Stack Development' },
-                  { value: 'Data Science & AI', label: 'Data Science & AI' },
-                  { value: 'Digital Marketing', label: 'Digital Marketing' },
-                  { value: 'Cloud Computing', label: 'Cloud Computing' },
-                  { value: 'UI/UX Design', label: 'UI/UX Design' },
-                  { value: 'Python Programming', label: 'Python Programming' }
+                  ...courses.map(course => ({
+                    value: course.name,
+                    label: course.name
+                  }))
                 ]}
                 placeholder="Select your specialization"
                 icon={BookOpen}
