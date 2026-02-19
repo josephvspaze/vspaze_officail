@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { X, LogIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const CountdownBanner = () => {
+const CountdownBanner = memo(() => {
   const navigate = useNavigate();
-  const bannerRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -12,10 +11,9 @@ const CountdownBanner = () => {
     seconds: 0
   });
   const [isVisible, setIsVisible] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    // Set target date to 20 days from now
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 20);
 
@@ -38,23 +36,19 @@ const CountdownBanner = () => {
 
     calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
+    let lastScrollY = 0;
     let ticking = false;
-    
+
     const handleScroll = () => {
+      lastScrollY = window.scrollY;
+
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          const shouldHide = scrollY > 10;
-          
-          if (shouldHide !== isScrolled) {
-            setIsScrolled(shouldHide);
-          }
-          
+          setIsHidden(lastScrollY > 50);
           ticking = false;
         });
         ticking = true;
@@ -63,7 +57,7 @@ const CountdownBanner = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isScrolled]);
+  }, []);
 
   const formatTime = (value) => String(value).padStart(2, '0');
 
@@ -71,15 +65,13 @@ const CountdownBanner = () => {
 
   return (
     <div 
-      ref={bannerRef}
-      className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative transition-all duration-300 ease-out"
-      style={{ 
-        height: isScrolled ? '0' : 'auto',
-        minHeight: isScrolled ? '0' : 'auto',
-        opacity: isScrolled ? 0 : 1,
+      className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative"
+      style={{
+        maxHeight: isHidden ? '0px' : '100px',
+        opacity: isHidden ? 0 : 1,
+        transition: 'max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         overflow: 'hidden',
-        borderBottomWidth: isScrolled ? '0' : '2px',
-        visibility: isScrolled ? 'hidden' : 'visible'
+        borderBottomWidth: isHidden ? '0px' : '2px'
       }}
     >
       <div className="absolute inset-0 bg-yellow-500/10 pointer-events-none"></div>
@@ -88,7 +80,6 @@ const CountdownBanner = () => {
         {/* Mobile & Tablet Layout (< 1024px) */}
         <div className="lg:hidden">
           <div className="flex items-center justify-between gap-2 mb-2">
-            {/* Timer */}
             <div className="bg-white rounded-lg px-2 py-1 shadow-lg">
               <div className="flex items-center gap-1 text-xs font-bold text-gray-800 font-mono">
                 <span>{formatTime(timeLeft.days)}d</span>
@@ -101,7 +92,6 @@ const CountdownBanner = () => {
               </div>
             </div>
 
-            {/* Close Button */}
             <button 
               onClick={() => setIsVisible(false)}
               className="text-gray-800 hover:text-gray-900 transition-colors flex-shrink-0"
@@ -111,7 +101,6 @@ const CountdownBanner = () => {
             </button>
           </div>
 
-          {/* Message and Button Row */}
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-bold text-gray-900 flex-1">
               20% Off Expert-Led Bootcamps
@@ -128,7 +117,6 @@ const CountdownBanner = () => {
 
         {/* Desktop Layout (>= 1024px) */}
         <div className="hidden lg:flex items-center justify-between gap-4">
-          {/* Left - Student Images */}
           <div className="flex items-center gap-2">
             <div className="flex -space-x-3">
               <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Student" className="w-10 h-10 rounded-full border-2 border-white object-cover" />
@@ -139,7 +127,6 @@ const CountdownBanner = () => {
             <span className="text-sm font-semibold text-gray-800 whitespace-nowrap">500+ Students Enrolled</span>
           </div>
 
-          {/* Center - Timer and Message */}
           <div className="flex items-center justify-center gap-6 flex-1">
             <div className="bg-white rounded-lg px-3 py-1.5 shadow-lg">
               <div className="flex items-center gap-1.5 text-lg font-bold text-gray-800 font-mono">
@@ -160,7 +147,6 @@ const CountdownBanner = () => {
             </div>
           </div>
 
-          {/* Right - Register Button */}
           <button 
             onClick={() => navigate('/student-registration')}
             className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-xl transition-all hover:scale-105 whitespace-nowrap"
@@ -169,7 +155,6 @@ const CountdownBanner = () => {
             <span>Register Now</span>
           </button>
 
-          {/* Close Button */}
           <button 
             onClick={() => setIsVisible(false)}
             className="text-gray-800 hover:text-gray-900 transition-colors"
@@ -181,6 +166,8 @@ const CountdownBanner = () => {
       </div>
     </div>
   );
-};
+});
+
+CountdownBanner.displayName = 'CountdownBanner';
 
 export default CountdownBanner;
