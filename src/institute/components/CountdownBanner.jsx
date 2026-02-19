@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, LogIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const CountdownBanner = () => {
   const navigate = useNavigate();
+  const bannerRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -47,7 +48,13 @@ const CountdownBanner = () => {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 50);
+          const scrollY = window.scrollY;
+          const shouldHide = scrollY > 10;
+          
+          if (shouldHide !== isScrolled) {
+            setIsScrolled(shouldHide);
+          }
+          
           ticking = false;
         });
         ticking = true;
@@ -56,7 +63,7 @@ const CountdownBanner = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   const formatTime = (value) => String(value).padStart(2, '0');
 
@@ -64,15 +71,18 @@ const CountdownBanner = () => {
 
   return (
     <div 
-      className={`bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative overflow-hidden transition-all duration-300 ease-in-out ${
-        isScrolled ? 'max-h-0 opacity-0 border-b-0' : 'max-h-24 lg:max-h-20 opacity-100'
-      }`}
+      ref={bannerRef}
+      className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative transition-all duration-300 ease-out"
       style={{ 
-        transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)',
-        transition: 'transform 0.3s ease-in-out, max-height 0.3s ease-in-out, opacity 0.3s ease-in-out'
+        height: isScrolled ? '0' : 'auto',
+        minHeight: isScrolled ? '0' : 'auto',
+        opacity: isScrolled ? 0 : 1,
+        overflow: 'hidden',
+        borderBottomWidth: isScrolled ? '0' : '2px',
+        visibility: isScrolled ? 'hidden' : 'visible'
       }}
     >
-      <div className="absolute inset-0 bg-yellow-500/20 animate-pulse"></div>
+      <div className="absolute inset-0 bg-yellow-500/10 pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3 relative z-10">
         {/* Mobile & Tablet Layout (< 1024px) */}
@@ -82,11 +92,11 @@ const CountdownBanner = () => {
             <div className="bg-white rounded-lg px-2 py-1 shadow-lg">
               <div className="flex items-center gap-1 text-xs font-bold text-gray-800 font-mono">
                 <span>{formatTime(timeLeft.days)}d</span>
-                <span className="animate-pulse">:</span>
+                <span>:</span>
                 <span>{formatTime(timeLeft.hours)}h</span>
-                <span className="animate-pulse">:</span>
+                <span>:</span>
                 <span>{formatTime(timeLeft.minutes)}m</span>
-                <span className="animate-pulse">:</span>
+                <span>:</span>
                 <span>{formatTime(timeLeft.seconds)}s</span>
               </div>
             </div>
@@ -134,11 +144,11 @@ const CountdownBanner = () => {
             <div className="bg-white rounded-lg px-3 py-1.5 shadow-lg">
               <div className="flex items-center gap-1.5 text-lg font-bold text-gray-800 font-mono">
                 <span>{formatTime(timeLeft.days)}d</span>
-                <span className="animate-pulse">:</span>
+                <span>:</span>
                 <span>{formatTime(timeLeft.hours)}h</span>
-                <span className="animate-pulse">:</span>
+                <span>:</span>
                 <span>{formatTime(timeLeft.minutes)}m</span>
-                <span className="animate-pulse">:</span>
+                <span>:</span>
                 <span>{formatTime(timeLeft.seconds)}s</span>
               </div>
             </div>
