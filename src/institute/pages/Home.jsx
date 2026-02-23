@@ -230,7 +230,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="text-center md:text-left">
-                <div className="inline-block mb-4 px-6 py-2 bg-cyan-400/30 backdrop-blur-sm rounded-full text-cyan-100 font-semibold border border-cyan-300/50">
+                <div className="inline-block mb-4 px-6 py-2 bg-cyan-400/30 backdrop-blur-sm rounded-full text-cyan-100 font-semibold border border-cyan-300/50 mt-8">
                    Engineering Excellence Online
                 </div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-3 sm:mb-4 leading-[1.2]">
