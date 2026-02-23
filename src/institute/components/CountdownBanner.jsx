@@ -12,6 +12,7 @@ const CountdownBanner = memo(() => {
   });
   const [isVisible, setIsVisible] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
+  const [bannerHeight, setBannerHeight] = useState(0);
 
   useEffect(() => {
     const targetDate = new Date();
@@ -48,7 +49,7 @@ const CountdownBanner = memo(() => {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsHidden(lastScrollY > 50);
+          setIsHidden(lastScrollY > 100);
           ticking = false;
         });
         ticking = true;
@@ -59,19 +60,30 @@ const CountdownBanner = memo(() => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Store banner height in sessionStorage for navbar to access
+    const height = window.innerWidth >= 1024 ? 64 : 72;
+    setBannerHeight(height);
+    sessionStorage.setItem('bannerHeight', height.toString());
+    sessionStorage.setItem('bannerHidden', isHidden.toString());
+  }, [isHidden]);
+
   const formatTime = (value) => String(value).padStart(2, '0');
 
   if (!isVisible) return null;
 
   return (
     <div 
-      className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative"
+      className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 border-b-2 border-yellow-600 relative w-full"
       style={{
-        maxHeight: isHidden ? '0px' : '100px',
+        transform: isHidden ? 'translateY(-100%)' : 'translateY(0)',
         opacity: isHidden ? 0 : 1,
-        transition: 'max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        overflow: 'hidden',
-        borderBottomWidth: isHidden ? '0px' : '2px'
+        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50
       }}
     >
       <div className="absolute inset-0 bg-yellow-500/10 pointer-events-none"></div>

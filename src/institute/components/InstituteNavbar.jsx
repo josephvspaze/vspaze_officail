@@ -5,7 +5,19 @@ import { Link, useLocation } from 'react-router-dom';
 const InstituteNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [bannerVisible, setBannerVisible] = useState(true);
   const location = useLocation();
+
+  useEffect(() => {
+    const checkBanner = () => {
+      const hidden = sessionStorage.getItem('bannerHidden') === 'true';
+      setBannerVisible(!hidden);
+    };
+
+    checkBanner();
+    const interval = setInterval(checkBanner, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -57,7 +69,12 @@ const InstituteNavbar = () => {
 
   return (
     <>
-    <nav className="bg-teal-700/75 backdrop-blur-sm shadow-md" style={{ marginTop: '0' }}>
+    <nav 
+      className="bg-teal-700/75 backdrop-blur-sm shadow-md sticky z-40 transition-all duration-300" 
+      style={{ 
+        top: bannerVisible ? (window.innerWidth >= 1024 ? '64px' : '72px') : '0px'
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3">

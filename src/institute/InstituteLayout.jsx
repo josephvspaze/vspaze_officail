@@ -14,10 +14,8 @@ const InstituteLayout = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="sticky top-0 z-50">
-        <CountdownBanner />
-        <InstituteNavbar />
-      </div>
+      <CountdownBanner />
+      <InstituteNavbar />
       <main className="flex-1">
         <Outlet />
       </main>
