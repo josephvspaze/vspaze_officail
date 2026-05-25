@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Video, RefreshCw } from 'lucide-react';
+import { Video, RefreshCw, Radio, CalendarClock, CheckCircle } from 'lucide-react';
 import api from '../../utils/api';
 import LiveClassItem from '../components/liveclass/LiveClassItem';
 
@@ -54,7 +54,7 @@ const LiveClasses = () => {
         {/* Live Now Banner */}
         {live.length > 0 && (
           <div className="bg-gradient-to-r from-green-900/40 to-teal-900/40 border border-green-500/30 rounded-2xl p-4 flex items-center gap-3">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+            <Radio className="w-4 h-4 text-green-400 animate-pulse flex-shrink-0" />
             <p className="text-green-300 font-semibold text-sm">
               {live.length} class{live.length > 1 ? 'es are' : ' is'} live right now! Join below.
             </p>
@@ -64,18 +64,22 @@ const LiveClasses = () => {
         {/* Filter Tabs */}
         <div className="flex gap-2 bg-slate-800/80 border border-slate-700/50 rounded-xl p-1">
           {[
-            { key: 'all', label: `All (${liveClasses.length})` },
-            { key: 'live', label: `🔴 Live (${live.length})` },
-            { key: 'upcoming', label: `Upcoming (${upcoming.length})` },
-            { key: 'ended', label: `Ended (${ended.length})` },
-          ].map(tab => (
-            <button key={tab.key} onClick={() => setFilter(tab.key)}
-              className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                filter === tab.key ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:text-white'
-              }`}>
-              {tab.label}
-            </button>
-          ))}
+            { key: 'all',      label: 'All',      count: liveClasses.length, icon: Video },
+            { key: 'live',     label: 'Live',     count: live.length,        icon: Radio },
+            { key: 'upcoming', label: 'Upcoming', count: upcoming.length,    icon: CalendarClock },
+            { key: 'ended',    label: 'Ended',    count: ended.length,       icon: CheckCircle },
+          ].map(tab => {
+            const Icon = tab.icon;
+            return (
+              <button key={tab.key} onClick={() => setFilter(tab.key)}
+                className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  filter === tab.key ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:text-white'
+                }`}>
+                <Icon className="w-3 h-3" />
+                {tab.label} ({tab.count})
+              </button>
+            );
+          })}
         </div>
 
         {/* Content */}
