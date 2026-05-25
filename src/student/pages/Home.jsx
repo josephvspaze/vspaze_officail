@@ -21,6 +21,8 @@ const Home = ({ onNavigate, onMenuClick, onNavigateToCourses }) => {
   };
 
   const userCourse = studentData?.enrolledCourses?.[0]?.name || 'No Course Enrolled';
+  const userBatch  = studentData?.batch?.name || null;
+  const batchCourse = studentData?.batch?.course?.name || null;
 
   if (showNotifications) {
     return <Notifications onBack={() => setShowNotifications(false)} />;
@@ -72,26 +74,47 @@ const Home = ({ onNavigate, onMenuClick, onNavigateToCourses }) => {
       <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
         {/* Continue Learning */}
         <div className="rounded-2xl shadow-sm p-6" style={{ background: '#fff' }}>
-          <h2 className="text-xl font-bold mb-4" style={{ color: '#000' }}>Continue Learning</h2>
-          <div className="rounded-xl p-4" style={{ background: '#e8f5f3' }}>
-            <h3 className="font-semibold mb-1" style={{ color: '#000' }}>{userCourse}</h3>
-            <p className="text-sm mb-3" style={{ color: '#555' }}>Module 3: State Management</p>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium" style={{ color: '#555' }}>45% Complete</span>
-              <button 
-                onClick={onNavigateToCourses}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition"
-                style={{ background: '#1a9b8e' }}
-                onMouseEnter={(e) => e.target.style.background = '#0d7a6f'}
-                onMouseLeave={(e) => e.target.style.background = '#1a9b8e'}
-              >
-                <Play className="w-5 h-5 text-white fill-white" />
-              </button>
+          <h2 className="text-xl font-bold mb-4" style={{ color: '#000' }}>My Enrollment</h2>
+
+          {/* Course Info */}
+          <div className="rounded-xl p-4 mb-3" style={{ background: '#e8f5f3' }}>
+            <div className="flex items-center gap-2 mb-1">
+              <BookOpen className="w-4 h-4" style={{ color: '#1a9b8e' }} />
+              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#1a9b8e' }}>Course</span>
             </div>
-            <div className="w-full rounded-full h-2" style={{ background: '#e0e0e0' }}>
-              <div className="h-2 rounded-full" style={{ width: '45%', background: '#1a9b8e' }}></div>
-            </div>
+            <h3 className="font-bold text-base" style={{ color: '#000' }}>{userCourse}</h3>
+            {studentData?.enrolledCourses?.length > 1 && (
+              <p className="text-xs mt-1" style={{ color: '#555' }}>+{studentData.enrolledCourses.length - 1} more course(s)</p>
+            )}
           </div>
+
+          {/* Batch Info */}
+          {userBatch ? (
+            <div className="rounded-xl p-4" style={{ background: '#e8f5f3', border: '1px solid #d0ebe8' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <Video className="w-4 h-4" style={{ color: '#1a9b8e' }} />
+                <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#1a9b8e' }}>Batch</span>
+              </div>
+              <h3 className="font-bold text-base" style={{ color: '#000' }}>{userBatch}</h3>
+              {batchCourse && <p className="text-xs mt-0.5" style={{ color: '#555' }}>{batchCourse}</p>}
+              <div className="flex items-center justify-between mt-3">
+                <span className="text-sm" style={{ color: '#555' }}>45% Complete</span>
+                <button onClick={onNavigateToCourses}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition"
+                  style={{ background: '#1a9b8e' }}>
+                  <Play className="w-5 h-5 text-white fill-white" />
+                </button>
+              </div>
+              <div className="w-full rounded-full h-2 mt-2" style={{ background: '#e0e0e0' }}>
+                <div className="h-2 rounded-full" style={{ width: '45%', background: '#1a9b8e' }}></div>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-xl p-4 text-center" style={{ background: '#f5f5f5', border: '1px dashed #ccc' }}>
+              <p className="text-sm" style={{ color: '#888' }}>No batch assigned yet.</p>
+              <p className="text-xs mt-1" style={{ color: '#aaa' }}>Contact admin to get assigned to a batch.</p>
+            </div>
+          )}
         </div>
 
         {/* Upcoming Live Sessions */}

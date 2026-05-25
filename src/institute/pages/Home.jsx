@@ -149,6 +149,7 @@ const Home = () => {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
   const [courses, setCourses] = useState([]);
+  const [faculty, setFaculty] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -190,7 +191,17 @@ const Home = () => {
 
   useEffect(() => {
     fetchCourses();
+    fetchFaculty();
   }, []);
+
+  const fetchFaculty = async () => {
+    try {
+      const response = await api.get('/faculty');
+      setFaculty(response.data.faculty || []);
+    } catch (error) {
+      console.error('Error fetching faculty:', error);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
@@ -444,18 +455,15 @@ const Home = () => {
               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Tech team collaborating on project" className="rounded-3xl shadow-2xl shadow-teal-500/20 mx-auto border border-teal-500/20" loading="lazy" style={{ maxWidth: '52.5%' }} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              {[
-                { id: 1, name: 'Dr. Rajesh Kumar', specialization: 'Full Stack Development', qualification: 'M.Tech, IIT Delhi', experience: '12+ Years', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
-                { id: 2, name: 'Priya Sharma', specialization: 'Data Science & AI', qualification: 'PhD in Computer Science', experience: '10+ Years', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
-                { id: 3, name: 'Amit Patel', specialization: 'Cloud Computing', qualification: 'B.Tech, AWS Certified', experience: '8+ Years', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80' },
-                { id: 4, name: 'Sneha Reddy', specialization: 'Digital Marketing', qualification: 'MBA, Google Certified', experience: '7+ Years', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80' }
-              ].map((member) => (
-                <div key={member.id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col">
+              {faculty.slice(0, 4).map((member) => (
+                <div key={member._id} className="group bg-gradient-to-br from-white to-cyan-50 border border-teal-200/30 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all transform hover:-translate-y-3 overflow-hidden flex flex-col">
                   <div className="relative bg-gradient-to-br from-teal-600 to-cyan-500 p-8 text-center overflow-hidden">
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all"></div>
                     <div className="relative w-24 h-24 mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/30 shadow-2xl">
-                        <img src={member.image} alt={`${member.name} - ${member.specialization} instructor`} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="w-24 h-24 rounded-full border-4 border-white/30 shadow-2xl bg-white/20 flex items-center justify-center">
+                        <span className="text-3xl font-bold text-white">
+                          {member.name?.split(' ').map(n => n[0]).join('') || 'F'}
+                        </span>
                       </div>
                     </div>
                     <h3 className="text-2xl font-bold text-white relative min-h-[64px] flex items-center justify-center">{member.name}</h3>
@@ -468,8 +476,8 @@ const Home = () => {
                       </span>
                       <span className="text-lg font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent">{member.experience}</span>
                     </div>
-                    <Link 
-                      to={`/faculty/${member.id}`} 
+                    <Link
+                      to={`/faculty/${member._id}`}
                       className="block text-center bg-gradient-to-r from-teal-600 to-cyan-500 text-white py-3 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/30 transition-all mt-auto"
                     >
                       View Profile

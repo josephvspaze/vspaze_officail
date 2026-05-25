@@ -3,16 +3,14 @@ import { X, Download, Code, Database, Megaphone, Cloud, Palette, BookOpen, Check
 import api from '../../utils/api';
 
 const BrochureModal = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState('form');
+  const savedLead = JSON.parse(localStorage.getItem('brochure_lead') || 'null');
+  const [step, setStep] = useState(savedLead ? 'courses' : 'form');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [courses, setCourses] = useState([]);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    mobile: '',
-    email: '',
-    qualification: '',
-    city: ''
-  });
+  const [formData, setFormData] = useState(
+    savedLead || { fullName: '', mobile: '', email: '', qualification: '', city: '' }
+  );
+  const [leadId, setLeadId] = useState(localStorage.getItem('brochure_lead_id') || null);
   const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
@@ -30,7 +28,8 @@ const BrochureModal = ({ isOpen, onClose }) => {
         name: course.name,
         icon: getIconForCourse(course.name),
         description: course.description,
-        color: getColorForCourse(course.name)
+        color: getColorForCourse(course.name),
+        brochureUrl: course.brochureUrl || ''
       }));
       setCourses(formattedCourses);
     } catch (error) {
@@ -106,53 +105,42 @@ const BrochureModal = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted:', formData);
+      try {
+        const response = await api.post('/leads', { ...formData, interestedCourse: '' });
+        const id = response.data.lead?._id || null;
+        setLeadId(id);
+        localStorage.setItem('brochure_lead', JSON.stringify(formData));
+        if (id) localStorage.setItem('brochure_lead_id', id);
+      } catch (error) {
+        console.error('Failed to save lead:', error);
+      }
       setStep('courses');
     }
   };
 
-  const handleDownload = () => {
-    const courseName = selectedCourse.name.toLowerCase();
-    let pdfPath = '';
-    let fileName = '';
-    
-    if (courseName.includes('full stack') || courseName.includes('mern')) {
-      pdfPath = '/Vspaze Institute MERN Stack Complete Curriculum.pdf';
-      fileName = 'Vspaze-MERN-Stack-Curriculum.pdf';
-    } else if (courseName.includes('data structures') || courseName.includes('dsa') || courseName.includes('c++')) {
-      pdfPath = '/Vspaze Institute Data Structures  And Algorithms Using C Plus Plus  Complete Curriculum.pdf';
-      fileName = 'Vspaze-DSA-CPP-Curriculum.pdf';
+  const handleDownload = async () => {
+    if (leadId) {
+      try { await api.put(`/leads/${leadId}`, { interestedCourse: selectedCourse.name }); } catch (e) {}
+    }
+
+    if (selectedCourse.brochureUrl) {
+      window.open(selectedCourse.brochureUrl, '_blank');
+      setTimeout(() => {
+        setSelectedCourse(null);
+        setStep('courses');
+      }, 500);
     } else {
       setStep('coming-soon');
-      return;
     }
-    
-    const link = document.createElement('a');
-    link.href = pdfPath;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    setTimeout(() => {
-      setSelectedCourse(null);
-      setStep('courses');
-    }, 1000);
   };
 
   const handleClose = () => {
-    setStep('form');
+    const alreadySubmitted = localStorage.getItem('brochure_lead');
+    setStep(alreadySubmitted ? 'courses' : 'form');
     setSelectedCourse(null);
-    setFormData({
-      fullName: '',
-      mobile: '',
-      email: '',
-      qualification: '',
-      city: ''
-    });
     setFormErrors({});
     onClose();
   };
@@ -169,8 +157,8 @@ const BrochureModal = ({ isOpen, onClose }) => {
       <div onClick={(e) => e.stopPropagation()} className="bg-slate-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-cyan-500/30">
         <div className="p-4 sm:p-6 border-b border-cyan-500/20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {step !== 'form' && (
-              <button onClick={() => step === 'download' ? handleBackToCourses() : setStep('form')} className="p-2 hover:bg-slate-700 rounded-lg">
+            {step !== 'form' && step !== 'courses' && (
+              <button onClick={handleBackToCourses} className="p-2 hover:bg-slate-700 rounded-lg">
                 <ArrowLeft className="w-5 h-5 text-cyan-400" />
               </button>
             )}

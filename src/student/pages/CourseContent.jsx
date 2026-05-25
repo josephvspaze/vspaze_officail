@@ -8,8 +8,8 @@ const CourseContent = () => {
   const [expandedModules, setExpandedModules] = useState({});
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [courseData, setCourseData] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [courses, setCourses] = useState([]);
+  const [batchName, setBatchName] = useState(null);
+  const [courseName, setCourseName] = useState('');
   const [showNotes, setShowNotes] = useState(false);
   const [currentNote, setCurrentNote] = useState('');
   const [videoNotes, setVideoNotes] = useState([]);
@@ -30,50 +30,22 @@ const CourseContent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await api.get('/student/profile');
-      const student = response.data.student;
-      console.log('Student enrolled courses:', student.enrolledCourses);
+      const [profileRes, videosRes] = await Promise.all([
+        api.get('/student/profile'),
+        api.get('/student/videos')
+      ]);
+      const student = profileRes.data.student;
       setStudentData(student);
       setIsPaid(student?.dueAmount === 0);
-      
-      if (student?.enrolledCourses?.length > 0) {
-        setCourses(student.enrolledCourses);
-        const firstCourse = student.enrolledCourses[0];
-        const courseId = firstCourse._id || firstCourse;
-        console.log('Selected course ID:', courseId);
-        setSelectedCourse(courseId);
-        await fetchCourseData(courseId);
-      } else {
-        console.log('No enrolled courses');
-        setCourseData({ syllabus: [], videos: [] });
-      }
+      setCourseData({ videos: videosRes.data.videos || [], syllabus: videosRes.data.syllabus || [] });
+      setBatchName(videosRes.data.batchName || null);
+      setCourseName(videosRes.data.courseName || '');
+      if (videosRes.data.videos?.length > 0) setExpandedModules({ 1: true });
     } catch (error) {
       console.error('Error fetching data:', error);
-      setStudentData({ name: 'Student', dueAmount: 0, enrolledCourses: [] });
-      setCourseData({ syllabus: [], videos: [] });
+      setStudentData({ name: 'Student', dueAmount: 0 });
+      setCourseData({ videos: [], syllabus: [] });
     }
-  };
-
-  const fetchCourseData = async (courseId) => {
-    try {
-      console.log('Fetching course data for:', courseId);
-      const courseRes = await api.get(`/courses/${courseId}`);
-      console.log('Course data received:', courseRes.data.course);
-      console.log('Videos in course:', courseRes.data.course.videos);
-      setCourseData(courseRes.data.course);
-      if (courseRes.data.course.videos?.length > 0 && !selectedVideo) {
-        setExpandedModules({ 1: true });
-      }
-    } catch (error) {
-      console.error('Error fetching course:', error);
-      setCourseData({ syllabus: [], videos: [] });
-    }
-  };
-
-  const handleCourseChange = async (courseId) => {
-    setSelectedCourse(courseId);
-    setSelectedVideo(null);
-    await fetchCourseData(courseId);
   };
 
   const videosByModule = {};
@@ -206,23 +178,21 @@ const CourseContent = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 sm:p-8 pb-24 md:pb-8">
-      {/* Course Selector */}
-      {courses.length > 1 && (
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Select Course</label>
-          <select
-            value={selectedCourse}
-            onChange={(e) => handleCourseChange(e.target.value)}
-            className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-          >
-            {courses.map((course) => (
-              <option key={course._id || course} value={course._id || course}>
-                {course.name || course}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+      {/* Course & Batch Info Header */}
+      <div className="mb-6 flex items-center gap-3 flex-wrap">
+        {courseName && (
+          <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
+            <BookMarked className="w-4 h-4 text-blue-600" />
+            <span className="text-blue-800 font-semibold text-sm">{courseName}</span>
+          </div>
+        )}
+        {batchName && (
+          <div className="flex items-center gap-2 bg-teal-50 border border-teal-200 rounded-lg px-4 py-2">
+            <span className="text-teal-700 text-xs font-semibold uppercase tracking-wider">Batch:</span>
+            <span className="text-teal-800 font-semibold text-sm">{batchName}</span>
+          </div>
+        )}
+      </div>
 
       {courseModules.length === 0 && (!courseData?.videos || courseData.videos.length === 0) ? (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">

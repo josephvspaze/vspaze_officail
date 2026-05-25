@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Home, BookOpen, Calendar, FileText, User, CreditCard, FileCheck, X, ChevronDown, ChevronUp, Code, Briefcase, Gamepad2 } from 'lucide-react';
+import { Home, BookOpen, Calendar, FileText, User, CreditCard, FileCheck, X, ChevronDown, ChevronUp, Code, Briefcase, Gamepad2, Video } from 'lucide-react';
 
 const StudentSidebar = ({ isOpen, onClose, activeSection, setActiveSection }) => {
   const [activitiesOpen, setActivitiesOpen] = useState(false);
 
   const menuItems = [
     { id: 'home', label: 'Home', icon: Home },
+    { id: 'live-classes', label: 'Live Classes', icon: Video },
     { id: 'courses', label: 'Course Content', icon: BookOpen },
     { id: 'practice', label: 'Live Coding', icon: Code },
     { id: 'jobs', label: 'Jobs', icon: Briefcase },

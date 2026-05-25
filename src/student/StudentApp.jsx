@@ -19,6 +19,7 @@ import Jobs from './pages/Jobs';
 import ProfileNew from './pages/ProfileNew';
 import Notifications from './pages/Notifications';
 import Notes from './pages/Notes';
+import LiveClasses from './pages/LiveClasses';
 
 function StudentApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -71,6 +72,7 @@ function StudentApp() {
       case 'profile': return <ProfileNew onMenuClick={() => setSidebarOpen(true)} />;
       case 'notifications': return <Notifications onBack={() => setActiveSection('home')} />;
       case 'notes': return <Notes />;
+      case 'live-classes': return <LiveClasses />;
       case 'dashboard': return <StudentDashboard />;
       case 'oldProfile': return <StudentProfile />;
       case 'courses': return <CourseContent />;
