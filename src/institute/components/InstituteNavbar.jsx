@@ -15,8 +15,16 @@ const InstituteNavbar = () => {
     };
 
     checkBanner();
+    
+    // Listen for storage changes
+    const handleStorageChange = () => checkBanner();
+    window.addEventListener('storage', handleStorageChange);
+    
     const interval = setInterval(checkBanner, 100);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -70,7 +78,7 @@ const InstituteNavbar = () => {
   return (
     <>
     <nav 
-      className="bg-teal-700/75 backdrop-blur-sm shadow-md sticky z-40 transition-all duration-300" 
+      className="bg-teal-700/75 backdrop-blur-sm shadow-md sticky z-40 transition-all duration-300 ease-in-out" 
       style={{ 
         top: bannerVisible ? (window.innerWidth >= 1024 ? '64px' : '72px') : '0px'
       }}

@@ -10,7 +10,9 @@ const CountdownBanner = memo(() => {
     minutes: 0,
     seconds: 0
   });
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(() => {
+    return sessionStorage.getItem('bannerHidden') !== 'true';
+  });
   const [isHidden, setIsHidden] = useState(false);
   const [bannerHeight, setBannerHeight] = useState(0);
 
@@ -41,6 +43,9 @@ const CountdownBanner = memo(() => {
   }, []);
 
   useEffect(() => {
+    // Only enable scroll hiding if banner wasn't permanently closed
+    if (!isVisible) return;
+
     let lastScrollY = 0;
     let ticking = false;
 
@@ -58,17 +63,24 @@ const CountdownBanner = memo(() => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isVisible]);
 
   useEffect(() => {
-    // Store banner height in sessionStorage for navbar to access
+    if (!isVisible) return;
+    
     const height = window.innerWidth >= 1024 ? 64 : 72;
     setBannerHeight(height);
     sessionStorage.setItem('bannerHeight', height.toString());
     sessionStorage.setItem('bannerHidden', isHidden.toString());
-  }, [isHidden]);
+  }, [isHidden, isVisible]);
 
   const formatTime = (value) => String(value).padStart(2, '0');
+
+  const handleClose = () => {
+    sessionStorage.setItem('bannerHidden', 'true');
+    setIsVisible(false);
+    window.dispatchEvent(new Event('storage'));
+  };
 
   if (!isVisible) return null;
 
@@ -105,7 +117,7 @@ const CountdownBanner = memo(() => {
             </div>
 
             <button 
-              onClick={() => setIsVisible(false)}
+              onClick={handleClose}
               className="text-gray-800 hover:text-gray-900 transition-colors flex-shrink-0"
               aria-label="Close banner"
             >
@@ -168,7 +180,7 @@ const CountdownBanner = memo(() => {
           </button>
 
           <button 
-            onClick={() => setIsVisible(false)}
+            onClick={handleClose}
             className="text-gray-800 hover:text-gray-900 transition-colors"
             aria-label="Close banner"
           >

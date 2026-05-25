@@ -231,7 +231,7 @@ const Home = () => {
     <ErrorBoundary>
       <div className="bg-gradient-to-b from-teal-900 via-teal-800 to-cyan-500 select-none" onContextMenu={(e) => e.preventDefault()}>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-teal-900 to-cyan-400 py-8 md:py-12 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-teal-900 to-cyan-400 pt-12 pb-8 md:py-12 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="absolute w-96 h-96 bg-teal-300/30 rounded-full blur-3xl top-0 -left-20"></div>
             <div className="absolute w-96 h-96 bg-cyan-300/30 rounded-full blur-3xl top-0 right-0"></div>
@@ -241,7 +241,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="text-center md:text-left">
-                <div className="inline-block mb-4 px-6 py-2 bg-cyan-400/30 backdrop-blur-sm rounded-full text-cyan-100 font-semibold border border-cyan-300/50 mt-8">
+                <div className="inline-block mb-4 px-6 py-2 bg-cyan-400/30 backdrop-blur-sm rounded-full text-cyan-100 font-semibold border border-cyan-300/50">
                    Engineering Excellence Online
                 </div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-3 sm:mb-4 leading-[1.2]">

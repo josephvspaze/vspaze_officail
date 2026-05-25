@@ -1,108 +1,114 @@
-import React, { useState } from 'react';
-import { Home, BookOpen, Calendar, FileText, User, CreditCard, FileCheck, X, ChevronDown, ChevronUp, Code, Briefcase, Gamepad2, Video } from 'lucide-react';
+import React from 'react';
+import {
+  Home, Video, BookOpen, ClipboardList, FileCheck,
+  CalendarCheck, CreditCard, User, Code, X, LogOut, GraduationCap
+} from 'lucide-react';
 
-const StudentSidebar = ({ isOpen, onClose, activeSection, setActiveSection }) => {
-  const [activitiesOpen, setActivitiesOpen] = useState(false);
+const NAV_ITEMS = [
+  { id: 'home',         label: 'Dashboard',      icon: Home,          section: 'main' },
+  { id: 'live-classes', label: 'Live Classes',    icon: Video,         section: 'main' },
+  { id: 'courses',      label: 'My Courses',      icon: BookOpen,      section: 'main' },
+  { id: 'assignments',  label: 'Assignments',     icon: ClipboardList, section: 'learn' },
+  { id: 'tests',        label: 'Tests & Quizzes', icon: FileCheck,     section: 'learn' },
+  { id: 'attendance',   label: 'Attendance',      icon: CalendarCheck, section: 'learn' },
+  { id: 'practice',     label: 'Code Practice',   icon: Code,          section: 'learn' },
+  { id: 'payments',     label: 'Payments',        icon: CreditCard,    section: 'account' },
+  { id: 'profile',      label: 'My Profile',      icon: User,          section: 'account' },
+];
 
-  const menuItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'live-classes', label: 'Live Classes', icon: Video },
-    { id: 'courses', label: 'Course Content', icon: BookOpen },
-    { id: 'practice', label: 'Live Coding', icon: Code },
-    { id: 'jobs', label: 'Jobs', icon: Briefcase },
-    { id: 'notes', label: 'My Notes', icon: FileText },
-    { id: 'payments', label: 'Payments', icon: CreditCard },
-    { id: 'dashboard', label: 'Dashboard', icon: Home },
-    { id: 'attendance', label: 'Attendance', icon: Calendar },
-    { id: 'profile', label: 'Profile', icon: User }
-  ];
+const SECTIONS = [
+  { key: 'main',    label: 'Learning' },
+  { key: 'learn',   label: 'Activities' },
+  { key: 'account', label: 'Account' },
+];
 
-  const activityItems = [
-    { id: 'assignments', label: 'Assignments', icon: FileText },
-    { id: 'tests', label: 'Tests', icon: FileCheck },
-    { id: 'activities', label: 'Game Zone', icon: Gamepad2 }
-  ];
+const StudentSidebar = ({ isOpen, onClose, activeSection, setActiveSection, onLogout }) => {
+  const studentAuth = JSON.parse(localStorage.getItem('student_auth') || '{}');
+  const student = studentAuth.student || {};
 
   return (
     <>
+      {/* Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={onClose} />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40" onClick={onClose} />
       )}
-      
-      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-xl">S</span>
+
+      {/* Drawer */}
+      <aside className={`fixed top-0 left-0 h-full w-72 bg-slate-900 border-r border-teal-500/20 z-50 flex flex-col transform transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-teal-500/20">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center">
+              <GraduationCap className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Student</span>
+            <span className="text-white font-bold text-base">Vspaze</span>
           </div>
-          <button onClick={onClose} className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
-            <X className="w-6 h-6 text-gray-600" />
+          <button onClick={onClose} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors">
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        <nav className="p-5 space-y-2 overflow-y-auto" style={{maxHeight: 'calc(100vh - 88px)'}}>
-          {menuItems.map((item) => {
-            const Icon = item.icon;
+        {/* Student Info */}
+        <div className="px-5 py-4 border-b border-teal-500/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-teal-600 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-bold text-sm">
+                {student.name?.split(' ').map(n => n[0]).join('') || 'S'}
+              </span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-white font-semibold text-sm truncate">{student.name || 'Student'}</p>
+              <p className="text-teal-400 text-xs truncate">{student.email || ''}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Nav */}
+        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
+          {SECTIONS.map(section => {
+            const items = NAV_ITEMS.filter(i => i.section === section.key);
             return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setActiveSection(item.id);
-                  onClose();
-                }}
-                className={`w-full flex items-center space-x-4 px-5 py-3.5 rounded-xl transition-all duration-200 ${
-                  activeSection === item.id
-                    ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md transform scale-[1.02]'
-                    : 'text-gray-700 hover:bg-gray-100 hover:translate-x-1'
-                }`}
-              >
-                <Icon className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium text-sm">{item.label}</span>
-              </button>
+              <div key={section.key}>
+                <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider px-3 mb-2">
+                  {section.label}
+                </p>
+                <div className="space-y-1">
+                  {items.map(item => {
+                    const Icon = item.icon;
+                    const isActive = activeSection === item.id;
+                    return (
+                      <button key={item.id}
+                        onClick={() => setActiveSection(item.id)}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                          isActive
+                            ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-lg shadow-teal-500/20'
+                            : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                        }`}>
+                        <Icon className="w-4 h-4 flex-shrink-0" />
+                        {item.label}
+                        {item.id === 'live-classes' && (
+                          <span className="ml-auto w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
-
-          {/* Activities Dropdown */}
-          <div className="mt-2">
-            <button
-              onClick={() => setActivitiesOpen(!activitiesOpen)}
-              className="w-full flex items-center justify-between px-5 py-3.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-200 hover:translate-x-1"
-            >
-              <div className="flex items-center space-x-4">
-                <FileCheck className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium text-sm">Activities</span>
-              </div>
-              {activitiesOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-            </button>
-            
-            {activitiesOpen && (
-              <div className="ml-6 mt-2 space-y-1 border-l-2 border-gray-200 pl-3">
-                {activityItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        setActiveSection(item.id);
-                        onClose();
-                      }}
-                      className={`w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
-                        activeSection === item.id
-                          ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md'
-                          : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4 flex-shrink-0" />
-                      <span className="text-sm font-medium">{item.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
         </nav>
+
+        {/* Logout */}
+        <div className="px-3 py-4 border-t border-teal-500/10">
+          <button onClick={onLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all">
+            <LogOut className="w-4 h-4" />
+            Logout
+          </button>
+        </div>
       </aside>
     </>
   );

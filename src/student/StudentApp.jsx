@@ -1,33 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StudentHeader from './components/StudentHeader';
 import StudentSidebar from './components/StudentSidebar';
 import BottomNav from './components/BottomNav';
-import StudentDashboard from './pages/StudentDashboard';
-import StudentProfile from './pages/StudentProfile';
-import MyCourses from './pages/MyCourses';
-import Payments from './pages/Payments';
+import StudentHeader from './components/StudentHeader';
+import Home from './pages/Home';
+import LiveClasses from './pages/LiveClasses';
 import CourseContent from './pages/CourseContent';
-import Attendance from './pages/Attendance';
 import Assignments from './pages/Assignments';
 import Tests from './pages/Tests';
-import Home from './pages/Home';
-import Activities from './pages/Activities';
-import GameZone from './pages/GameZone';
-import CodePractice from './pages/CodePractice';
-import Jobs from './pages/Jobs';
+import Attendance from './pages/Attendance';
+import Payments from './pages/Payments';
 import ProfileNew from './pages/ProfileNew';
 import Notifications from './pages/Notifications';
-import Notes from './pages/Notes';
-import LiveClasses from './pages/LiveClasses';
+import CodePractice from './pages/CodePractice';
 
 function StudentApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [isPaid, setIsPaid] = useState(false);
   const navigate = useNavigate();
-  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('student_auth') || '{}');
@@ -36,75 +27,64 @@ function StudentApp() {
     } else {
       navigate('/student-login');
     }
-    setAuthChecked(true);
   }, [navigate]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchStudentData();
-    }
-  }, [isAuthenticated]);
-
-  const fetchStudentData = () => {
-    // Use demo data from localStorage
-    const auth = JSON.parse(localStorage.getItem('student_auth') || '{}');
-    setIsPaid(auth.student?.dueAmount === 0 || true);
-  };
 
   const handleLogout = () => {
     localStorage.removeItem('student_auth');
+    localStorage.removeItem('token');
     navigate('/');
   };
 
-  if (!isAuthenticated) {
-    return null;
-  }
+  const navigate_to = (section) => {
+    setActiveSection(section);
+    setSidebarOpen(false);
+  };
+
+  if (!isAuthenticated) return null;
 
   const renderContent = () => {
-    switch(activeSection) {
-      case 'home': return <Home onMenuClick={() => setSidebarOpen(true)} onNavigateToCourses={() => setActiveSection('courses')} />;
-      case 'activities': return <GameZone onMenuClick={() => setSidebarOpen(true)} onGameSelect={(game) => {
-        if (game.id === 'quick-quiz') setActiveSection('assignments');
-        else if (game.id === 'code-challenge') setActiveSection('tests');
-      }} />;
-      case 'practice': return <CodePractice onMenuClick={() => setSidebarOpen(true)} />;
-      case 'jobs': return <Jobs onMenuClick={() => setSidebarOpen(true)} />;
-      case 'profile': return <ProfileNew onMenuClick={() => setSidebarOpen(true)} />;
-      case 'notifications': return <Notifications onBack={() => setActiveSection('home')} />;
-      case 'notes': return <Notes />;
+    switch (activeSection) {
+      case 'home':         return <Home onNavigateToCourses={() => navigate_to('courses')} onNavigateToLive={() => navigate_to('live-classes')} />;
       case 'live-classes': return <LiveClasses />;
-      case 'dashboard': return <StudentDashboard />;
-      case 'oldProfile': return <StudentProfile />;
-      case 'courses': return <CourseContent />;
-      case 'payments': return <Payments />;
-      case 'attendance': return <Attendance />;
-      case 'assignments': return <Assignments />;
-      case 'tests': return <Tests />;
-      default: return <Home />;
+      case 'courses':      return <CourseContent />;
+      case 'assignments':  return <Assignments />;
+      case 'tests':        return <Tests />;
+      case 'attendance':   return <Attendance />;
+      case 'payments':     return <Payments />;
+      case 'profile':      return <ProfileNew onMenuClick={() => setSidebarOpen(true)} />;
+      case 'notifications':return <Notifications onBack={() => navigate_to('home')} />;
+      case 'practice':     return <CodePractice onMenuClick={() => setSidebarOpen(true)} />;
+      default:             return <Home />;
     }
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <StudentSidebar 
-        isOpen={sidebarOpen} 
+    <div className="flex flex-col h-screen bg-slate-950">
+      {/* Sidebar — always overlay */}
+      <StudentSidebar
+        isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         activeSection={activeSection}
-        setActiveSection={setActiveSection}
+        setActiveSection={navigate_to}
+        onLogout={handleLogout}
       />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <StudentHeader 
-          onMenuClick={() => setSidebarOpen(!sidebarOpen)} 
-          onLogout={handleLogout}
-          onNotificationClick={() => setActiveSection('notifications')}
-          onLogoClick={() => setActiveSection('home')}
-          hideOnMobile={['home', 'activities', 'practice', 'jobs', 'profile', 'notifications'].includes(activeSection)}
-        />
-        <main className="flex-1 overflow-y-auto">
-          {renderContent()}
-        </main>
-        <BottomNav activeSection={activeSection} setActiveSection={setActiveSection} />
-      </div>
+
+      {/* Header */}
+      <StudentHeader
+        onMenuClick={() => setSidebarOpen(true)}
+        onNotificationClick={() => navigate_to('notifications')}
+        onLogoClick={() => navigate_to('home')}
+        onLogout={handleLogout}
+        activeSection={activeSection}
+      />
+
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto pb-16 md:pb-0">
+        {renderContent()}
+      </main>
+
+      {/* Bottom Nav — mobile only */}
+      <BottomNav activeSection={activeSection} setActiveSection={navigate_to} />
     </div>
   );
 }
