@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import StudentSidebar from './components/StudentSidebar';
 import BottomNav from './components/BottomNav';
 import StudentHeader from './components/StudentHeader';
@@ -27,6 +28,13 @@ function StudentApp() {
     } else {
       navigate('/student-login');
     }
+
+    // Listen for custom navigation events from Home page quick links
+    const handleNavigate = (e) => {
+      navigate_to(e.detail);
+    };
+    window.addEventListener('navigate', handleNavigate);
+    return () => window.removeEventListener('navigate', handleNavigate);
   }, [navigate]);
 
   const handleLogout = () => {
@@ -59,33 +67,37 @@ function StudentApp() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-slate-950">
-      {/* Sidebar — always overlay */}
-      <StudentSidebar
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        activeSection={activeSection}
-        setActiveSection={navigate_to}
-        onLogout={handleLogout}
-      />
+    <ThemeProvider>
+      <div className="flex flex-col h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-teal-950 transition-colors duration-300">
+        {/* Sidebar — always overlay, opens only with menu button */}
+        <StudentSidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          activeSection={activeSection}
+          setActiveSection={navigate_to}
+          onLogout={handleLogout}
+        />
 
-      {/* Header */}
-      <StudentHeader
-        onMenuClick={() => setSidebarOpen(true)}
-        onNotificationClick={() => navigate_to('notifications')}
-        onLogoClick={() => navigate_to('home')}
-        onLogout={handleLogout}
-        activeSection={activeSection}
-      />
+        {/* Header */}
+        <StudentHeader
+          onMenuClick={() => setSidebarOpen(true)}
+          onNotificationClick={() => navigate_to('notifications')}
+          onLogoClick={() => navigate_to('home')}
+          onLogout={handleLogout}
+          activeSection={activeSection}
+        />
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pb-16 md:pb-0">
-        {renderContent()}
-      </main>
+        {/* Main Content with smooth scroll */}
+        <main className="flex-1 overflow-y-auto pb-16 md:pb-0 scroll-smooth">
+          <div className="transition-opacity duration-300">
+            {renderContent()}
+          </div>
+        </main>
 
-      {/* Bottom Nav — mobile only */}
-      <BottomNav activeSection={activeSection} setActiveSection={navigate_to} />
-    </div>
+        {/* Bottom Nav — mobile only */}
+        <BottomNav activeSection={activeSection} setActiveSection={navigate_to} />
+      </div>
+    </ThemeProvider>
   );
 }
 

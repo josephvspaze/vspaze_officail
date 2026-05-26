@@ -33,15 +33,15 @@ const StudentSidebar = ({ isOpen, onClose, activeSection, setActiveSection, onLo
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40" onClick={onClose} />
       )}
 
-      {/* Drawer */}
-      <aside className={`fixed top-0 left-0 h-full w-72 bg-slate-900 border-r border-teal-500/20 z-50 flex flex-col transform transition-transform duration-300 ease-in-out ${
+      {/* Drawer - always overlay, opens only with menu button */}
+      <aside className={`fixed top-0 left-0 h-full w-72 bg-gradient-to-b from-slate-900 via-slate-900 to-teal-950 border-r border-teal-500/20 z-50 flex flex-col transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
 
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-teal-500/20">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/30">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <span className="text-white font-bold text-base">Vspaze</span>
@@ -67,12 +67,12 @@ const StudentSidebar = ({ isOpen, onClose, activeSection, setActiveSection, onLo
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
+        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5 scroll-smooth">
           {SECTIONS.map(section => {
             const items = NAV_ITEMS.filter(i => i.section === section.key);
             return (
               <div key={section.key}>
-                <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider px-3 mb-2">
+                <p className="text-teal-400/70 text-xs font-semibold uppercase tracking-wider px-3 mb-2">
                   {section.label}
                 </p>
                 <div className="space-y-1">
